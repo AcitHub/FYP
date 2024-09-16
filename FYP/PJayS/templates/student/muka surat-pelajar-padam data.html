@@ -1,0 +1,190 @@
+{% extends "layout.html" %}
+
+{% block title %}
+  Padam Data Pelajar - PJays KoopSystem
+{% endblock %}
+
+{% block content %}
+
+<div class="pagetitle">
+  <h1>Padam Data Pelajar</h1>
+  <nav>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">Muka Surat</li>
+      <li class="breadcrumb-item">Pelajar</li>
+      <li class="breadcrumb-item active">Padam Data</li>
+    </ol>
+  </nav>
+</div><!-- Penutup Page Title -->
+
+<section class="section">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Maklumat Pendaftaran Pelajar</h5>
+      
+          <form method="POST" action="{% url 'delete_student_page' %}">
+            {% csrf_token %}
+            <div class="card">
+              <div class="card-body">
+              <fieldset>
+                <h5 class="card-title">Tapisan</h5>
+                <div class="row mb-3">
+                  <label class="col-sm-2 col-form-label">Tingkatan</label>
+                  <div class="col-sm-10">
+                    <select class="form-select" id="filterTingkatan" aria-label="Default select example" name="tingkatan">
+                      <option selected disabled>Pilih</option>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                    </select>
+                    {% comment %} {{ form.tingkatan }} {% endcomment %}
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <label class="col-sm-2 col-form-label">Kelas</label>
+                  <div class="col-sm-10">
+                    <select class="form-select" id="filterKelas" aria-label="Default select example" name="kelas">
+                      <option selected disabled>Pilih</option>
+                      <option value="ANGGERIK">ANGGERIK</option>
+                      <option value="CEMPAKA">CEMPAKA</option>
+                      <option value="DAHLIA">DAHLIA</option>
+                      <option value="MAWAR">MAWAR</option>
+                      <option value="SEROJA">SEROJA</option>
+                      <option value="TERATAI">TERATAI</option>
+                      <option value="UM">UM</option>
+                      <option value="UKM">UKM</option>
+                      <option value="USM">USM</option>
+                      <option value="LILY">LILY</option>
+                    </select>
+                    {% comment %} {{ form.kelas }} {% endcomment %}
+                  </div>
+                </div>
+              </fieldset>
+            </div>
+            </div>
+            <div class="card">
+              <div class="card-body">
+                <fieldset>
+                  <h5 class="card-title">Info Pelajar</h5>
+                  <table class="table datatable">
+                    <thead>
+                      <tr>
+                        <th>Pilih</th>
+                        <th>ID member</th>
+                        <th>No. IC</th>
+                        <th>Nama</th>
+                        <th>Jantina</th>
+                        <th>Kaum</th>
+                        <th>Agama</th>
+                        <th>Alamat Rumah</th>
+                        <th>Tingkatan</th>
+                        <th>Kelas</th>
+                        <th>Ahli</th>
+                        <th>Modal Syer(RM)</th>
+                        <th data-type="date" data-format="MM/DD/YYYY">Tarikh Pendaftaran</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for i in member %}
+                      <tr class="student-row" data-tingkatan="{{ i.tingkatan }}" data-kelas="{{ i.kelas }}">
+                        <td>
+                          <input type="checkbox" name="selected_students[]" value="{{ i.member_id }}">
+                        </td>
+                        <td>{{ i.member_id }}</td>
+                        <td>{{ i.ic_pelajar }}</td>
+                        <td>{{ i.nama }}</td>
+                        <td>{{ i.jantina }}</td>
+                        <td>{{ i.kaum }}</td>
+                        <td>{{ i.agama }}</td>
+                        <td>{{ i.alamat_rumah }}</td>
+                        <td>{{ i.tingkatan }}</td>
+                        <td>{{ i.kelas }}</td>
+                        <td>{{ i.ahli }}</td>
+                        <td>{{ i.modal_syer }}</td>
+                        <td>{{ i.tarikh_daftar }}</td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                  <br>
+                  <div class="form-check">
+                    <input type="checkbox" id="select-all" class="form-check-input">
+                    <label class="form-check-label" for="select-all">Semua</label>
+                  </div>
+                  <br>
+                </fieldset>
+              </div>
+            </div>
+
+            <!-- Delete Button below the table -->
+            <button type="submit" class="btn btn-primary">Padam Pelajar Terpilih</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const selectAllCheckbox = document.getElementById('select-all');
+    const filterTingkatan = document.getElementById('filterTingkatan');
+    const filterKelas = document.getElementById('filterKelas');
+    const rows = document.querySelectorAll('.student-row');
+    const form = document.querySelector('form'); // Get the form element
+  
+    // Filter rows based on Tingkatan and Kelas
+    function filterRows() {
+      const tingkatanValue = filterTingkatan.value;
+      const kelasValue = filterKelas.value;
+  
+      rows.forEach(row => {
+        const rowTingkatan = row.getAttribute('data-tingkatan');
+        const rowKelas = row.getAttribute('data-kelas');
+  
+        // Check if the row should be visible based on the filters
+        const tingkatanMatch = (tingkatanValue === "Pilih" || rowTingkatan === tingkatanValue);
+        const kelasMatch = (kelasValue === "Pilih" || rowKelas === kelasValue);
+  
+        if (tingkatanMatch && kelasMatch) {
+          row.style.display = '';
+          row.querySelector('input[type="checkbox"]').disabled = false; // Enable checkbox for visible rows
+        } else {
+          row.style.display = 'none';
+          row.querySelector('input[type="checkbox"]').disabled = true; // Disable checkbox for hidden rows
+        }
+      });
+    }
+  
+    // Add event listeners to dropdowns
+    filterTingkatan.addEventListener('change', filterRows);
+    filterKelas.addEventListener('change', filterRows);
+  
+    // Select all visible checkboxes
+    selectAllCheckbox.addEventListener('change', function() {
+      rows.forEach(row => {
+        if (row.style.display !== 'none') {
+          row.querySelector('input[type="checkbox"]').checked = selectAllCheckbox.checked;
+        }
+      });
+    });
+  
+    // Before form submission, ensure that hidden checkboxes are disabled so they won't be submitted
+    form.addEventListener('submit', function() {
+      rows.forEach(row => {
+        if (row.style.display === 'none') {
+          row.querySelector('input[type="checkbox"]').disabled = true; // Ensure hidden checkboxes are disabled
+        }
+      });
+    });
+  });
+  
+</script>
+
+
+{% endblock %}
