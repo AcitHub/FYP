@@ -116,8 +116,8 @@
                     <option value="Penolong Pegawai Ehwal Ekonomi">Penolong Pegawai Ehwal Ekonomi</option>
                     <option value="Juruaudit">Juruaudit</option>
                     <option value="Penolog Juruaudit">Penolong Juruaudit</option>
-                    <option value="Lain-lain">Lain-lain</option>
                     <option value="Guru Biasa">Guru Biasa</option>
+                    <option value="Lain-lain">Lain-lain</option>
 
                   </select>
                   {% comment %} {{ form.tingkatan }} {% endcomment %}
@@ -185,8 +185,8 @@
             <thead>
               <tr>
                 <th>ID Teacher</th>
-                <th>Nama</th>
                 <th>No. IC</th>
+                <th>Nama</th>
                 <th>Jantina</th>
                 <th>Kaum</th>
                 <th>Agama</th>
@@ -201,8 +201,8 @@
               {% for i in teacher %}
               <tr>
                 <td>{{ i.teacher_id}}</td>
-                <td>{{ i.nama }}</td>
                 <td>{{ i.ic_cikgu }}</td>
+                <td>{{ i.nama }}</td>
                 <td>{{ i.jantina }}</td>
                 <td>{{ i.kaum }}</td>
                 <td>{{ i.agama }}</td>

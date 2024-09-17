@@ -1,3 +1,11 @@
+/**
+* Template Name: NiceAdmin
+* Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+* Updated: Apr 20 2024 with Bootstrap v5.3.3
+* Author: BootstrapMade.com
+* License: https://bootstrapmade.com/license/
+*/
+
 (function() {
   "use strict";
 
@@ -311,8 +319,8 @@
 })();
 
 /**
- * Login
- */
+   * Login Signup
+   */
 
 function toggleContainerClass() {
   container.classList.toggle("active");
@@ -321,8 +329,12 @@ function toggleContainerClass() {
 function fadeOutContainerAndRedirect() {
   container.classList.add('fade-out');
   setTimeout(() => {
-    window.location.href = 'http://127.0.0.1:5500/FYP.html#';
+      window.location.href = 'http://127.0.0.1:5500/FYP.html#';
   }, 600);
+}
+
+function handleRegisterButtonClick() {
+  toggleContainerClass();
 }
 
 function handleLoginButtonClick() {
@@ -335,10 +347,12 @@ function handleForgetPasswordLinkClick(event) {
 }
 
 const container = document.getElementById('container');
+const registerBtn = document.getElementById('register');
 const loginBtn = document.getElementById('login');
 const forgetPasswordLink = document.getElementById('forgetPasswordLink');
 
 function setupEventListeners() {
+  registerBtn.addEventListener('click', handleRegisterButtonClick);
   loginBtn.addEventListener('click', handleLoginButtonClick);
   forgetPasswordLink.addEventListener('click', handleForgetPasswordLinkClick);
 }
@@ -347,57 +361,15 @@ function refreshPage(){
   window.location.href= window.location.href;
 }
 
-setupEventListeners();
-
 document.addEventListener('DOMContentLoaded', function() {
   const selectAllCheckbox = document.getElementById('select-all');
-  const filterTingkatan = document.getElementById('filterTingkatan');
-  const filterKelas = document.getElementById('filterKelas');
-  const rows = document.querySelectorAll('.student-row');
-  const form = document.querySelector('form'); // Get the form element
+  const checkboxes = document.querySelectorAll('tbody input[type="checkbox"]');
 
-  // Filter rows based on Tingkatan and Kelas
-  function filterRows() {
-    const tingkatanValue = filterTingkatan.value;
-    const kelasValue = filterKelas.value;
-
-    rows.forEach(row => {
-      const rowTingkatan = row.getAttribute('data-tingkatan');
-      const rowKelas = row.getAttribute('data-kelas');
-
-      // Check if the row should be visible based on the filters
-      const tingkatanMatch = (tingkatanValue === "Pilih" || rowTingkatan === tingkatanValue);
-      const kelasMatch = (kelasValue === "Pilih" || rowKelas === kelasValue);
-
-      if (tingkatanMatch && kelasMatch) {
-        row.style.display = '';
-        row.querySelector('input[type="checkbox"]').disabled = false; // Enable checkbox for visible rows
-      } else {
-        row.style.display = 'none';
-        row.querySelector('input[type="checkbox"]').disabled = true; // Disable checkbox for hidden rows
-      }
-    });
-  }
-
-  // Add event listeners to dropdowns
-  filterTingkatan.addEventListener('change', filterRows);
-  filterKelas.addEventListener('change', filterRows);
-
-  // Select all visible checkboxes
   selectAllCheckbox.addEventListener('change', function() {
-    rows.forEach(row => {
-      if (row.style.display !== 'none') {
-        row.querySelector('input[type="checkbox"]').checked = selectAllCheckbox.checked;
-      }
-    });
-  });
-
-  // Before form submission, ensure that hidden checkboxes are disabled so they won't be submitted
-  form.addEventListener('submit', function() {
-    rows.forEach(row => {
-      if (row.style.display === 'none') {
-        row.querySelector('input[type="checkbox"]').disabled = true; // Ensure hidden checkboxes are disabled
-      }
+    checkboxes.forEach(checkbox => {
+      checkbox.checked = selectAllCheckbox.checked;
     });
   });
 });
+
+setupEventListeners();
