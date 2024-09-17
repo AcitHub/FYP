@@ -27,6 +27,7 @@
             <!-- General Form Elements -->
             <form action="" method="POST">
               {% csrf_token %}
+
               {{ form.as_p }}
               <div class="row mb-3">
                 <label for="inputICPelajar" class="col-sm-2 col-form-label">No. IC</label>
@@ -139,6 +140,8 @@
                   {% comment %} {{ form.kelas }} {% endcomment %}
                 </div>
               </div>
+  
+              <!----------------------- Break -------------------------->
 
               <fieldset class="row mb-3">
                 <legend class="col-form-label col-sm-2 pt-0">Ahli</legend>
@@ -196,7 +199,6 @@
         
           <!-- Table with stripped rows -->
           <table class="table datatable">
-
             <thead>
               <tr>
                 <th>ID member</th>
@@ -210,10 +212,9 @@
                 <th>Kelas</th>
                 <th>Ahli</th>
                 <th>Modal Syer(RM)</th>
-                <th data-type="date" data-format="MM/DD/YYYY">Tarikh Pendaftaran</th>
+                <th data-type="date" data-format="MM/DD/YYYY">Tarik Pendaftaran</th>
               </tr>
             </thead>
-            
             <tbody>
               {% for i in member %}
               <tr>

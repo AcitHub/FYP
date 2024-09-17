@@ -33,7 +33,7 @@
   <link href="{% static "assets/vendor/simple-datatables/style.css" %}" rel="stylesheet">
 
   <!-- Template Main CSS File -->
-  <link href="{% static "assets/css/style.css" %}" rel="stylesheet">
+  
 
 </head>
 
@@ -219,7 +219,7 @@
       <li class="nav-heading">Laman Utama</li>
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="/home/">
+        <a class="nav-link collapsed" href="{% url 'home' %}">
           <i class="bi bi-grid"></i>
           <span>Papan Pemuka Analisis</span>
         </a>
@@ -232,71 +232,127 @@
           <i class="ri-community-line"></i><span>Komuniti</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="komuniti-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
-            <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#student-data-nav" data-bs-toggle="collapse" href="#">
-                  <i class="bi bi-people"></i>
-                  <span>Pelajar</span><i class="bi bi-chevron-down ms-auto student-chevron"></i>
+            
+          <!-- Pelajar Section -->
+          <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#student-data-nav" data-bs-toggle="collapse" href="#">
+              <i class="bi bi-people"></i>
+              <span>Pelajar</span><i class="bi bi-chevron-down ms-auto student-chevron"></i>
+            </a>
+            <ul id="student-data-nav" class="nav-content collapse" data-bs-parent="#komuniti-nav">
+                
+              <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#tambah-data-nav" data-bs-toggle="collapse" href="#">
+                  <i class="bi bi-plus-circle"></i>
+                  <span>Tambah Data</span><i class="bi bi-chevron-down ms-auto"></i>
                 </a>
-                <ul id="student-data-nav" class="nav-content collapse" data-bs-parent="#komuniti-nav">
+                <ul id="tambah-data-nav" class="nav-content collapse" data-bs-parent="#student-data-nav">
+                  
+                  <!-- Tambah Individu -->
                   <li class="nav-item">
                     <a class="nav-link collapsed pelajar-link" href="{% url 'register_student' %}">
-                      <i class="bi bi-plus-circle"></i>
-                      <span>Tambah Data</span>
+                      <i class="bi bi-person"></i>
+                      <span>Tambah Individu</span>
                     </a>
                   </li>
+              
+                  <!-- Tambah Kumpulan -->
                   <li class="nav-item">
-                    <a class="nav-link collapsed pelajar-link" href="{% url 'delete_student_page' %}">
-                      <i class="bi bi-trash"></i>
-                      <span>Padam Data</span>
+                    <a class="nav-link collapsed pelajar-link" href="{% url 'register_student_kumpulan_page' %}">
+                      <i class="bi bi-people"></i>
+                      <span>Tambah Kumpulan</span>
                     </a>
                   </li>
+              
+                </ul><!-- End Tambah Data Nav -->
+              </li><!-- End Tambah Data Nav Item -->
+              
+              <!-- Padam Data -->
+              <li class="nav-item">
+                <a class="nav-link collapsed pelajar-link" href="{% url 'delete_student_page' %}">
+                  <i class="bi bi-trash"></i>
+                  <span>Padam Data</span>
+                </a>
+              </li>
+              
+              <!-- Kemas Kini Data -->
+              <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#update-student-nav" data-bs-toggle="collapse" href="#">
+                  <i class="bi bi-pencil"></i>
+                  <span>Kemas Kini Data</span><i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="update-student-nav" class="nav-content collapse" data-bs-parent="#student-data-nav">
+                    
+                  <!-- Individu -->
                   <li class="nav-item">
-                    <a class="nav-link collapsed pelajar-link" href="{% url 'update_student_page' %}">
-                      <i class="bi bi-pencil"></i>
-                      <span>Kemas Kini Data</span>
+                    <a class="nav-link collapsed" href="{% url 'update_student_page' %}">
+                      <i class="bi bi-person"></i>
+                      <span>Individu</span>
                     </a>
                   </li>
-                </ul><!-- Penutup Nav Pelajar-->
-              </li><!-- Penutup Nav Pelajar-->
-      
+
+                  <!-- Any other sub-options for Kemas Kini can go here -->
+                  <li class="nav-item">
+                    <a class="nav-link collapsed" href="{% url 'update_student_kumpulan_page' %}">
+                      <i class="bi bi-people"></i>
+                      <span>Kumpulan</span>
+                    </a>
+                  </li>
+
+                </ul>
+              </li><!-- Penutup Kemas Kini Data -->
+                
+            </ul><!-- Penutup Nav Pelajar -->
+          </li><!-- Penutup Nav Pelajar -->
+          
+          <!-- Kakitangan Section -->
           <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#staff-data-nav" data-bs-toggle="collapse" href="#">
               <i class="bi bi-person-badge"></i>
               <span>Kakitangan</span><i class="bi bi-chevron-down ms-auto staff-chevron"></i>
             </a>
             <ul id="staff-data-nav" class="nav-content collapse" data-bs-parent="#komuniti-nav">
+                
+              <!-- Tambah Data -->
               <li class="nav-item">
                 <a class="nav-link collapsed kakitangan-link" href="{% url 'register_teacher' %}">
                   <i class="bi bi-plus-circle"></i>
                   <span>Tambah Data</span>
                 </a>
               </li>
+              
+              <!-- Padam Data -->
               <li class="nav-item">
                 <a class="nav-link collapsed kakitangan-link" href="{% url 'delete_teacher_page' %}">
                   <i class="bi bi-trash"></i>
                   <span>Padam Data</span>
                 </a>
               </li>
+              
+              <!-- Kemas Kini Data -->
               <li class="nav-item">
                 <a class="nav-link collapsed kakitangan-link" href="{% url 'update_teacher_page' %}">
                   <i class="bi bi-pencil"></i>
                   <span>Kemas Kini Data</span>
                 </a>
               </li>
-            </ul>
+                
+            </ul><!-- Penutup Nav Kakitangan -->
           </li><!-- Penutup Nav Kakitangan -->
-        </ul>
-      </li><!-- Penutup Nav Komuniti -->      
+            
+        </ul><!-- Penutup Nav Komuniti -->
+      </li><!-- Penutup Nav Komuniti -->
+ 
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="{% url 'saham_komuniti' %}">
+        <a class="nav-link collapsed" href="{% url 'share_page' %}">
           <i class="bi bi-graph-up-arrow"></i>
           <span>Saham</span>
         </a>
       </li><!-- Penutup Saham Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="{% url 'register_student' %}">
+        <a class="nav-link collapsed" href="{% url 'generate_student_page' %}">
           <i class="bi bi-file-earmark-break"></i>
           <span>Hasilkan Laporan</span>
         </a>

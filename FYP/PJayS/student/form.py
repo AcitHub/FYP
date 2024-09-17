@@ -1,7 +1,7 @@
 from django import forms
-from .models import *
+from .models import Member
 
-class Tambah_Student(forms.ModelForm):
+class TambahStudentForm(forms.ModelForm):
     class Meta:
         model = Member
-        fields = '__all__'
+        fields = ['nama', 'ic_pelajar', 'jantina', 'kaum', 'agama', 'alamat_rumah', 'tingkatan', 'kelas', 'ahli', 'modal_syer', 'tarikh_daftar']

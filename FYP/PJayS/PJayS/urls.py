@@ -24,5 +24,4 @@ urlpatterns = [
     path('', include('student.urls')),
     path('', include('teacher.urls')),
     path('', include('shares.urls')),
-
 ]

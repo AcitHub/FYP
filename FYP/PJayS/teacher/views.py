@@ -39,7 +39,7 @@ def edit_teacher(request, teacher_id):
         form = Tambah_Teacher(request.POST or None, instance=teacher)
         if form.is_valid():
             form.save()
-            return redirect('/home/update_teacher/')
+            return redirect('/home/update_teacher_page/')
     else:
         form = Tambah_Teacher(instance=teacher)
-    return render(request, 'teacher/muka surat-cikgu-kemas kini data.html', {'teacher': teacher})
+    return render(request, 'teacher/update-cikgu page.html', {'teacher': teacher})

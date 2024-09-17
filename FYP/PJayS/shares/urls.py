@@ -1,6 +1,7 @@
 from django.urls import path
-from .views import *
+from .views import share_page
 
 urlpatterns = [
-    path('dashboard/saham_komuniti/', saham_komuniti, name='saham_komuniti'),
+    path('home/share_page/', share_page, name='share_page'),
+
 ]

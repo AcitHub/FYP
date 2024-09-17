@@ -18,7 +18,7 @@ class Teacher(models.Model):
     kaum = models.CharField(max_length=50, choices=[('IBAN', 'IBAN'), ('INDO', 'INDO'),('KADAZAN','KADAZAN'),('KAYAN','KAYAN'),('MELAYU','MELAYU'),('ORANG ASLI','ORANG ASLI'),('SEMAI','SEMAI'),('THAI','THAI'),('LAIN-LAIN','LAIN-LAIN')])  # Dropdown
     agama = models.CharField(max_length=50, choices=[('BUDDHA', 'BUDDHA'), ('ISLAM', 'ISLAM'),('KRISTIAN','KRISTIAN'),('TAO','TAO'),('TIADA AGAMA','TIADA AGAMA'),('TERATAI','TERATAI'),('LAIN-LAIN','LAIN-LAIN')] )  # Dropdown
     alamat_rumah = models.CharField(max_length=255)  # Dropdown
-    pangkat = models.CharField(max_length=50, choices=[('Pengerusi', 'Pengerusi'), ('Naib Pengerusi', 'Naib Pengerusi'), ('Pegawai Ehwal Ekonomi','Pegawai Ehwal Ekonomi'), ('Penolong Pegawai Ehwal Ekonomi', 'Penolong Pegawai Ehwal Ekonomi'), ('Juruaudit','Juruadti'), ('Penolong Juruaudit', 'Penolong Juruaudit'), ('Lain-lain','Lain-lain'), ('Guru Biasa','Guru Biasa')])  # Dropdown
+    pangkat = models.CharField(max_length=50, choices=[('Pengerusi', 'Pengerusi'), ('Naib Pengerusi', 'Naib Pengerusi'), ('Pegawai Ehwal Ekonomi','Pegawai Ehwal Ekonomi'), ('Penolong Pegawai Ehwal Ekonomi', 'Penolong Pegawai Ehwal Ekonomi'), ('Juruaudit','Juruadit'), ('Penolong Juruaudit', 'Penolong Juruaudit'), ('Guru Biasa','Guru Biasa'), ('Lain-lain','Lain-lain') ])  # Dropdown
     ahli = models.CharField(max_length=11, choices=[('Aktif', 'Aktif'),('Tidak Aktif', 'Tidak Aktif')], default='Aktif')
     modal_syer = models.DecimalField(max_digits=10, decimal_places=2)
     tarikh_daftar = models.DateField()
