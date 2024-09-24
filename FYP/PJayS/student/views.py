@@ -17,7 +17,12 @@ def register_student(request):
         form = TambahStudentForm()
 
     member = Member.objects.all()
-    return render(request, 'student/muka surat-pelajar-tambah data.html', {'member': member})
+
+    context = {
+        form: form,
+        
+    }
+    return render(request, 'student/muka surat-pelajar-tambah data.html', {'member':member})
 
 def register_student_kumpulan_page(request):
     if request.method == 'POST':

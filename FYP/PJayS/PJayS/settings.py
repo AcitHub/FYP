@@ -144,5 +144,6 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+ALLOWED_HOSTS = ['social-helpful-labrador.ngrok-free.app']
 
-ALLOWED_HOSTS = ['grouse-awaited-readily.ngrok-free.app']
+CSRF_TRUSTED_ORIGINS = ['https://social-helpful-labrador.ngrok-free.app']
