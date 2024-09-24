@@ -30,6 +30,9 @@ def admin_login(request):
     return render(request, 'login/pages-login-signup.html')
 
 def home(request):
+    if request.user.is_authenticated is not True: 
+        return redirect('/login/')
+    
     member = Member.objects.count()
     teacher  = Teacher.objects.count()
     return render(request, 'login/laman utama-papan pemuka analisis.html', {'member':member, 'teacher':teacher})
