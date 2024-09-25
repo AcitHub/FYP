@@ -26,10 +26,6 @@ SECRET_KEY = 'django-insecure-#=((1ol4n799+3m28!a)@k)^xu=m8$c&ii-l7^2o5*0(mf&p3m
 # DEBUG = False
 DEBUG = True
 
-
-# ALLOWED_HOSTS = []
-
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -144,6 +140,6 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-ALLOWED_HOSTS = ['regular-penguin-primary.ngrok-free.app', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['social-helpful-labrador.ngrok-free.app']
 
-CSRF_TRUSTED_ORIGINS = ['https://regular-penguin-primary.ngrok-free.app', 'http://127.0.0.1', 'http://localhost']
+CSRF_TRUSTED_ORIGINS = ['https://social-helpful-labrador.ngrok-free.app']
