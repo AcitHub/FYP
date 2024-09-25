@@ -15,7 +15,7 @@ class Teacher(models.Model):
     nama = models.CharField(max_length=100)
     ic_cikgu = models.CharField(max_length=12, unique=True)
     jantina = models.CharField(max_length=10, choices=[('Lelaki', 'Lelaki'), ('Perempuan', 'Perempuan')])
-    kaum = models.CharField(max_length=50, choices=[('IBAN', 'IBAN'), ('INDO', 'INDO'),('KADAZAN','KADAZAN'),('KAYAN','KAYAN'),('MELAYU','MELAYU'),('ORANG ASLI','ORANG ASLI'),('SEMAI','SEMAI'),('THAI','THAI'),('LAIN-LAIN','LAIN-LAIN')])  # Dropdown
+    kaum = models.CharField(max_length=50, choices=[('IBAN ATAU SEA DAYAK', 'IBAN  ATAU SEA DAYAK'), ('TEMIAR', 'TEMIAR'),('INDO', 'INDO'),('KADAZAN','KADAZAN'),('KAYAN','KAYAN'),('MELAYU','MELAYU'),('ORANG ASLI','ORANG ASLI'),('SEMAI','SEMAI'),('THAI','THAI'),('LAIN-LAIN','LAIN-LAIN')])  # Dropdown
     agama = models.CharField(max_length=50, choices=[('BUDDHA', 'BUDDHA'), ('ISLAM', 'ISLAM'),('KRISTIAN','KRISTIAN'),('TAO','TAO'),('TIADA AGAMA','TIADA AGAMA'),('TERATAI','TERATAI'),('LAIN-LAIN','LAIN-LAIN')] )  # Dropdown
     alamat_rumah = models.CharField(max_length=255)  # Dropdown
     pangkat = models.CharField(max_length=50, choices=[('Pengerusi', 'Pengerusi'), ('Naib Pengerusi', 'Naib Pengerusi'), ('Pegawai Ehwal Ekonomi','Pegawai Ehwal Ekonomi'), ('Penolong Pegawai Ehwal Ekonomi', 'Penolong Pegawai Ehwal Ekonomi'), ('Juruaudit','Juruadit'), ('Penolong Juruaudit', 'Penolong Juruaudit'), ('Guru Biasa','Guru Biasa'), ('Lain-lain','Lain-lain') ])  # Dropdown
