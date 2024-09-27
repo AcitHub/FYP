@@ -140,6 +140,6 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-ALLOWED_HOSTS = ['social-helpful-labrador.ngrok-free.app']
+ALLOWED_HOSTS = ['social-helpful-labrador.ngrok-free.app', '127.0.0.1', 'localhost']
 
-CSRF_TRUSTED_ORIGINS = ['https://social-helpful-labrador.ngrok-free.app']
+CSRF_TRUSTED_ORIGINS = ['https://social-helpful-labrador.ngrok-free.app', 'http://127.0.0.1', 'http://localhost']
