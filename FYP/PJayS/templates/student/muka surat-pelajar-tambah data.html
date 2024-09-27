@@ -171,7 +171,7 @@
               <div class="row mb-3">
                 <label for="modalSyer" class="col-sm-2 col-form-label">Modal Syer(RM)</label>
                 <div class="col-sm-10">
-                  <input type="number" class="form-control" id="modalSyer" placeholder="Sila masukkan nilai modal syer pelajar" name="modal_syer">
+                  <input type="number" class="form-control" id="modalSyer" placeholder="Sila masukkan nilai modal syer pelajar" name="modal_syer" onkeydown="return restrictInput(event)" step="any">
                 </div>
                 {% comment %} {{ form.modal_syer }} {% endcomment %}
               </div>
@@ -248,5 +248,20 @@
       </div>
     </div>
   </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script>
+      {% if messages %}
+          {% for message in messages %}
+              Swal.fire({
+                  title: "{{ message.tags|title }}",
+                  text: "{{ message }}",
+                  icon: "{{ message.tags }}",
+                  confirmButtonText: 'OK'
+              });
+          {% endfor %}
+      {% endif %}
+  </script>
+  
   
 {% endblock %}
