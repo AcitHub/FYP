@@ -142,5 +142,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 ALLOWED_HOSTS = ['social-helpful-labrador.ngrok-free.app']
 
-CSRF_TRUSTED_ORIGINS = ['https://social-helpful-labrador.ngrok-free.app', 'http://127.0.0.1', 'http://localhost']
+CSRF_TRUSTED_ORIGINS = ['https://social-helpful-labrador.ngrok-free.app']
 

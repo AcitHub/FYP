@@ -30,7 +30,7 @@ class Member(models.Model):
     )
     
     jantina = models.CharField(max_length=10, choices=[('Lelaki', 'Lelaki'), ('Perempuan', 'Perempuan')])
-    kaum = models.CharField(max_length=50, choices=[('-', '-'), ('IBAN', 'IBAN'), ('INDO', 'INDO'), ('KADAZAN', 'KADAZAN'), ('KAYAN', 'KAYAN'), ('MELAYU', 'MELAYU'), ('ORANG ASLI', 'ORANG ASLI'), ('SEMAI', 'SEMAI'), ('THAI', 'THAI'), ('LAIN-LAIN', 'LAIN-LAIN')])
+    kaum = models.CharField(max_length=50, choices=[('-', '-'), ('IBAN ATAU SEA DAYAK', 'IBAN ATAU SEA DAYAK'), ('INDONESIA', 'INDONESIA'), ('KADAZAN', 'KADAZAN'), ('KAYAN', 'KAYAN'), ('MELAYU', 'MELAYU'), ('ORANG ASLI', 'ORANG ASLI'), ('SEMAI', 'SEMAI'), ('THAI', 'THAI'), ('LAIN-LAIN', 'LAIN-LAIN')])
     agama = models.CharField(max_length=50, choices=[('-', '-'), ('BUDDHA', 'BUDDHA'), ('ISLAM', 'ISLAM'), ('KRISTIAN', 'KRISTIAN'), ('TIADA AGAMA', 'TIADA AGAMA'), ('LAIN-LAIN', 'LAIN-LAIN')])
     alamat_rumah = models.CharField(max_length=255)
     tingkatan = models.CharField(max_length=50, choices=[('-', '-'), ('1', '1'), ('2', '2'), ('3', '3'), ('4', '4'), ('5', '5')])
