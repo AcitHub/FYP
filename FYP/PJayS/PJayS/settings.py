@@ -26,6 +26,10 @@ SECRET_KEY = 'django-insecure-#=((1ol4n799+3m28!a)@k)^xu=m8$c&ii-l7^2o5*0(mf&p3m
 # DEBUG = False
 DEBUG = True
 
+
+ALLOWED_HOSTS = []
+
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -143,4 +147,3 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 ALLOWED_HOSTS = ['social-helpful-labrador.ngrok-free.app']
 
 CSRF_TRUSTED_ORIGINS = ['https://social-helpful-labrador.ngrok-free.app']
-
