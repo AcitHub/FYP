@@ -68,16 +68,14 @@
                 <div class="col-sm-10">
                   <select class="form-select" id="kaumPelajar" aria-label="Default select example" name="kaum">
                     <option selected disabled>Pilih</option>
-                    <option value="-">-</option>
-                    <option value="IBAN ATAU SE DAYAK">IBAN ATAU SEA DAYAK</option>
-                    <option value="INDONESIA">INDONESIA</option>
+                    <option value="IBAN">IBAN</option>
+                    <option value="INDO">INDONESIA</option>
                     <option value="KADAZAN">KADAZAN</option>
                     <option value="KAYAN">KAYAN</option>
                     <option value="MELAYU">MELAYU</option>
                     <option value="ORANG ASLI">ORANG ASLI(SEMENANJUNG)</option>
                     <option value="SEMAI">SEMAI</option>
                     <option value="THAI">THAI</option>
-                    <option value="TEMIAR">TEMIAR</option>
                     <option value="LAIN-LAIN">Lain-lain Kaum</option>
                   </select>
                   {% comment %} {{ form.kaum }} {% endcomment %}
@@ -89,11 +87,9 @@
                 <div class="col-sm-10">
                   <select class="form-select" id="agamaPelajar" aria-label="Default select example" name="agama">
                     <option selected disabled>Pilih</option>
-                    <option value="-">-</option>
                     <option value="BUDDHA">BUDDHA</option>
                     <option value="ISLAM">ISLAM</option>
                     <option value="KRISTIAN">KRISTIAN</option>
-                    <option value="TAO">TAO</option>
                     <option value="TIADA AGAMA">TIADA AGAMA/AITISMISME</option>
                     <option value="LAIN-LAIN">Lain-lain Agama</option>
                   </select>
@@ -114,7 +110,6 @@
                 <div class="col-sm-10">
                   <select class="form-select" id="inputTingkatanPelajar" aria-label="Default select example" name="tingkatan">
                     <option selected disabled>Pilih</option>
-                    <option value="-">-</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -130,7 +125,6 @@
                 <div class="col-sm-10">
                   <select class="form-select" id="inputKelasPelajar" aria-label="Default select example" name="kelas">
                     <option selected disabled>Pilih</option>
-                    <option value="-">-</option>
                     <option value="ANGGERIK">ANGGERIK</option>
                     <option value="CEMPAKA">CEMPAKA</option>
                     <option value="DAHLIA">DAHLIA</option>
@@ -171,7 +165,7 @@
               <div class="row mb-3">
                 <label for="modalSyer" class="col-sm-2 col-form-label">Modal Syer(RM)</label>
                 <div class="col-sm-10">
-                  <input type="number" class="form-control" id="modalSyer" placeholder="Sila masukkan nilai modal syer pelajar" name="modal_syer" onkeydown="return restrictInput(event)" step="any">
+                  <input type="number" class="form-control" id="modalSyer" placeholder="Sila masukkan nilai modal syer pelajar" name="modal_syer">
                 </div>
                 {% comment %} {{ form.modal_syer }} {% endcomment %}
               </div>
@@ -248,20 +242,5 @@
       </div>
     </div>
   </section>
-
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <script>
-      {% if messages %}
-          {% for message in messages %}
-              Swal.fire({
-                  title: "{{ message.tags|title }}",
-                  text: "{{ message }}",
-                  icon: "{{ message.tags }}",
-                  confirmButtonText: 'OK'
-              });
-          {% endfor %}
-      {% endif %}
-  </script>
-  
   
 {% endblock %}
