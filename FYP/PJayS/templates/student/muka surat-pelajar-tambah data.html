@@ -6,20 +6,28 @@
 
 {% block content %}
 <div class="pagetitle">
-  <h1>Tambah Pelajar</h1>
-  <nav>
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item">Muka Surat</li>
-      <li class="breadcrumb-item">Pelajar</li>
-      <li class="breadcrumb-item active">Tambah Data</li>
-    </ol>
-  </nav>
+  <div>
+    <h1>Tambah Pelajar</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">Muka Surat</li>
+        <li class="breadcrumb-item">Pelajar</li>
+        <li class="breadcrumb-item active">Tambah Data</li>
+      </ol>
+    </nav>
+  </div>
 </div><!-- Penutup Page Title -->
 
 <section class="section">
     <div class="row">
       <div class="col-lg-12">
-  
+        
+        <!-- Button Group -->
+        <div class="btn-nav" style="position: relative;">
+          <button type="button" class="btn-Individu ms-2">Individu</button>
+          <button type="button" class="btn-Kumpulan ms-2">Kumpulan</button>
+
+
         <div class="card">
           <div class="card-body">
             <h5 class="card-title">Borang Pendaftaran</h5>
@@ -69,7 +77,7 @@
                   <select class="form-select" id="kaumPelajar" aria-label="Default select example" name="kaum">
                     <option selected disabled>Pilih</option>
                     <option value="-">-</option>
-                    <option value="IBAN ATAU SE DAYAK">IBAN ATAU SEA DAYAK</option>
+                    <option value="IBAN ATAU SEA DAYAK">IBAN ATAU SEA DAYAK</option>
                     <option value="INDONESIA">INDONESIA</option>
                     <option value="KADAZAN">KADAZAN</option>
                     <option value="KAYAN">KAYAN</option>
@@ -197,7 +205,7 @@
   
           </div>
         </div>
-  
+      </div>
         <div class="card">
           <div class="card-body">
             <h5 class="card-title">Jadual Pelajar</h5>
