@@ -46,5 +46,3 @@ class TambahStudentForm(forms.ModelForm):
         if not nama:
             raise forms.ValidationError("Please enter a name.")
         return nama
-
-    # Add similar clean methods for other fields as necessary
