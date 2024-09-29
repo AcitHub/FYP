@@ -2,7 +2,7 @@ import pandas as pd
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import Member
-from .form import TambahStudentForm
+from .form import TambahStudentForm, UpdateStudentForm
 
 def get_all_members():
     """Helper function to get all members."""
@@ -92,7 +92,7 @@ def edit_student(request, member_id):
         return redirect('update_student_page')
 
     if request.method == 'POST':
-        form = TambahStudentForm(request.POST, instance=member)
+        form = UpdateStudentForm(request.POST, instance=member)
         if form.is_valid():
             form.save()
             messages.success(request, 'Student data updated successfully.')
@@ -100,7 +100,7 @@ def edit_student(request, member_id):
         else:
             messages.error(request, f"There was an error updating the data: {form.errors}")
     else:
-        form = TambahStudentForm(instance=member)
+        form = UpdateStudentForm(instance=member)
 
     return render(request, 'student/update-page.html', {'form': form, 'member': member})
 
