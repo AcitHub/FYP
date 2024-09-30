@@ -6,10 +6,10 @@
 
 {% block content %}
     <div class="pagetitle">
-      <h1>Papan Pemuka Analisis</h1>
+      <h1><span>Papan Pemuka Analisis</span></h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="laman utama-papan pemuka analisis.html">Laman Utama</a></li>
+          <li class="breadcrumb-item"><a href="{% url 'home' %}">Laman Utama</a></li>
           <li class="breadcrumb-item active">Papan Pemuka Analisis</li>
         </ol>
       </nav>
@@ -25,8 +25,8 @@
               <div class="filter">
                 <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                  <li><a class="dropdown-item" href="#">Pelajar</a></li>
-                  <li><a class="dropdown-item" href="#">Kakitangan</a></li>
+                  <li><a class="dropdown-item" href="{% url 'register_student' %}">Pelajar</a></li>
+                  <li><a class="dropdown-item" href="{% url 'register_teacher' %}">Kakitangan</a></li>
                 </ul>
               </div>
           
@@ -41,7 +41,7 @@
                       <div class="filter">
                         <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
                         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                          <li><a class="dropdown-item" href="#">Lagi</a></li>
+                          <li><a class="dropdown-item" href="{% url 'register_student' %}">Lagi</a></li>
                         </ul>
                       </div>
                       <div class="card-body">
@@ -65,7 +65,7 @@
                       <div class="filter">
                         <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
                         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                          <li><a class="dropdown-item" href="#">Lagi</a></li>
+                          <li><a class="dropdown-item" href="{% url 'register_teacher' %}">Lagi</a></li>
                         </ul>
                       </div>
                       <div class="card-body">
