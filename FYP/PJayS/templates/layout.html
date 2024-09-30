@@ -242,11 +242,29 @@
             <ul id="student-data-nav" class="nav-content collapse" data-bs-parent="#komuniti-nav">
                 
               <li class="nav-item">
-                <a class="nav-link collapsed pelajar-link" href="{% url 'register_student' %}">
+                <a class="nav-link collapsed" data-bs-target="#tambah-data-nav" data-bs-toggle="collapse" href="#">
                   <i class="bi bi-plus-circle"></i>
-                  <span>Tambah Data</span>
+                  <span>Tambah Data</span><i class="bi bi-chevron-down ms-auto"></i>
                 </a>
-
+                <ul id="tambah-data-nav" class="nav-content collapse" data-bs-parent="#student-data-nav">
+                  
+                  <!-- Tambah Individu -->
+                  <li class="nav-item">
+                    <a class="nav-link collapsed pelajar-link" href="{% url 'register_student' %}">
+                      <i class="bi bi-person"></i>
+                      <span>Tambah Individu</span>
+                    </a>
+                  </li>
+              
+                  <!-- Tambah Kumpulan -->
+                  <li class="nav-item">
+                    <a class="nav-link collapsed pelajar-link" href="{% url 'register_student_kumpulan_page' %}">
+                      <i class="bi bi-people"></i>
+                      <span>Tambah Kumpulan</span>
+                    </a>
+                  </li>
+              
+                </ul><!-- End Tambah Data Nav -->
               </li><!-- End Tambah Data Nav Item -->
               
               <!-- Padam Data -->
@@ -259,11 +277,30 @@
               
               <!-- Kemas Kini Data -->
               <li class="nav-item">
-                <a class="nav-link collapsed pelajar-link" href="{% url 'update_student_page' %}">
+                <a class="nav-link collapsed" data-bs-target="#update-student-nav" data-bs-toggle="collapse" href="#">
                   <i class="bi bi-pencil"></i>
-                  <span>Kemas Kini Data</span>
+                  <span>Kemas Kini Data</span><i class="bi bi-chevron-down ms-auto"></i>
                 </a>
-              <li><!-- Penutup Kemas Kini Data -->
+                <ul id="update-student-nav" class="nav-content collapse" data-bs-parent="#student-data-nav">
+                    
+                  <!-- Individu -->
+                  <li class="nav-item">
+                    <a class="nav-link collapsed" href="{% url 'update_student_page' %}">
+                      <i class="bi bi-person"></i>
+                      <span>Individu</span>
+                    </a>
+                  </li>
+
+                  <!-- Any other sub-options for Kemas Kini can go here -->
+                  <li class="nav-item">
+                    <a class="nav-link collapsed" href="{% url 'update_student_kumpulan_page' %}">
+                      <i class="bi bi-people"></i>
+                      <span>Kumpulan</span>
+                    </a>
+                  </li>
+
+                </ul>
+              </li><!-- Penutup Kemas Kini Data -->
                 
             </ul><!-- Penutup Nav Pelajar -->
           </li><!-- Penutup Nav Pelajar -->
@@ -278,7 +315,7 @@
                 
               <!-- Tambah Data -->
               <li class="nav-item">
-                <a class="nav-link collapsed pelajar-link" href="{% url 'register_teacher' %}">
+                <a class="nav-link collapsed kakitangan-link" href="{% url 'register_teacher' %}">
                   <i class="bi bi-plus-circle"></i>
                   <span>Tambah Data</span>
                 </a>
@@ -286,7 +323,7 @@
               
               <!-- Padam Data -->
               <li class="nav-item">
-                <a class="nav-link collapsed pelajar-link" href="{% url 'delete_teacher_page' %}">
+                <a class="nav-link collapsed kakitangan-link" href="{% url 'delete_teacher_page' %}">
                   <i class="bi bi-trash"></i>
                   <span>Padam Data</span>
                 </a>
@@ -294,7 +331,7 @@
               
               <!-- Kemas Kini Data -->
               <li class="nav-item">
-                <a class="nav-link collapsed pelajar-link" href="{% url 'update_teacher_page' %}">
+                <a class="nav-link collapsed kakitangan-link" href="{% url 'update_teacher_page' %}">
                   <i class="bi bi-pencil"></i>
                   <span>Kemas Kini Data</span>
                 </a>
