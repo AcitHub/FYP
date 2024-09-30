@@ -23,7 +23,7 @@ def delete_teacher(request, teacher_id):
         teacher = Teacher.objects.get(teacher_id=teacher_id)
         teacher.delete()
         messages.success(request, 'Data successfully deleted')
-        return redirect('/home/delete_teacher/')
+        return redirect('/home/delete_teacher_page/')
 
 def delete_teacher_page(request):
     teacher = Teacher.objects.all()
