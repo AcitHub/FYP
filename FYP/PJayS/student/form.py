@@ -46,3 +46,22 @@ class TambahStudentForm(forms.ModelForm):
         if not nama:
             raise forms.ValidationError("Please enter a name.")
         return nama
+
+    # Add similar clean methods for other fields as necessary
+
+class UpdateStudentForm(forms.ModelForm):
+    class Meta:
+        model = Member
+        fields = [
+            'nama', 
+            'ic_pelajar', 
+            'jantina', 
+            'kaum', 
+            'agama', 
+            'alamat_rumah', 
+            'tingkatan', 
+            'kelas', 
+            'ahli', 
+            'modal_syer', 
+            'tarikh_daftar'
+        ]
