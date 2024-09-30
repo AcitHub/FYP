@@ -106,10 +106,6 @@ h6 {
   text-align: center;
   border: 1px solid #c9c9c9;
   border-bottom: none;
-  background-size: 200% auto;
-  background-position: left;
-  transition: background-position 0.3s ease-in;
-  cursor: pointer;
 }
 
 .btn-Individu {
@@ -117,39 +113,22 @@ h6 {
   position: relative;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 28px;
-  padding-right: 28px;
+  padding: 8px;
   z-index: 3;
 }
 
 .btn-Kumpulan {
   background: #fff;
   position: absolute;
-  border-top-left-radius: 5px;
   border-top-right-radius: 5px;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 28px;
-  padding-right: 28px;
-  left: 100px;
+  padding-left: 12px;
+  padding: 8px;
+  left: 70px;
   z-index: 2;
 }
 
 .btn-nav button:hover {
-  background-color: #f6f9ff;
-}
-
-.btn-nav button.active {
-  background-color: #fff; /* Keep it bright when active */
-  border-color: #d1651a;
-  z-index: 3;
-}
-
-.btn-nav button.inactive {
-  background-color: #f6f9ff; /* Make it a little darker when inactive */
-  z-index: 2;
+  background: #d1651a;
 }
 
 /*--------------------------------------------------------------
@@ -842,6 +821,7 @@ h6 {
 .sidebar-nav .nav-content .pelajar-link {
   padding: 10px 0 10px 60px; /* Adjust this padding as needed */
 }
+
 
 .sidebar-nav .nav-content a i {
   font-size: 15px;
