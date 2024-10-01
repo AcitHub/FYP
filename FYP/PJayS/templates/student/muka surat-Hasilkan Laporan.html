@@ -23,7 +23,7 @@
           <h5 class="card-title">Senarai Laporan</h5>
           
           <!-- Generate Report Elements -->
-          <form">
+          <form>
             {% csrf_token %}
               <div class="row mb-3">
               <label for="report-type" class="col-sm-2 col-form-label">Jenis Laporan</label>
@@ -108,7 +108,9 @@
               </div>
             </div>
 
-            <button type="submit" class="btn btn-primary mt-3">Menjana</button>
+            <div class="form-btn">
+              <button type="submit" class="btn btn-primary mt-3">Menjana</button>
+            </div>
           </form>
         </div>
       </div>

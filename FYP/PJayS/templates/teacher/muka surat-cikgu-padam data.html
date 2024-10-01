@@ -22,7 +22,7 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Maklumat Pendaftaran Kakitangan</h5>
-      
+          <div class="table-scrollpane">
         <!-- Table with stripped rows -->
         <table class="table datatable">
 
@@ -59,8 +59,10 @@
               <td>{{ i.tarikh_daftar }}</td>
               <td>
                 <form method="POST" action="{% url 'delete_teacher' i.teacher_id %}">
-                  {% csrf_token %} 
-                  <button type="submit" class="btn btn-primary">Padam</button>
+                  {% csrf_token %}
+                  <div class="form-btn">
+                    <button type="submit" class="btn btn-primary">Padam</button>
+                  </div>
                 </form> 
               </td> <!-- Button yang menyimpan id pelajar untuk displaykan di form -->
             </tr>
@@ -71,7 +73,7 @@
           
         </table>
         <!-- End Table with stripped rows -->
-      
+      </div>
         </div>
       </div>
 {% endblock %}
