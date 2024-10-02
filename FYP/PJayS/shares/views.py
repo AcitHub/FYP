@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from .form import Tambah_Share
-from .models import Saham
+from .models import Saham, Teacher, Member
 
 def share_page(request):
     if request.method == 'POST':
@@ -15,5 +15,9 @@ def share_page(request):
     else:
         form = Tambah_Share()
 
-    saham = Saham.objects.all()
-    return render(request, 'saham/muka surat-saham komuniti.html', {'saham': saham})
+    context = {
+        "saham" : Saham.objects.all(),
+        "teacher" : Teacher.objects.all(),
+        "member" : Member.objects.all(),
+    }
+    return render(request, 'saham/muka surat-saham komuniti.html', context)
