@@ -1464,3 +1464,8 @@ h6 {
   background-position: right;
   color: white !important;
 }
+
+input[readonly] {
+  background-color: #f8f9fa; /* Light gray background */
+  opacity: 1; /* Ensures it is fully opaque */
+}
