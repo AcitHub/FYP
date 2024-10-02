@@ -22,7 +22,7 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Maklumat Pendaftaran Kakitangan</h5>
-      
+          <div class="table-scrollpane">
         <!-- Table with stripped rows -->
         <table class="table datatable">
           <thead>
@@ -58,7 +58,9 @@
               <td>
                 <form method="POST" action="{% url 'edit_teacher' teacher.teacher_id %}">
                   {% csrf_token %}
-                  <button type="submit"  class="btn btn-primary">Kemas Kini</button>
+                  <div class="form-btn">
+                    <button type="submit"  class="btn btn-primary">Kemas Kini</button>
+                  <div>
                 </form>
               </td> <!-- Button yang menyimpan id pelajar untuk displaykan di form -->
             </tr>
@@ -69,6 +71,7 @@
           
         </table>
         <!-- End Table with stripped rows -->
+      </div>
       
         </div>
       </div>

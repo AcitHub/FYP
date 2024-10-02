@@ -2,7 +2,8 @@ import pandas as pd
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import Member
-from .form import TambahStudentForm, UpdateStudentForm
+from .form import TambahStudentForm
+from .form import UpdateStudentForm
 
 def get_all_members():
     """Helper function to get all members."""
