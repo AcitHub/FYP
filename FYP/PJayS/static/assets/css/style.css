@@ -162,11 +162,14 @@ h6 {
   right: 15px;
   bottom: 15px;
   z-index: 99999;
-  background: #4154f1;
+  background: -webkit-linear-gradient(left, #d1651a 0%, #c1282a 50%, #d1651a 100%);
+  background-size: 200% auto;
+  background-position: right;
+  color: #fff !important;
   width: 40px;
   height: 40px;
   border-radius: 4px;
-  transition: all 0.4s;
+  transition: 0.2s ease-out;
 }
 
 .back-to-top i {
@@ -176,8 +179,8 @@ h6 {
 }
 
 .back-to-top:hover {
-  background: #6776f4;
-  color: #fff;
+  background-position: left;
+  color: white !important;
 }
 
 .back-to-top.active {
@@ -771,7 +774,7 @@ h6 {
   align-items: center;
   font-size: 15px;
   font-weight: 600;
-  color: #fff;
+  color: #fff !important;
   transition: 0.3;
   background: transparent;
   padding: 10px 15px;
@@ -1048,6 +1051,12 @@ h6 {
 
 .dashboard .top-selling .table tbody td {
   vertical-align: middle;
+}
+
+.table-scrollpane {
+  max-height: 1000px; /* Adjust the height as needed */
+  overflow-y: auto; /* Enables vertical scrolling */
+  overflow-x: auto; /* Enables horizontal scrolling if necessary */
 }
 
 .dashboard .top-selling img {
@@ -1440,4 +1449,23 @@ h6 {
 .login {
   margin: 0;
   padding-top: 75px;
+}
+
+/* Form Button */
+.form-btn button {
+  background: -webkit-linear-gradient(left, #d1651a 0%, #c1282a 50%, #d1651a 100%);
+  background-size: 200% auto;
+  background-position: left;
+  transition: background-position 0.2s ease-out;
+  color: #fff !important;
+}
+
+.form-btn button:hover {
+  background-position: right;
+  color: white !important;
+}
+
+input[readonly] {
+  background-color: #f8f9fa; /* Light gray background */
+  opacity: 1; /* Ensures it is fully opaque */
 }

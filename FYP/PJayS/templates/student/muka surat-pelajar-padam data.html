@@ -22,7 +22,6 @@
     <div class="col-lg-12">
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title">Maklumat Pendaftaran Pelajar</h5>
       
           <form method="POST" action="{% url 'delete_student_page' %}">
             {% csrf_token %}
@@ -70,59 +69,64 @@
             <div class="card">
               <div class="card-body">
                 <fieldset>
-                  <h5 class="card-title">Info Pelajar</h5>
-                  <table class="table datatable">
-                    <thead>
-                      <tr>
-                        <th>Pilih</th>
-                        <th>ID member</th>
-                        <th>No. IC</th>
-                        <th>Nama</th>
-                        <th>Jantina</th>
-                        <th>Kaum</th>
-                        <th>Agama</th>
-                        <th>Alamat Rumah</th>
-                        <th>Tingkatan</th>
-                        <th>Kelas</th>
-                        <th>Ahli</th>
-                        <th>Modal Syer(RM)</th>
-                        <th data-type="date" data-format="MM/DD/YYYY">Tarikh Pendaftaran</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {% for i in member %}
-                      <tr class="student-row" data-tingkatan="{{ i.tingkatan }}" data-kelas="{{ i.kelas }}">
-                        <td>
-                          <input type="checkbox" name="selected_students[]" value="{{ i.member_id }}">
-                        </td>
-                        <td>{{ i.member_id }}</td>
-                        <td>{{ i.ic_pelajar }}</td>
-                        <td>{{ i.nama }}</td>
-                        <td>{{ i.jantina }}</td>
-                        <td>{{ i.kaum }}</td>
-                        <td>{{ i.agama }}</td>
-                        <td>{{ i.alamat_rumah }}</td>
-                        <td>{{ i.tingkatan }}</td>
-                        <td>{{ i.kelas }}</td>
-                        <td>{{ i.ahli }}</td>
-                        <td>{{ i.modal_syer }}</td>
-                        <td>{{ i.tarikh_daftar }}</td>
-                      </tr>
-                      {% endfor %}
-                    </tbody>
-                  </table>
+                  <h5 class="card-title">Maklumat Data Pelajar</h5>
+                  <!-- Table container with scrollpane -->
+                  <div class="table-scrollpane">
+                    <table class="table datatable">
+                      <thead>
+                        <tr>
+                          <th>Pilih</th>
+                          <th>ID member</th>
+                          <th>No. IC</th>
+                          <th>Nama</th>
+                          <th>Jantina</th>
+                          <th>Kaum</th>
+                          <th>Agama</th>
+                          <th>Alamat Rumah</th>
+                          <th>Tingkatan</th>
+                          <th>Kelas</th>
+                          <th>Ahli</th>
+                          <th>Modal Syer(RM)</th>
+                          <th data-type="date" data-format="MM/DD/YYYY">Tarikh Pendaftaran</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for i in member %}
+                        <tr class="student-row" data-tingkatan="{{ i.tingkatan }}" data-kelas="{{ i.kelas }}">
+                          <td>
+                            <input type="checkbox" name="selected_students[]" value="{{ i.member_id }}">
+                          </td>
+                          <td>{{ i.member_id }}</td>
+                          <td>{{ i.ic_pelajar }}</td>
+                          <td>{{ i.nama }}</td>
+                          <td>{{ i.jantina }}</td>
+                          <td>{{ i.kaum }}</td>
+                          <td>{{ i.agama }}</td>
+                          <td>{{ i.alamat_rumah }}</td>
+                          <td>{{ i.tingkatan }}</td>
+                          <td>{{ i.kelas }}</td>
+                          <td>{{ i.ahli }}</td>
+                          <td>{{ i.modal_syer }}</td>
+                          <td>{{ i.tarikh_daftar }}</td>
+                        </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
                   <br>
                   <div class="form-check">
                     <input type="checkbox" id="select-all" class="form-check-input">
                     <label class="form-check-label" for="select-all">Semua</label>
                   </div>
                   <br>
+                  <div class="form-btn">
+                    <!-- Delete Button below the table -->
+                    <button type="submit" class="btn btn-primary">Padam Pelajar Terpilih</button>
+                  </div>
                 </fieldset>
               </div>
             </div>
 
-            <!-- Delete Button below the table -->
-            <button type="submit" class="btn btn-primary">Padam Pelajar Terpilih</button>
           </form>
         </div>
       </div>
