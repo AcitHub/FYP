@@ -119,48 +119,50 @@
                   <div class="card-body">
                     <fieldset>
                       <h5 class="card-title">Maklumat Data Pelajar</h5>
-
-                      <table class="table datatable">
-                        <thead>
-                          <tr>
-                            <th>Pilih</th>
-                            <th>ID member</th>
-                            <th>No. IC</th>
-                            <th>Nama</th>
-                            <th>Jantina</th>
-                            <th>Kaum</th>
-                            <th>Agama</th>
-                            <th>Alamat Rumah</th>
-                            <th>Tingkatan</th>
-                            <th>Kelas</th>
-                            <th>Ahli</th>
-                            <th>Modal Syer(RM)</th>
-                            <th data-type="date" data-format="MM/DD/YYYY">Tarikh Pendaftaran</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {% for i in member %}
-                          <tr class="student-row" data-tingkatan="{{ i.tingkatan }}" data-kelas="{{ i.kelas }}">
-                            <td>
-                              <input type="checkbox" name="selected_students[]" value="{{ i.member_id }}">
-                            </td>
-                            <td>{{ i.member_id }}</td>
-                            <td>{{ i.ic_pelajar }}</td>
-                            <td>{{ i.nama }}</td>
-                            <td>{{ i.jantina }}</td>
-                            <td>{{ i.kaum }}</td>
-                            <td>{{ i.agama }}</td>
-                            <td>{{ i.alamat_rumah }}</td>
-                            <td>{{ i.tingkatan }}</td>
-                            <td>{{ i.kelas }}</td>
-                            <td>{{ i.ahli }}</td>
-                            <td>{{ i.modal_syer }}</td>
-                            <td>{{ i.tarikh_daftar }}</td>
-                          </tr>
-                          {% endfor %}
-                        </tbody>
-                      </table>
-                      <br>
+                      <!-- Table container with scrollpane -->
+                      {% comment %} <div class="table-scrollpane"> {% endcomment %}
+                        <table class="table datatable" id="tblTambah">
+                          <thead>
+                            <tr>
+                              <th>Pilih</th>
+                              <th>ID member</th>
+                              <th>No. IC</th>
+                              <th>Nama</th>
+                              <th>Jantina</th>
+                              <th>Kaum</th>
+                              <th>Agama</th>
+                              <th>Alamat Rumah</th>
+                              <th>Tingkatan</th>
+                              <th>Kelas</th>
+                              <th>Ahli</th>
+                              <th>Modal Syer(RM)</th>
+                              <th data-type="date" data-format="MM/DD/YYYY">Tarikh Pendaftaran</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {% for i in member %}
+                            <tr class="student-row" data-tingkatan="{{ i.tingkatan }}" data-kelas="{{ i.kelas }}">
+                              <td>
+                                <input type="checkbox" name="selected_students[]" value="{{ i.member_id }}">
+                              </td>
+                              <td>{{ i.member_id }}</td>
+                              <td>{{ i.ic_pelajar }}</td>
+                              <td>{{ i.nama }}</td>
+                              <td>{{ i.jantina }}</td>
+                              <td>{{ i.kaum }}</td>
+                              <td>{{ i.agama }}</td>
+                              <td>{{ i.alamat_rumah }}</td>
+                              <td>{{ i.tingkatan }}</td>
+                              <td>{{ i.kelas }}</td>
+                              <td>{{ i.ahli }}</td>
+                              <td>{{ i.modal_syer }}</td>
+                              <td>{{ i.tarikh_daftar }}</td>
+                            </tr>
+                            {% endfor %}
+                          </tbody>
+                        </table>
+                        <br>
+                      {% comment %} </div> {% endcomment %}
                       <div class="form-check">
                         <input type="checkbox" id="select-all" class="form-check-input">
                         <label class="form-check-label" for="select-all">Pilih Semua</label>
@@ -183,63 +185,62 @@
 </section>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const selectAllCheckbox = document.getElementById('select-all');
-      const filterTingkatan = document.getElementById('filterTingkatan');
-      const filterKelas = document.getElementById('filterKelas');
-      const rows = document.querySelectorAll('.student-row');
-      const form = document.querySelector('form');
-      const updateButton = form.querySelector('button[type="submit"]');
-  
-      function filterRows() {
-        const tingkatanValue = filterTingkatan.value;
-        const kelasValue = filterKelas.value;
-  
-        rows.forEach(row => {
-          const rowTingkatan = row.getAttribute('data-tingkatan');
-          const rowKelas = row.getAttribute('data-kelas');
-  
-          const tingkatanMatch = (tingkatanValue === "Pilih" || rowTingkatan === tingkatanValue);
-          const kelasMatch = (kelasValue === "Pilih" || rowKelas === kelasValue);
-  
-          if (tingkatanMatch && kelasMatch) {
-            row.style.display = '';
-            row.querySelector('input[type="checkbox"]').disabled = false;
-          } else {
-            row.style.display = 'none';
-            row.querySelector('input[type="checkbox"]').disabled = true;
-          }
-        });
-      }
-  
-      filterTingkatan.addEventListener('change', filterRows);
-      filterKelas.addEventListener('change', filterRows);
-  
-      selectAllCheckbox.addEventListener('change', function() {
-        rows.forEach(row => {
-          if (row.style.display !== 'none') {
-            row.querySelector('input[type="checkbox"]').checked = selectAllCheckbox.checked;
-          }
-        });
+  document.addEventListener('DOMContentLoaded', function() {
+    const selectAllCheckbox = document.getElementById('select-all');
+    const filterTingkatan = document.getElementById('filterTingkatan');
+    const filterKelas = document.getElementById('filterKelas');
+    const rows = document.querySelectorAll('.student-row');
+    const form = document.querySelector('form');
+    const updateButton = form.querySelector('button[type="submit"]');
+
+    function filterRows() {
+      const tingkatanValue = filterTingkatan.value;
+      const kelasValue = filterKelas.value;
+
+      rows.forEach(row => {
+        const rowTingkatan = row.getAttribute('data-tingkatan');
+        const rowKelas = row.getAttribute('data-kelas');
+
+        const tingkatanMatch = (tingkatanValue === "Pilih" || rowTingkatan === tingkatanValue);
+        const kelasMatch = (kelasValue === "Pilih" || rowKelas === kelasValue);
+
+        if (tingkatanMatch && kelasMatch) {
+          row.style.display = '';
+          row.querySelector('input[type="checkbox"]').disabled = false;
+        } else {
+          row.style.display = 'none';
+          row.querySelector('input[type="checkbox"]').disabled = true;
+        }
       });
-  
-      form.addEventListener('submit', function() {
-        rows.forEach(row => {
-          if (row.style.display === 'none') {
-            row.querySelector('input[type="checkbox"]').disabled = true;
-          }
-        });
-        
-        // Optionally, you can disable the button if no checkboxes are checked
-        if (!Array.from(rows).some(row => row.querySelector('input[type="checkbox"]').checked)) {
-          updateButton.disabled = true;
-          alert('Please select at least one student to update.');
-          return false; // Prevent form submission
+    }
+
+    filterTingkatan.addEventListener('change', filterRows);
+    filterKelas.addEventListener('change', filterRows);
+
+    selectAllCheckbox.addEventListener('change', function() {
+      rows.forEach(row => {
+        if (row.style.display !== 'none') {
+          row.querySelector('input[type="checkbox"]').checked = selectAllCheckbox.checked;
         }
       });
     });
-  </script>
-  
 
+    form.addEventListener('submit', function() {
+      rows.forEach(row => {
+        if (row.style.display === 'none') {
+          row.querySelector('input[type="checkbox"]').disabled = true;
+        }
+      });
+      
+      // Optionally, you can disable the button if no checkboxes are checked
+      if (!Array.from(rows).some(row => row.querySelector('input[type="checkbox"]').checked)) {
+        updateButton.disabled = true;
+        alert('Please select at least one student to update.');
+        return false; // Prevent form submission
+      }
+    });
+  });
+
+</script>
 
 {% endblock %}

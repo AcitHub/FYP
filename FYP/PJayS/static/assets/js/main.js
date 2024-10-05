@@ -279,13 +279,15 @@
     })
 
   /**
-   * Initiate Datatables
-   */
-  const datatables = select('.datatable', true)
+   * Initiate Datatables
+   */
+  const datatables = select('.datatable', true);
   datatables.forEach(datatable => {
     new simpleDatatables.DataTable(datatable, {
-      perPageSelect: [5, 10, 15, ["All", -1]],
-      columns: [{
+      perPage: -1,  // Set default to "All"
+      perPageSelect: [5, 10, 15, ["All", -1]],  // Options for perPage select
+      columns: [
+        {
           select: 2,
           sortSequence: ["desc", "asc"]
         },
@@ -300,7 +302,8 @@
         }
       ]
     });
-  })
+  });
+
 
   /**
    * Autoresize echart charts
