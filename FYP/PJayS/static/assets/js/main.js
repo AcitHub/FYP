@@ -279,13 +279,14 @@
     })
 
   /**
-   * Initiate Datatables
-   */
-  const datatables = select('.datatable', true);
+   * Initiate Datatables
+   */
+  const datatables = document.querySelectorAll('.datatable'); // Select elements with the class 'datatable'
   datatables.forEach(datatable => {
     new simpleDatatables.DataTable(datatable, {
-      perPage: -1,  // Set default to "All"
-      perPageSelect: [5, 10, 15, ["All", -1]],  // Options for perPage select
+      perPage: -1, // Set default to show all items
+      perPageSelect: [["All", -1]], // Only allow "All" option
+
       columns: [
         {
           select: 2,
