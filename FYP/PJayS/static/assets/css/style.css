@@ -1054,7 +1054,7 @@ h6 {
 }
 
 .table-scrollpane {
-  max-height: 1000px; /* Adjust the height as needed */
+  max-height: 750px; /* Adjust the height as needed */
   overflow-y: auto; /* Enables vertical scrolling */
   overflow-x: auto; /* Enables horizontal scrolling if necessary */
 }
