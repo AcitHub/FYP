@@ -120,7 +120,7 @@
                     <fieldset>
                       <h5 class="card-title">Maklumat Data Pelajar</h5>
 
-                      <table class="table datatable">
+                      <table class="table datatable" id="tblTambah">
                         <thead>
                           <tr>
                             <th>Pilih</th>
@@ -183,63 +183,30 @@
 </section>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const selectAllCheckbox = document.getElementById('select-all');
-      const filterTingkatan = document.getElementById('filterTingkatan');
-      const filterKelas = document.getElementById('filterKelas');
-      const rows = document.querySelectorAll('.student-row');
-      const form = document.querySelector('form');
-      const updateButton = form.querySelector('button[type="submit"]');
-  
-      function filterRows() {
-        const tingkatanValue = filterTingkatan.value;
-        const kelasValue = filterKelas.value;
-  
-        rows.forEach(row => {
-          const rowTingkatan = row.getAttribute('data-tingkatan');
-          const rowKelas = row.getAttribute('data-kelas');
-  
-          const tingkatanMatch = (tingkatanValue === "Pilih" || rowTingkatan === tingkatanValue);
-          const kelasMatch = (kelasValue === "Pilih" || rowKelas === kelasValue);
-  
-          if (tingkatanMatch && kelasMatch) {
-            row.style.display = '';
-            row.querySelector('input[type="checkbox"]').disabled = false;
-          } else {
-            row.style.display = 'none';
-            row.querySelector('input[type="checkbox"]').disabled = true;
-          }
-        });
-      }
-  
-      filterTingkatan.addEventListener('change', filterRows);
-      filterKelas.addEventListener('change', filterRows);
-  
-      selectAllCheckbox.addEventListener('change', function() {
-        rows.forEach(row => {
-          if (row.style.display !== 'none') {
-            row.querySelector('input[type="checkbox"]').checked = selectAllCheckbox.checked;
-          }
-        });
-      });
-  
-      form.addEventListener('submit', function() {
-        rows.forEach(row => {
-          if (row.style.display === 'none') {
-            row.querySelector('input[type="checkbox"]').disabled = true;
-          }
-        });
-        
-        // Optionally, you can disable the button if no checkboxes are checked
-        if (!Array.from(rows).some(row => row.querySelector('input[type="checkbox"]').checked)) {
-          updateButton.disabled = true;
-          alert('Please select at least one student to update.');
-          return false; // Prevent form submission
-        }
-      });
-    });
-  </script>
-  
+  document.getElementById("filterTingkatan").addEventListener("change", filterTable);
 
+  function filterTable() {
+      let dropdown, table, rows, cells, tingkatan, filter;
+      
+      dropdown = document.getElementById("filterTingkatan");
+      table = document.getElementById("tblTambah");
+      rows = table.getElementsByTagName("tr");
+      filter = dropdown.value;
+
+      // Loop through rows and hide those that don't match the filter
+      for (let i = 1; i < rows.length; i++) { // Skip the first row (header row)
+          cells = rows[i].getElementsByTagName("td");
+          tingkatan = cells[8]; // Get the 9th column (index 8)
+
+          // Check if the current row matches the filter
+          if (!tingkatan || filter === "Pilih" || filter === tingkatan.textContent.trim()) {
+              rows[i].style.display = ""; // Show the row
+          } else {
+              rows[i].style.display = "none"; // Hide the row
+          }
+      }
+  }
+
+</script>
 
 {% endblock %}

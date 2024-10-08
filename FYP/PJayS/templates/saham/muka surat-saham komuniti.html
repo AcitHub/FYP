@@ -263,10 +263,10 @@
                 <table class="table datatable">
                   <thead>
                     <tr>
-                        <th>ID Teacher</th>
-                        <th>Nama</th>
-                        <th>Modal Syer(RM)</th>
-                        <th data-type="date" data-format="MM/DD/YYYY">Tarik Pendaftaran</th>
+                      <th>ID TEACHER</th>
+                      <th>Nama</th>
+                      <th>Modal Syer (RM)</th>
+                      <th>Tarikh Pendaftaran</th>
                       <th>Tindakan</th>
                     </tr>
                   </thead>
@@ -278,9 +278,9 @@
                         <td>{{ teacher.modal_syer }}</td>
                         <td>{{ teacher.tarikh_daftar }}</td>
                       <td>
-                        <form method="POST" action="">
+                        <form method="POST" action="{% url 'add_share_page' teacher.teacher_id %}">
                           {% csrf_token %}
-                          <button type="submit"  class="btn btn-primary">Kemas Kini</button>
+                          <button type="submit"  class="btn btn-primary">Tambah Saham</button>
                         </form>
                       </td> <!-- Button yang menyimpan id cikgu untuk displaykan di form -->
                     </tr>
@@ -308,22 +308,14 @@
                 <table class="table datatable">
                   <thead>
                     <tr>
-<<<<<<< HEAD
                       <th>ID STUDENT</th>
                       <th>Nama</th>
                       <th>Modal Syer (RM)</th>
                       <th>Tarikh Pendaftaran</th>
-=======
-                        <th>ID Member</th>
-                        <th>Nama</th>
-                        <th>Modal Syer(RM)</th>
-                        <th data-type="date" data-format="MM/DD/YYYY">Tarik Pendaftaran</th>
->>>>>>> 82ed8c4564276c6b8848f5d9b6107f2417360072
                       <th>Tindakan</th>
                     </tr>
                   </thead>
                   <tbody>
-<<<<<<< HEAD
                     {% for member in member %}
                     <tr>
                       <td>{{ member.member_id }}</td>
@@ -332,16 +324,6 @@
                       <td>{{ member.tarikh_daftar }}</td>
                       <td>
                         <form method="POST" action="">
-=======
-                    {% for teacher in teacher %}
-                    <tr>
-                        <td>{{ teacher.teacher_id}}</td>\
-                        <td>{{ teacher.nama }}</td>
-                        <td>{{ teacher.modal_syer }}</td>
-                        <td>{{ teacher.tarikh_daftar }}</td>
-                      <td>
-                        <form method="POST" action="{% url 'edit_teacher' teacher.teacher_id %}">
->>>>>>> 82ed8c4564276c6b8848f5d9b6107f2417360072
                           {% csrf_token %}
                           <button type="submit"  class="btn btn-primary">Tambah Saham</button>
                         </form>

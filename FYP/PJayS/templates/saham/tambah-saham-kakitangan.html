@@ -18,42 +18,42 @@
         <div class="row mb-3">
           <label for="idStaff" class="col-sm-2 col-form-label">ID Kakitangan</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" id="IDStaff" name="ic_pelajar" value="{{ member.ic_pelajar }}" readonly>
+            <input type="text" class="form-control" id="IDStaff" name="ic_pelajar" value="{{ teacher.teacher_id }}" readonly>
           </div>
         </div>
 
         <div class="row mb-3">
           <label for="namaStaff" class="col-sm-2 col-form-label">Nama</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" id="namaStaff" name="nama" value="{{ member.nama }}" readonly>
+            <input type="text" class="form-control" id="namaStaff" name="nama" value="{{ teacher.nama }}" readonly>
           </div>
         </div>
 
         <div class="row mb-3">
           <label for="modalSyerStaff" class="col-sm-2 col-form-label">Baki Modal Syer(RM)</label>
           <div class="col-sm-10">
-            <input type="number" class="form-control" id="modalSyerStaff" name="modal_syer" value="{{ member.modal_syer }}" readonly>
+            <input type="number" class="form-control" id="modalSyerStaff" name="modal_syer" value="{{ teacher.modal_syer }}" readonly>
           </div>
         </div>
 
         <div class="row mb-3">
           <label for="tambahmodalSyer" class="col-sm-2 col-form-label">Tambah Modal Syer(RM)</label>
           <div class="col-sm-10">
-            <input type="number" class="form-control" id="tambahmodalSyer" name="tambah_modal_syer" value="{{ member.modal_syer }}">
+            <input type="number" class="form-control" id="tambahmodalSyer" name="amount" value="">
           </div>
         </div>
 
         <div class="row mb-3">
           <label for="tarikh_tambah_saham" class="col-sm-2 col-form-label">Tarikh Penambahan</label>
           <div class="col-sm-10">
-            <input type="date" class="form-control" name="tarikh_tambah_saham" value="{{ member.tarikh_daftar|date:'Y-m-d' }}">
+            <input type="date" class="form-control" name="tarikh_tambah_saham" id="tarikh_tambah_saham" disabled>
           </div>
         </div>
 
         <div class="row mb-3">
           <div class="col-xs-12 d-flex justify-content-center">
             <div>
-              <form method="POST" action="">
+              <form method="POST" action="{% url 'add_share_page' teacher.teacher_id %}">
                 {% csrf_token %}
                 <div class="form-btn">
                   <button type="submit"  class="btn btn-primary">Tambah Saham</button> <!-- Button simpan semua kemas kini yang telah dibuat -->
@@ -67,4 +67,9 @@
     </div>
   </div>
 </section>
+
+<script>
+  document.getElementById("tarikh_tambah_saham").valueAsDate = new Date();
+</script>
+
 {% endblock %}
