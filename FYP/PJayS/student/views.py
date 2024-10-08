@@ -42,22 +42,23 @@ def register_student_kumpulan_page(request):
         if file:
             try:
                 df = pd.read_excel(file)
+                df.columns = df.columns.str.strip()  # Ensure no leading/trailing spaces in column names
+                df = df.rename(columns={"tarikh_dafatr": "tarikh_daftar"})  # Fix the typo in the column name
+
                 for _, row in df.iterrows():
-                    Member.objects.update_or_create(
-                        member_id=row.get('ID member'),
-                        defaults={
-                            'ic_pelajar': row.get('No. IC'),
-                            'nama': row.get('Nama'),
-                            'jantina': row.get('Jantina'),
-                            'kaum': row.get('Kaum'),
-                            'agama': row.get('Agama'),
-                            'alamat_rumah': row.get('Alamat Rumah'),
-                            'tingkatan': row.get('Tingkatan'),
-                            'kelas': row.get('Kelas'),
-                            'ahli': row.get('Ahli'),
-                            'modal_syer': row.get('Modal Syer(RM)'),
-                            'tarikh_daftar': row.get('Tarik Pendaftaran'),
-                        }
+                    # Use the update_or_create but generate member_id in the model
+                    Member.objects.create(
+                        ic_pelajar=row.get('ic_pelajar'),
+                        nama=row.get('nama'),
+                        jantina=row.get('jantina'),
+                        kaum=row.get('kaum'),
+                        agama=row.get('agama'),
+                        alamat_rumah=row.get('alamat_rumah'),
+                        tingkatan=row.get('tingkatan'),
+                        kelas=row.get('kelas'),
+                        ahli=row.get('ahli'),
+                        modal_syer=row.get('modal_syer'),
+                        tarikh_daftar=row.get('tarikh_daftar'),
                     )
                 messages.success(request, 'Data successfully uploaded and saved.')
                 return redirect('register_student_kumpulan_page')
@@ -66,7 +67,7 @@ def register_student_kumpulan_page(request):
         else:
             messages.error(request, 'No file uploaded.')
 
-    member = get_all_members()
+    member = Member.objects.all()
     return render(request, 'student/muka surat-pelajar-tambah data-kumpulan.html', {'member': member})
 
 def delete_student_page(request):
@@ -78,11 +79,11 @@ def delete_student_page(request):
         else:
             messages.warning(request, 'No students selected for deletion.')
 
-    member = get_all_members()
+    member = Member.objects.all()
     return render(request, 'student/muka surat-pelajar-padam data.html', {'member': member})
 
 def update_student_page(request):
-    member = get_all_members()
+    member = Member.objects.all()
     return render(request, 'student/muka surat-pelajar-kemas kini data.html', {'member': member})
 
 def edit_student(request, member_id):
@@ -90,45 +91,53 @@ def edit_student(request, member_id):
         member = Member.objects.get(member_id=member_id)
     except Member.DoesNotExist:
         messages.error(request, 'The selected student does not exist.')
-        return redirect('update_student_page')
+        return redirect('update_student_page')  # Use URL name for consistency
 
     if request.method == 'POST':
-        form = UpdateStudentForm(request.POST, instance=member)
+        form = TambahStudentForm(request.POST, instance=member)
         if form.is_valid():
             form.save()
             messages.success(request, 'Student data updated successfully.')
-            return redirect('update_student_page')
+            return redirect('update_student_page')  # Use URL name for consistency
         else:
             messages.error(request, f"There was an error updating the data: {form.errors}")
     else:
-        form = UpdateStudentForm(instance=member)
+        form = TambahStudentForm(instance=member)
 
     return render(request, 'student/update-page.html', {'form': form, 'member': member})
 
 def update_student_kumpulan_page(request):
     if request.method == 'POST':
+        # Get filter criteria
+        filter_tingkatan = request.POST.get('tingkatan')
+        filter_kelas = request.POST.get('kelas')
+
+        # Get new values to update
         new_tingkatan = request.POST.get('new_tingkatan')
         new_kelas = request.POST.get('new_kelas')
+
+        # Get selected student IDs
         selected_students = request.POST.getlist('selected_students[]')
 
         if selected_students:
+            # Filter students by selected IDs and apply updates
             students_to_update = Member.objects.filter(member_id__in=selected_students)
-            try:
-                if new_tingkatan:
-                    students_to_update.update(tingkatan=new_tingkatan)
-                if new_kelas:
-                    students_to_update.update(kelas=new_kelas)
 
-                messages.success(request, 'Selected students have been updated.')
-                return redirect('update_student_kumpulan_page')
-            except Exception as e:
-                messages.error(request, f"Error updating students: {e}")
+            # Update fields if new values are provided
+            if new_tingkatan:
+                students_to_update.update(tingkatan=new_tingkatan)
+            if new_kelas:
+                students_to_update.update(kelas=new_kelas)
+
+            messages.success(request, 'Selected students have been updated.')
         else:
             messages.warning(request, 'No students selected for updating.')
 
-    member = get_all_members()
+        return redirect('update_student_kumpulan_page')
+
+    member = Member.objects.all()
     return render(request, 'student/muka surat-pelajar-kemas kini-kumpulan.html', {'member': member})
 
 def generate_student_page(request):
-    member = get_all_members()
+    member = Member.objects.all()
     return render(request, 'student/muka surat-Hasilkan Laporan.html', {'member': member})
