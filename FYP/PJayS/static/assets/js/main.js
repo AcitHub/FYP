@@ -281,11 +281,13 @@
   /**
    * Initiate Datatables
    */
-  const datatables = select('.datatable', true)
+  const datatables = document.querySelectorAll('.datatable'); // Select elements with the class 'datatable'
   datatables.forEach(datatable => {
     new simpleDatatables.DataTable(datatable, {
-      perPageSelect: [5, 10, 15, ["All", -1]],
-      columns: [{
+      perPage: -1, // Set default to show all items
+      perPageSelect: [["All", -1]], // Only allow "All" option
+      columns: [
+        {
           select: 2,
           sortSequence: ["desc", "asc"]
         },
@@ -300,7 +302,8 @@
         }
       ]
     });
-  })
+  });
+  
 
   /**
    * Autoresize echart charts
