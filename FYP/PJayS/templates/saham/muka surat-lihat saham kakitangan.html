@@ -1,306 +1,106 @@
 {% extends "layout.html" %}
 
 {% block title %}
-  Saham - PJays KoopSystem
+  Lihat Lagi (Show ID Member) - PJays KoopSystem <!-- Try show ID dekat title -->
 {% endblock %}
 
 {% block content %}
-    <div class="pagetitle">
-      <h1>Saham Komuniti</h1>
-      <nav>
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item">Muka Surat</li>
-          <li class="breadcrumb-item active">Saham Komuniti</li>
-        </ol>
-      </nav>
-    </div><!-- Penutup Page Title -->
+<div class="pagetitle">
+  <h1>Maklumat Saham Kakitangan</h1>
+  <nav>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">Muka Surat</li>
+      <li class="breadcrumb-item">Saham Komuniti</li> 
+      <li class="breadcrumb-item active">Lihat Lagi</li>
+    </ol>
+  </nav>
+</div><!-- Penutup Page Title -->
 
-    <section class="section">
-      
-      <div class="row">
-        <!-- Saham -->
-        <div class="col-lg-12">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Jumlah Saham <span>| Terkini</span></h5>
-
-              <!-- Line Chart -->
-              <div id="lineChart"></div>
-
-              <script>
-                document.addEventListener("DOMContentLoaded", () => {
-                  new ApexCharts(document.querySelector("#lineChart"), {
-                    series: [{
-                      name: "Jumlah",
-                      data: [5000, 5500, 7000, 6500, 8500, 7500, 8000, 6500, 9000, 8500, 10000, 11000]
-                    }],
-                    chart: {
-                      height: 385,
-                      type: 'line',
-                      zoom: {
-                        enabled: true
-                      }
-                    },
-                    dataLabels: {
-                      enabled: false, // Enable data labels
-                      formatter: (val) => `RM ${val}` // Format the labels to include RM
-                    },
-                    stroke: {
-                      curve: 'straight'
-                    },
-                    grid: {
-                      row: {
-                        colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
-                        opacity: 0.5
-                      },
-                    },
-                    xaxis: {
-                      categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dis'],
-                    },
-                    tooltip: {
-                      y: {
-                        formatter: (val) => `RM ${val}` // Format the tooltip to include RM
-                      }
-                    }
-                  }).render();
-                });
-              </script>
-              
-              <!-- End Line Chart -->
-
-            </div>
-          </div>
-        </div><!-- Penutup Saham -->
-
-        <div class="col-lg-4">
-
-          <!-- Pie Saham -->
-          <div class="card">
-
-            <div class="card-body pb-0">
-              <h5 class="card-title">Jumlah Saham Mengikut Kategori</h5>
-              <!-- Table container with scrollpane -->
-              <div class="table-scrollpane">
-                <div id="sahamPieChart" style="min-height: 416px;" class="echart"></div>
-
-                <script>
-                  document.addEventListener("DOMContentLoaded", () => {
-                    echarts.init(document.querySelector("#sahamPieChart")).setOption({
-                      tooltip: {
-                        trigger: 'item',
-                        formatter: function (params) {
-                          return `${params.name}: RM ${params.value}`;
-                        }
-                      },
-                      legend: {
-                        top: '5%',
-                        left: 'center'
-                      },
-                      series: [{
-                        name: 'Akses Dari',
-                        type: 'pie',
-                        radius: ['40%', '70%'],
-                        avoidLabelOverlap: false,
-                        label: {
-                          show: false,
-                          position: 'center'
-                        },
-                        emphasis: {
-                          label: {
-                            show: true,
-                            fontSize: '18',
-                            fontWeight: 'bold'
-                          }
-                        },
-                        labelLine: {
-                          show: false
-                        },
-                        data: [{
-                            value: 6850,
-                            name: 'Pelajar'
-                          },
-                          {
-                            value: 2800,
-                            name: 'Kakitangan'
-                          }
-                        ]
-                      }]
-                    });
-                  });
-                </script>
-
+<section class="section">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Saham bagi ID Teacher</h5>
+          
+          <!-- View Share Elements -->
+          <form>
+            {% csrf_token %}
+            <div class="row mb-3">
+              <label for="tarikh_pendaftaran" class="col-sm-2 col-form-label">Tarikh Pendaftaran</label>
+              <div class="col-sm-10">
+                <input type="date" class="form-control" name="tarikh_pendaftaran" id="tarikh_pendaftaran" disabled>
               </div>
             </div>
-          </div><!-- End Pie Saham -->
-          
-        </div>
 
-
-        <div class="col-lg-8">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Jumlah Saham Pelajar Mengikut Tingkatan </h5>
-
-              <!-- Column Chart -->
-              <div id="columnChart"></div>
-
-              <script>
-                document.addEventListener("DOMContentLoaded", () => {
-                  new ApexCharts(document.querySelector("#columnChart"), {
-                    series: [{
-                      name: 'Jumlah',
-                      data: [44, 55, 57, 56, 61]
-                    }],
-                    chart: {
-                      type: 'bar',
-                      height: 385
-                    },
-                    plotOptions: {
-                      bar: {
-                        horizontal: false,
-                        columnWidth: '55%',
-                        endingShape: 'rounded'
-                      },
-                    },
-                    dataLabels: {
-                      enabled: false
-                    },
-                    stroke: {
-                      show: true,
-                      width: 2,
-                      colors: ['transparent']
-                    },
-                    xaxis: {
-                      categories: ['Tingkatan 1', 'Tingkatan 2', 'Tingkatan 3', 'Tingkatan 4', 'Tingkatan 5'],
-                    },
-                    yaxis: {
-                      title: {
-                        text: 'Saham (RM)'
-                      }
-                    },
-                    fill: {
-                      opacity: 1
-                    },
-                    tooltip: {
-                      y: {
-                        formatter: function(val) {
-                          return "RM " + val
-                        }
-                      }
-                    }
-                  }).render();
-                });
-              </script>
-              <!-- End Column Chart -->
-
-            </div>
-          </div>
-        </div>
-
-        <hr>
-        
-        <!-- Saham -->
-        <div class="col-lg-6">
-          <div class="pagetitle">
-            <h1>Saham Kakitangan</h1>
-          </div><!-- Penutup Page Title -->
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Maklumat Saham Kakitangan</h5>
-              <!-- Table container with scrollpane -->
-              <div class="table-scrollpane">
-                <!-- Table with stripped rows -->
-                <table class="table datatable">
-                  <thead>
-                    <tr>
-                      <th>ID TEACHER</th>
-                      <th>Nama</th>
-                      <th>Modal Syer (RM)</th>
-                      <th>Tarikh Pendaftaran</th>
-                      <th>Tindakan</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {% for teacher in teacher %}
-                    <tr>
-                        <td>{{ teacher.teacher_id }}</td>
-                        <td>{{ teacher.nama }}</td>
-                        <td>{{ teacher.modal_syer }}</td>
-                        <td>{{ teacher.tarikh_daftar }}</td>
-                        <td>
-                          <form method="POST" action="{% url 'add_share_page' teacher.teacher_id %}">
-                            <div class="form-btn">
-                              {% csrf_token %}
-                              <button type="submit"  class="btn btn-primary">Tambah Saham</button>
-                            </div>
-                          </form>
-                        </td> <!-- Button yang menyimpan id cikgu untuk displaykan di form -->
-                      </tr>
-                    {% endfor %}
-                    <!-- Repeat the rows for other students -->
-
-                  </tbody>
-                  
-                </table>
-                <!-- End Table with stripped rows -->
+            <div class="row mb-3">
+              <label for="report-type" class="col-sm-2 col-form-label">ID Kakitangan</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="IDStaff" name="ic_pelajar" value="{{ teacher.teacher_id }}" disabled>
               </div>
-          
             </div>
-          </div>
-        </div>
 
-        <!-- Saham -->
-        <div class="col-lg-6">
-          <div class="pagetitle">
-            <h1>Saham Pelajar</h1>
-          </div><!-- Penutup Page Title -->
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Maklumat Saham Pelajar</h5>
-              <!-- Table container with scrollpane -->
-              <div class="table-scrollpane">
-                <!-- Table with stripped rows -->
-                <table class="table datatable">
-                  <thead>
-                    <tr>
-                      <th>ID STUDENT</th>
-                      <th>Nama</th>
-                      <th>Modal Syer (RM)</th>
-                      <th>Tarikh Pendaftaran</th>
-                      <th>Tindakan</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {% for member in member %}
-                    <tr>
-                      <td>{{ member.member_id }}</td>
-                      <td>{{ member.nama }}</td>
-                      <td>{{ member.modal_syer }}</td>
-                      <td>{{ member.tarikh_daftar }}</td>
-                      <td>
-                        <form method="POST" action="">
-                          <div class="form-btn">
-                            {% csrf_token %}
-                            <button type="submit"  class="btn btn-primary">Tambah Saham</button>
-                          </div>
-                        </form>
-                      </td> <!-- Button yang menyimpan id cikgu untuk displaykan di form -->
-                    </tr>
-                  {% endfor %}
-                    <!-- Repeat the rows for other students -->
-
-                  </tbody>
-                  
-                </table>
-                <!-- End Table with stripped rows -->
+            <div class="row mb-3">
+              <label for="namaStaff" class="col-sm-2 col-form-label">Nama</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="namaStaff" name="nama" value="{{ teacher.nama }}" disabled>
               </div>
-          
             </div>
-          </div>
+
+            <div class="row mb-3">
+              <label for="modalSyerStaff" class="col-sm-2 col-form-label">Nilai Syer Semasa (RM)</label>
+              <div class="col-sm-10 d-flex align-items-center">
+                <input type="number" class="form-control me-2" id="modalSyerStaff" name="modal_syer" value="{{ teacher.modal_syer }}" disabled>
+                <div class="form-btn">
+                  <button type="button" class="btn btn-primary" style="width: 150px;">Tambah Syer</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-btn">
+              <button type="submit" class="btn btn-primary mt-3">Kembali</button>
+            </div>
+          </form>
+          <!-- View Share Elements -->
+
         </div>
-
-
       </div>
     </div>
-  </section>
-{% endblock content %}
+
+    <!-- Saham -->
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Rekod Urus Niaga Syer Kakitangan</h5>
+          <!-- Table container with scrollpane -->
+          <div class="table-scrollpane">
+            <!-- Table with stripped rows -->
+            <table class="table datatable">
+              <thead>
+                <tr>
+                  <th>Modal Syer (RM)</th>
+                  <th>Tarikh Penambahan</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for teacher in teacher %}
+                <tr>
+                    <td>{{ teacher.modal_syer }}</td>
+                    <td>{{ teacher.tarikh_daftar }}</td>
+                  </tr>
+                {% endfor %}
+                <!-- Repeat the rows for other students -->
+
+              </tbody>
+              
+            </table>
+            <!-- End Table with stripped rows -->
+          </div>
+      
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+{% endblock  %}
