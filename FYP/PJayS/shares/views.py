@@ -1,5 +1,6 @@
 import json
-from django.shortcuts import render, redirect, get_object_or_404
+from django.urls import reverse
+from django.shortcuts import render, redirect, get_object_or_404, HttpResponseRedirect
 from django.contrib import messages
 from .form import Teacher_Share, Student_Share
 from .models import Teacher, SahamTeacher, Member, SahamStudent
@@ -35,14 +36,10 @@ def share_page(request):
 
     return render(request, 'saham/muka surat-saham komuniti.html', context)
 
-# teacher saham account page
-# def teacher_saham_page(request, teacher_id):
-#     teacher = get_object_or_404(Teacher, pk=teacher_id)
-#     return render(request, 'saham/tambah-saham-kakitangan.html', {'teacher': teacher})
-
 # function add teacher saham into each account 
 def add_share_teacher_func(request, teacher_id):
     teacher = get_object_or_404(Teacher, pk=teacher_id)
+    # saham = SahamTeacher.objects.filter(teacher_id=teacher_id)
 
     if request.method == 'POST':
         form = Teacher_Share(request.POST)
@@ -57,13 +54,14 @@ def add_share_teacher_func(request, teacher_id):
             SahamTeacher.objects.create(teacher=teacher, amount=new_modal_syer)
 
             messages.success(request, 'Share amount updated successfully.')
-            return redirect('share_page')
-        else:
-            messages.error(request, f"There was an error adding share: {form.errors}")
-    # else:
-    #     form = Teacher_Share()
+            return redirect('view_account_teacher', teacher_id=teacher_id)  # Pass the teacher_id to the redirect
+        # else:
+        #     messages.error(request, f"There was an error adding share: {form.errors}")
+    else:
+        form = Teacher_Share()  # Define the form when the request method is not POST
 
-    return render(request, 'saham/tambah-saham-kakitangan.html', {'form': form,'teacher': teacher})
+    return render(request, 'saham/tambah-saham-kakitangan.html', {'form': form, 'teacher': teacher})
+
 
 # function add student saham into each account 
 def add_share_student_func(request, member_id):
@@ -83,9 +81,31 @@ def add_share_student_func(request, member_id):
 
             messages.success(request, 'Share amount updated successfully.')
             return redirect('share_page')
-        else:
-            messages.error(request, f"There was an error adding share: {form.errors}")
+        # else:
+        #     messages.error(request, f"There was an error adding share: {form.errors}")
     # else:
     #     form = Student_share()
 
     return render(request, 'saham/tambah-saham-pelajar.html', {'form': form,'member': member})
+
+# view account saham teacher
+def view_account_teacher(request, teacher_id):
+    teacher = get_object_or_404(Teacher, pk=teacher_id)
+    saham = SahamTeacher.objects.filter(teacher_id=teacher_id)
+
+    if request.method == 'POST':
+        if 'kembali' in request.POST:
+            return HttpResponseRedirect(reverse('share_page'))  # Redirect to share_page
+        # Handle other form submissions
+    return render(request, 'saham/muka surat-lihat saham kakitangan.html', {'teacher': teacher, 'saham': saham})
+
+# view account saham student
+def view_account_student(request, member_id):
+    member = get_object_or_404(Member, pk=member_id)
+    saham = SahamStudent.objects.filter(member_id=member_id)
+
+    if request.method == 'POST':
+        if 'kembali' in request.POST:
+            return HttpResponseRedirect(reverse('share_page'))  # Redirect to share_page
+        # Handle other form submissions
+    return render(request, 'saham/muka surat-lihat saham pelajar.html', {'member': member, 'saham': saham})

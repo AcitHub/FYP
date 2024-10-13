@@ -222,10 +222,10 @@
                         <td>{{ teacher.modal_syer }}</td>
                         <td>{{ teacher.tarikh_daftar }}</td>
                         <td>
-                          <form method="POST" action="{% url 'add_share_page_teacher' teacher.teacher_id %}">
+                          <form method="POST" action="{% url 'view_account_teacher' teacher.teacher_id %}">
                             <div class="form-btn">
                               {% csrf_token %}
-                              <button type="submit"  class="btn btn-primary">Tambah Saham</button>
+                              <button type="submit"  class="btn btn-primary">Lihat Transaksi Akaun</button>
                             </div>
                           </form>
                         </td> <!-- Button yang menyimpan id cikgu untuk displaykan di form -->
@@ -272,10 +272,10 @@
                       <td>{{ member.modal_syer }}</td>
                       <td>{{ member.tarikh_daftar }}</td>
                       <td>
-                        <form method="POST" action="{% url 'add_share_page_student' member.member_id %}">
+                        <form method="POST" action="{% url 'view_account_student' member.member_id %}">
                           <div class="form-btn">
                             {% csrf_token %}
-                            <button type="submit"  class="btn btn-primary">Tambah Saham</button>
+                            <button type="submit"  class="btn btn-primary">Lihat Transaksi Akaun</button>
                           </div>
                         </form>
                       </td> <!-- Button yang menyimpan id cikgu untuk displaykan di form -->
