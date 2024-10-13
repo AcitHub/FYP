@@ -121,7 +121,8 @@
                                               <i class="bi bi-people"></i>
                                           </div>
                                           <div class="ps-3">
-                                              <h6>RM 6850</h6>
+                                              <h6>{{ member_total }}</h6>
+
                                               <span class="text-secondary small pt-1 fw-bold">20%</span> <span class="text-muted small pt-2 ps-1">meningkat</span>
                                           </div>
                                       </div>
@@ -145,7 +146,7 @@
                                               <i class="bi bi-person-badge"></i>
                                           </div>
                                           <div class="ps-3">
-                                              <h6>RM 2800</h6>
+                                              <h6>{{ teacher_total }}</h6>
                                               <span class="text-success small pt-1 fw-bold">5%</span> <span class="text-muted small pt-2 ps-1">meningkat</span>
                                           </div>
                                       </div>
@@ -169,40 +170,47 @@
 
                         <script>
                             document.addEventListener("DOMContentLoaded", () => {
-                                new ApexCharts(document.querySelector("#lineChart"), {
-                                    series: [{
-                                        name: "Jumlah",
-                                        data: [5000, 5500, 7000, 6500, 8500, 7500, 8000, 6500, 9000, 8500, 10000, 11000]
-                                    }],
-                                    chart: {
-                                        height: 385,
-                                        type: 'line',
-                                        zoom: {
-                                            enabled: true
-                                        }
-                                    },
-                                    dataLabels: {
-                                        enabled: false, // Enable data labels
-                                        formatter: (val) => `RM ${val}` // Format the labels to include RM
-                                    },
-                                    stroke: {
-                                        curve: 'straight'
-                                    },
-                                    grid: {
-                                        row: {
-                                            colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
-                                            opacity: 0.5
+                                const lineChartData = {{ line_chart_data|safe }};
+                                console.log(lineChartData); // Log the data to the console
+                        
+                                if (lineChartData.length > 0) {
+                                    new ApexCharts(document.querySelector("#lineChart"), {
+                                        series: [{
+                                            name: "Jumlah",
+                                            data: lineChartData.map(item => item.total_modal_syer)
+                                        }],
+                                        chart: {
+                                            height: 385,
+                                            type: 'line',
+                                            zoom: {
+                                                enabled: true
+                                            }
                                         },
-                                    },
-                                    xaxis: {
-                                        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dis'],
-                                    },
-                                    tooltip: {
-                                        y: {
-                                            formatter: (val) => `RM ${val}` // Format the tooltip to include RM
+                                        dataLabels: {
+                                            enabled: false, // Enable data labels
+                                            formatter: (val) => `RM ${val}` // Format the labels to include RM
+                                        },
+                                        stroke: {
+                                            curve: 'straight'
+                                        },
+                                        grid: {
+                                            row: {
+                                                colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
+                                                opacity: 0.5
+                                            },
+                                        },
+                                        xaxis: {
+                                            categories: lineChartData.map(item => item.month_year),
+                                        },
+                                        tooltip: {
+                                            y: {
+                                                formatter: (val) => `RM ${val}` // Format the tooltip to include RM
+                                            }
                                         }
-                                    }
-                                }).render();
+                                    }).render();
+                                } else {
+                                    console.log("No data available"); // Log a message to the console if no data is available
+                                }
                             });
                         </script>
                         <!-- End Line Chart -->

@@ -46,7 +46,7 @@ def register_student_kumpulan_page(request):
                 df = df.rename(columns={"tarikh_dafatr": "tarikh_daftar"})  # Fix the typo in the column name
 
                 for _, row in df.iterrows():
-                    # Use the update_or_create but generate member_id in the model
+
                     Member.objects.create(
                         ic_pelajar=row.get('ic_pelajar'),
                         nama=row.get('nama'),
@@ -94,7 +94,7 @@ def edit_student(request, member_id):
         return redirect('update_student_page')  # Use URL name for consistency
 
     if request.method == 'POST':
-        form = TambahStudentForm(request.POST, instance=member)
+        form = UpdateStudentForm(request.POST, instance=member)
         if form.is_valid():
             form.save()
             messages.success(request, 'Student data updated successfully.')
@@ -102,15 +102,15 @@ def edit_student(request, member_id):
         else:
             messages.error(request, f"There was an error updating the data: {form.errors}")
     else:
-        form = TambahStudentForm(instance=member)
+        form = UpdateStudentForm(instance=member)
 
     return render(request, 'student/update-page.html', {'form': form, 'member': member})
 
 def update_student_kumpulan_page(request):
     if request.method == 'POST':
         # Get filter criteria
-        filter_tingkatan = request.POST.get('tingkatan')
-        filter_kelas = request.POST.get('kelas')
+        # filter_tingkatan = request.POST.get('tingkatan')
+        # filter_kelas = request.POST.get('kelas')
 
         # Get new values to update
         new_tingkatan = request.POST.get('new_tingkatan')
@@ -137,7 +137,3 @@ def update_student_kumpulan_page(request):
 
     member = Member.objects.all()
     return render(request, 'student/muka surat-pelajar-kemas kini-kumpulan.html', {'member': member})
-
-def generate_student_page(request):
-    member = Member.objects.all()
-    return render(request, 'student/muka surat-Hasilkan Laporan.html', {'member': member})
