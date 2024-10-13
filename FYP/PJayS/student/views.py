@@ -46,7 +46,7 @@ def register_student_kumpulan_page(request):
                 df = df.rename(columns={"tarikh_dafatr": "tarikh_daftar"})  # Fix the typo in the column name
 
                 for _, row in df.iterrows():
-                    # Use the update_or_create but generate member_id in the model
+
                     Member.objects.create(
                         ic_pelajar=row.get('ic_pelajar'),
                         nama=row.get('nama'),
