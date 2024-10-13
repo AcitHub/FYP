@@ -109,8 +109,8 @@ def edit_student(request, member_id):
 def update_student_kumpulan_page(request):
     if request.method == 'POST':
         # Get filter criteria
-        filter_tingkatan = request.POST.get('tingkatan')
-        filter_kelas = request.POST.get('kelas')
+        # filter_tingkatan = request.POST.get('tingkatan')
+        # filter_kelas = request.POST.get('kelas')
 
         # Get new values to update
         new_tingkatan = request.POST.get('new_tingkatan')
@@ -137,7 +137,3 @@ def update_student_kumpulan_page(request):
 
     member = Member.objects.all()
     return render(request, 'student/muka surat-pelajar-kemas kini-kumpulan.html', {'member': member})
-
-def generate_student_page(request):
-    member = Member.objects.all()
-    return render(request, 'student/muka surat-Hasilkan Laporan.html', {'member': member})
