@@ -53,8 +53,7 @@
         <div class="row mb-3">
           <div class="col-xs-12 d-flex justify-content-center">
             <div>
-              <form method="POST" action="{% url 'add_share_page' teacher.teacher_id %}">
-                {% csrf_token %}
+              <form method="POST" action="{% url 'add_share_page_teacher' teacher.teacher_id %}">
                 <div class="form-btn">
                   <button type="submit"  class="btn btn-primary">Tambah Saham</button> <!-- Button simpan semua kemas kini yang telah dibuat -->
               </form>

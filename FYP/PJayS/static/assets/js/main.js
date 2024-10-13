@@ -286,6 +286,7 @@
     new simpleDatatables.DataTable(datatable, {
       perPage: -1, // Set default to show all items
       perPageSelect: [["All", -1]], // Only allow "All" option
+
       columns: [
         {
           select: 2,
@@ -303,7 +304,7 @@
       ]
     });
   });
-  
+
 
   /**
    * Autoresize echart charts
