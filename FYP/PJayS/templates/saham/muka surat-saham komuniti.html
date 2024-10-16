@@ -28,42 +28,31 @@
               <div id="lineChart"></div>
 
               <script>
-                document.addEventListener("DOMContentLoaded", () => {
-                  new ApexCharts(document.querySelector("#lineChart"), {
-                    series: [{
-                      name: "Jumlah",
-                      data: [5000, 5500, 7000, 6500, 8500, 7500, 8000, 6500, 9000, 8500, 10000, 11000]
-                    }],
-                    chart: {
-                      height: 385,
-                      type: 'line',
-                      zoom: {
-                        enabled: true
-                      }
-                    },
-                    dataLabels: {
-                      enabled: false, // Enable data labels
-                      formatter: (val) => `RM ${val}` // Format the labels to include RM
-                    },
-                    stroke: {
-                      curve: 'straight'
-                    },
-                    grid: {
-                      row: {
-                        colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
-                        opacity: 0.5
-                      },
-                    },
-                    xaxis: {
-                      categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dis'],
-                    },
-                    tooltip: {
-                      y: {
-                        formatter: (val) => `RM ${val}` // Format the tooltip to include RM
-                      }
-                    }
-                  }).render();
-                });
+                  document.addEventListener("DOMContentLoaded", () => {
+                      const lineChartData = {{ line_chart_data|safe }};
+                      const chart = new ApexCharts(document.querySelector("#lineChart"), {
+                          series: [{
+                              name: "Modal Syer",
+                              data: lineChartData.map(item => item.total_modal_syer)
+                          }],
+                          chart: {
+                              height: 385,
+                              type: 'line',
+                              zoom: {
+                                  enabled: true
+                              }
+                          },
+                          xaxis: {
+                              categories: lineChartData.map(item => item.month_year)
+                          },
+                          tooltip: {
+                              y: {
+                                  formatter: (val) => `RM ${val}` // Format the tooltip to include RM
+                              }
+                          }
+                      });
+                      chart.render();
+                  });
               </script>
               
               <!-- End Line Chart -->
@@ -116,11 +105,11 @@
                           show: false
                         },
                         data: [{
-                            value: 6850,
+                            value: {{ member_total }},
                             name: 'Pelajar'
                           },
                           {
-                            value: 2800,
+                            value: {{ teacher_total }},
                             name: 'Kakitangan'
                           }
                         ]
@@ -138,64 +127,69 @@
 
         <div class="col-lg-8">
           <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Jumlah Saham Pelajar Mengikut Tingkatan </h5>
-
-              <!-- Column Chart -->
-              <div id="columnChart"></div>
-
-              <script>
-                document.addEventListener("DOMContentLoaded", () => {
-                  new ApexCharts(document.querySelector("#columnChart"), {
-                    series: [{
-                      name: 'Jumlah',
-                      data: [44, 55, 57, 56, 61]
-                    }],
-                    chart: {
-                      type: 'bar',
-                      height: 385
-                    },
-                    plotOptions: {
-                      bar: {
-                        horizontal: false,
-                        columnWidth: '55%',
-                        endingShape: 'rounded'
-                      },
-                    },
-                    dataLabels: {
-                      enabled: false
-                    },
-                    stroke: {
-                      show: true,
-                      width: 2,
-                      colors: ['transparent']
-                    },
-                    xaxis: {
-                      categories: ['Tingkatan 1', 'Tingkatan 2', 'Tingkatan 3', 'Tingkatan 4', 'Tingkatan 5'],
-                    },
-                    yaxis: {
-                      title: {
-                        text: 'Saham (RM)'
-                      }
-                    },
-                    fill: {
-                      opacity: 1
-                    },
-                    tooltip: {
-                      y: {
-                        formatter: function(val) {
-                          return "RM " + val
-                        }
-                      }
-                    }
-                  }).render();
-                });
-              </script>
-              <!-- End Column Chart -->
-
-            </div>
+              <div class="card-body">
+                  <h5 class="card-title">Jumlah Saham Pelajar Mengikut Tingkatan </h5>
+      
+                  <!-- Column Chart -->
+                  <div id="columnChart"></div>
+      
+                  <script>
+                    document.addEventListener("DOMContentLoaded", () => {
+                        const chartData = {{ bar_chart_data|safe }};
+                
+                        const categories = chartData.map(item => item.tingkatan);
+                        const seriesData = chartData.map(item => item.total_saham);
+                
+                        new ApexCharts(document.querySelector("#columnChart"), {
+                            series: [{
+                                name: 'Jumlah Saham',
+                                data: seriesData
+                            }],
+                            chart: {
+                                type: 'bar',
+                                height: 385
+                            },
+                            plotOptions: {
+                                bar: {
+                                    horizontal: false,
+                                    columnWidth: '55%',
+                                    endingShape: 'rounded'
+                                },
+                            },
+                            dataLabels: {
+                                enabled: false
+                            },
+                            stroke: {
+                                show: true,
+                                width: 2,
+                                colors: ['transparent']
+                            },
+                            xaxis: {
+                                categories: categories
+                            },
+                            yaxis: {
+                                title: {
+                                    text: 'Saham (RM)'
+                                }
+                            },
+                            fill: {
+                                opacity: 1
+                            },
+                            tooltip: {
+                                y: {
+                                    formatter: function(val) {
+                                        return "RM " + val
+                                    }
+                                }
+                            }
+                        }).render();
+                    });
+                </script>
+                  <!-- End Column Chart -->
+      
+              </div>
           </div>
-        </div>
+      </div>
 
         <hr>
         
@@ -228,10 +222,10 @@
                         <td>{{ teacher.modal_syer }}</td>
                         <td>{{ teacher.tarikh_daftar }}</td>
                         <td>
-                          <form method="POST" action="{% url 'add_share_page' teacher.teacher_id %}">
+                          <form method="POST" action="{% url 'view_account_teacher' teacher.teacher_id %}">
                             <div class="form-btn">
                               {% csrf_token %}
-                              <button type="submit"  class="btn btn-primary">Tambah Saham</button>
+                              <button type="submit"  class="btn btn-primary">Lihat Transaksi Akaun</button>
                             </div>
                           </form>
                         </td> <!-- Button yang menyimpan id cikgu untuk displaykan di form -->
@@ -278,10 +272,10 @@
                       <td>{{ member.modal_syer }}</td>
                       <td>{{ member.tarikh_daftar }}</td>
                       <td>
-                        <form method="POST" action="">
+                        <form method="POST" action="{% url 'view_account_student' member.member_id %}">
                           <div class="form-btn">
                             {% csrf_token %}
-                            <button type="submit"  class="btn btn-primary">Tambah Saham</button>
+                            <button type="submit"  class="btn btn-primary">Lihat Transaksi Akaun</button>
                           </div>
                         </form>
                       </td> <!-- Button yang menyimpan id cikgu untuk displaykan di form -->

@@ -1470,7 +1470,7 @@ input[readonly] {
   opacity: 1; /* Ensures it is fully opaque */
 }
 
-hr {
+.card-body hr {
   border: none; /* Removes the default border */
   height: 1px; /* Increase the thickness of the line */
   background-color: #000; /* Defines the color of the line */
