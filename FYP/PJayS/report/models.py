@@ -1,7 +1,8 @@
 from django.db import models
 from django.core.validators import RegexValidator
-from student.models import Member  # Adjust this import
-from teacher.models import Teacher  # Import your Teacher model
+from student.models import Member
+from teacher.models import Teacher
+from django.core.exceptions import ValidationError
 
 class Report(models.Model):
     member = models.ForeignKey(Member, on_delete=models.CASCADE, null=True, blank=True)  # ForeignKey to Member model
@@ -9,20 +10,7 @@ class Report(models.Model):
 
     # Personal details
     nama = models.CharField(max_length=100)
-    
-    # Add IC for student and teacher
-    ic_pelajar = models.CharField(
-        max_length=12, 
-        unique=True,
-        validators=[RegexValidator(r'^\d{12}$', message="IC must be exactly 12 digits")]
-    )
-    
-    ic_cikgu = models.CharField(
-        max_length=12,
-        unique=True,
-        validators=[RegexValidator(r'^\d{12}$', message="IC must be exactly 12 digits")]
-    )
-    
+
     jantina = models.CharField(max_length=10, choices=[('Lelaki', 'Lelaki'), ('Perempuan', 'Perempuan')])
 
     kaum = models.CharField(max_length=50, choices=[
@@ -56,7 +44,7 @@ class Report(models.Model):
         ('3', '3'),
         ('4', '4'),
         ('5', '5')
-    ])
+    ], null=True, blank=True)
 
     kelas = models.CharField(max_length=50, choices=[
         ('-', '-'),
@@ -70,7 +58,7 @@ class Report(models.Model):
         ('UKM', 'UKM'),
         ('USM', 'USM'),
         ('LILY', 'LILY')
-    ])
+    ], null=True, blank=True)
 
     pangkat = models.CharField(max_length=50, choices=[
         ('Pengerusi', 'Pengerusi'),
@@ -81,11 +69,21 @@ class Report(models.Model):
         ('Penolong Juruaudit', 'Penolong Juruaudit'),
         ('Guru Biasa', 'Guru Biasa'),
         ('Lain-lain', 'Lain-lain')
-    ])  # Dropdown for rank
+    ], null=True, blank=True)
 
     ahli = models.CharField(max_length=11, choices=[('Aktif', 'Aktif'), ('Tidak Aktif', 'Tidak Aktif')], default='Aktif')
     modal_syer = models.DecimalField(max_digits=10, decimal_places=2)
     tarikh_daftar = models.DateField()
 
+    def clean(self):
+        if self.member and self.teacher:
+            raise ValidationError("A report cannot belong to both a student and a teacher.")
+        if not self.member and not self.teacher:
+            raise ValidationError("A report must belong to either a student or a teacher.")
+
     def __str__(self):
+        if self.member:
+            return f"Pelajar: {self.nama}"
+        elif self.teacher:
+            return f"Guru: {self.nama}"
         return self.nama
