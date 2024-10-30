@@ -19,6 +19,10 @@ def generate_member_id():
     return new_id
 
 class Member(models.Model):
+
+    def get_class_name(self):
+        return self.__class__.__name__
+
     member_id = models.CharField(max_length=8, primary_key=True, editable=False, default=generate_member_id)
     nama = models.CharField(max_length=100)
     
