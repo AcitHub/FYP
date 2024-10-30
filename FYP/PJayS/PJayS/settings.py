@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'student',
     'teacher',
     'shares',
-    'generate',
     'report',
 ]
 

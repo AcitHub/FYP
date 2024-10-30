@@ -25,7 +25,7 @@
           <!-- Generate Report Elements -->
           <form method="POST" action="{% url 'generate_report' %}">
             {% csrf_token %}
-              <div class="row mb-3">
+            <div class="row mb-3">
               <label for="report-type" class="col-sm-2 col-form-label">Jenis Laporan</label>
               <div class="col-sm-6">
                 <select class="form-select" id="report-type" aria-label="Default select example" name="report-type">
@@ -53,24 +53,24 @@
             <fieldset class="row mb-3">
               <legend class="col-form-label col-sm-2 pt-0">Komuniti</legend>
               <div class="col-sm-10 d-flex">
-                  <div class="form-check">
-                      <input class="form-check-input" type="radio" name="gen-list" id="gen-forStudent" value="Pelajar" checked>
-                      <label class="form-check-label" for="gen-forStudent">Pelajar</label>
-                  </div>
-                  <div class="form-check ms-3">
-                      <input class="form-check-input" type="radio" name="gen-list" id="gen-forStaff" value="Kakitangan">
-                      <label class="form-check-label" for="gen-forStaff">Kakitangan</label>
-                  </div>
-                  {% comment %} <div class="form-check ms-3">
-                      <input class="form-check-input" type="radio" name="gen-list" id="gen-forSaham" value="Saham">
-                      <label class="form-check-label" for="gen-forSaham">Saham</label>
-                  </div> {% endcomment %}
-                  <div class="form-check ms-3">
-                      <input class="form-check-input" type="radio" name="gen-list" id="gen-Keseluruhan" value="Keseluruhan">
-                      <label class="form-check-label" for="gen-Keseluruhan">Keseluruhan</label>
-                  </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="gen-list" id="gen-forStudent" value="Pelajar" checked onchange="toggleTableVisibility()">
+                  <label class="form-check-label" for="gen-forStudent">Pelajar</label>
+                </div>
+                <div class="form-check ms-3">
+                  <input class="form-check-input" type="radio" name="gen-list" id="gen-forStaff" value="Kakitangan" onchange="toggleTableVisibility()">
+                  <label class="form-check-label" for="gen-forStaff">Kakitangan</label>
+                </div>
+                <div class="form-check ms-3">
+                  <input class="form-check-input" type="radio" name="gen-list" id="gen-forSaham" value="Saham" onchange="toggleTableVisibility()">
+                  <label class="form-check-label" for="gen-forSaham">Saham</label>
+                </div>
+                <div class="form-check ms-3">
+                  <input class="form-check-input" type="radio" name="gen-list" id="gen-Keseluruhan" value="Keseluruhan" onchange="toggleTableVisibility()">
+                  <label class="form-check-label" for="gen-Keseluruhan">Keseluruhan</label>
+                </div>
               </div>
-          </fieldset>
+            </fieldset>
 
             <div class="form-btn">
               <button type="submit" class="btn btn-primary">Menjana</button>
@@ -78,7 +78,156 @@
           </form>
         </div>
       </div>
-    </div>
-  </div>
-</section>
+
+      <!-- Table Maklumat Pelajar -->
+      <div class="card" id="student-data-table" style="display: none;">
+        <div class="card-body">
+          <h5 class="card-title">Maklumat Pelajar</h5>
+          <div class="table-scrollpane">
+            <table class="table datatable">
+              <thead>
+                <tr>
+                  <th>ID member</th>
+                  <th>No. IC</th>
+                  <th>Nama</th>
+                  <th>Alamat Rumah</th>
+                  <th>Tingkatan</th>
+                  <th>Kelas</th>
+                  <th>Ahli</th>
+                  <th>Modal Syer(RM)</th>
+                  <th>Tarikh Pendaftaran</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for report in reports %}
+                  {% if report.is_member %}
+                    <tr>
+                      <td>{{ report.member_id }}</td>
+                      <td>{{ report.ic_pelajar }}</td>
+                      <td>{{ report.nama }}</td>
+                      <td>{{ report.alamat_rumah }}</td>
+                      <td>{{ report.tingkatan }}</td>
+                      <td>{{ report.kelas }}</td>
+                      <td>{{ report.ahli }}</td>
+                      <td>{{ report.modal_syer }}</td>
+                      <td>{{ report.tarikh_daftar }}</td>
+                    </tr>
+                  {% endif %}
+                {% empty %}
+                  <tr>
+                    <td colspan="9">No data found for Pelajar</td>
+                  </tr>
+                {% endfor %}
+              </tbody>                
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Table Maklumat Kakitangan -->
+      <div class="card" id="teacher-data-table" style="display: none;">
+        <div class="card-body">
+          <h5 class="card-title">Maklumat Kakitangan</h5>
+          <div class="table-scrollpane">
+            <table class="table datatable">
+              <thead>
+                <tr>
+                  <th>ID Cikgu</th>
+                  <th>No. IC</th>
+                  <th>Nama</th>
+                  <th>Pangkat</th>
+                  <th>Ahli</th>
+                  <th>Modal Syer(RM)</th>
+                  <th>Tarikh Pendaftaran</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for report in reports %}
+                  {% if report.is_teacher %}
+                    <tr>
+                      <td>{{ report.teacher_id }}</td>
+                      <td>{{ report.ic_cikgu }}</td>
+                      <td>{{ report.nama }}</td>
+                      <td>{{ report.pangkat }}</td>
+                      <td>{{ report.ahli }}</td>
+                      <td>{{ report.modal_syer }}</td>
+                      <td>{{ report.tarikh_daftar }}</td>
+                    </tr>
+                  {% endif %}
+                {% empty %}
+                  <tr>
+                    <td colspan="7">No data found for Kakitangan</td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Table for Saham Pelajar -->
+      <div class="card" id="saham-student-data-table" style="display: none;">
+        <div class="card-body">
+          <h5 class="card-title">Maklumat Saham Pelajar</h5>
+          <div class="table-scrollpane">
+            <table class="table datatable">
+              <thead>
+                <tr>
+                  <th>ID Pelajar</th>
+                  <th>Nama</th>
+                  <th>Modal Syer (RM)</th>
+                  <th>Tarikh Pendaftaran</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for report in reports %}
+                  <tr>
+                    <td>{{ report.member_id }}</td>
+                    <td>{{ report.nama }}</td>
+                    <td>{{ report.modal_syer}}</td>
+                    <td>{{ report.tarikh_daftar}}</td>
+                  </tr>
+                {% empty %}
+                  <tr>
+                    <td colspan="4">No data found for Saham Pelajar</td>
+                  </tr>
+                {% endfor %}
+              </tbody>                
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- End of Column -->
+  </div><!-- End of Row -->
+</section><!-- End of Section -->
+
+<script>
+  function toggleTableVisibility() {
+    const selectedOption = document.querySelector('input[name="gen-list"]:checked').value;
+    
+    // Hide all tables
+    document.getElementById("student-data-table").style.display = "none";
+    document.getElementById("teacher-data-table").style.display = "none";
+    document.getElementById("saham-student-data-table").style.display = "none";
+
+    // Show relevant tables
+    if (selectedOption === "Pelajar") {
+      document.getElementById("student-data-table").style.display = "block";
+    } else if (selectedOption === "Kakitangan") {
+      document.getElementById("teacher-data-table").style.display = "block";
+    } else if (selectedOption === "Saham") {
+      document.getElementById("saham-student-data-table").style.display = "block"; // For demonstration, adjust as needed
+    } else if (selectedOption === "Keseluruhan") {
+      document.getElementById("student-data-table").style.display = "block";
+      document.getElementById("teacher-data-table").style.display = "block";
+    }
+  }
+
+  // Initial call to set visibility based on default checked radio button
+  document.addEventListener("DOMContentLoaded", function() {
+    toggleTableVisibility();
+  });
+</script>
+
 {% endblock %}
