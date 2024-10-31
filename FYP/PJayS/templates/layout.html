@@ -14,7 +14,9 @@
   <meta content="" name="description">
   <meta content="" name="keywords">
 
+  <!-- Template Main CSS File -->
   <link href="{% static "assets/css/style.css" %}" rel="stylesheet">
+ 
   <!-- Favicons -->
   <link href="{% static "assets/img/SMKPJ logo.png" %}" rel="icon">
   <link href="{% static "assets/img/SMKPJ logo.png" %}" rel="apple-touch-icon">
@@ -30,10 +32,7 @@
   <link href="{% static "assets/vendor/quill/quill.snow.css" %}" rel="stylesheet">
   <link href="{% static "assets/vendor/quill/quill.bubble.css" %}" rel="stylesheet">
   <link href="{% static "assets/vendor/remixicon/remixicon.css" %}" rel="stylesheet">
-  <link href="{% static "assets/vendor/simple-datatables/style.css" %}" rel="stylesheet">
-
-  <!-- Template Main CSS File -->
-  
+  <link href="{% static "assets/vendor/simple-datatables/style.css" %}" rel="stylesheet">  
 
 </head>
 
@@ -187,7 +186,7 @@
             </li>
         
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="#">
+              <a class="dropdown-item d-flex align-items-center" href="{% url 'help_page' %}">
                 <i class="bi bi-question-circle"></i>
                 <span>Perlu Bantuan?</span>
               </a>

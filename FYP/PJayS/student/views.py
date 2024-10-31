@@ -137,3 +137,7 @@ def update_student_kumpulan_page(request):
 
     member = Member.objects.all()
     return render(request, 'student/muka surat-pelajar-kemas kini-kumpulan.html', {'member': member})
+
+def help_page(request):
+    member = Member.objects.all()
+    return render(request, 'student/laman-perlukan bantuan.html', {'member': member})

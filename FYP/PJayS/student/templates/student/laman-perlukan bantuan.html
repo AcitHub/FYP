@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block title %}
+  Papan Pemuka Analisis - PJays KoopSystem
+{% endblock %}
+
+{% block content %}
+    <div class="pagetitle">
+        <h1><span>Perlukan Bantuan?</span></h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">Laman Utama</li>
+                <li class="breadcrumb-item active">Papan Pemuka Analisis</li>
+            </ol>
+        </nav>
+    </div><!-- Penutup Page Title -->
+
+    <section class="section dashboard">
+        <div class="row">
+
+            <!-- PDF Manual Card -->
+            <div class="col-xxl-4 col-md-4">
+                <div class="card info-card pdf-card">
+                    <div class="card-body">
+                        <h5 class="card-title">Bagaimana Untuk Menggunakan Sistem Ini?</h5>
+                        <div class="d-flex align-items-center">
+                            <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                <!-- Add the link to the PDF here -->
+                                <a href="{% static "assets/manual/Manual Penggunaan Sistem Koperasi PJayS.pdf" %}" target="_blank" download>
+                                    <i class="bi bi-filetype-pdf"></i>
+                                </a>
+                            </div>
+                            <div class="ps-3">
+                            <label>Manual cara penggunaan Sistem Koperasi PJayS</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- Penutup PDF Manual Card -->
+
+
+            <!-- Developer Card -->
+            <div class="col-xxl-12 col-md-12">
+                <div class="card info-card pdf-card">
+                    <div class="card-body">
+                        <h5 class="card-title">Pembangun Untuk Sistem Koperasi PJayS</h5>
+                        <div class="d-flex align-items-center">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div><!-- Penutup PDF Manual Card -->
+        </div>
+    </section>
+{% endblock content %}
