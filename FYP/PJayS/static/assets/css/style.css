@@ -48,7 +48,7 @@ body {
 }
 
 a {
-  color: #4154f1;
+  color: #f14141;
   text-decoration: none;
 }
 
@@ -211,7 +211,7 @@ h6 {
 
 .dropdown-menu .dropdown-footer a {
   color: #444444;
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 .dropdown-menu .dropdown-footer a:hover {
@@ -923,6 +923,11 @@ h6 {
   height: 64px;
   flex-shrink: 0;
   flex-grow: 0;
+}
+
+.pdf-card .card-icon {
+  color: #4154f1;
+  background: #f6f6fe;
 }
 
 .dashboard .student-card .card-icon {
