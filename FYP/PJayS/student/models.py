@@ -19,10 +19,6 @@ def generate_member_id():
     return new_id
 
 class Member(models.Model):
-
-    def get_class_name(self):
-        return self.__class__.__name__
-
     member_id = models.CharField(max_length=8, primary_key=True, editable=False, default=generate_member_id)
     nama = models.CharField(max_length=100)
     
@@ -34,8 +30,7 @@ class Member(models.Model):
     )
     
     jantina = models.CharField(max_length=10, choices=[('Lelaki', 'Lelaki'), ('Perempuan', 'Perempuan')])
-    kaum = models.CharField(max_length=50, choices=[('-', '-'), ('IBAN ATAU SEA DAYAK', 'IBAN ATAU SEA DAYAK'), ('INDONESIA', 'INDONESIA'), ('KADAZAN', 'KADAZAN'), ('KAYAN', 'KAYAN'), ('MELAYU', 'MELAYU'), ('ORANG ASLI', 'ORANG ASLI'), ('SEMAI', 'SEMAI'), ('THAI', 'THAI'), ('LAIN-LAIN', 'LAIN-LAIN')])
-    agama = models.CharField(max_length=50, choices=[('-', '-'), ('BUDDHA', 'BUDDHA'), ('ISLAM', 'ISLAM'), ('KRISTIAN', 'KRISTIAN'), ('TIADA AGAMA', 'TIADA AGAMA'), ('LAIN-LAIN', 'LAIN-LAIN')])
+    status = models.CharField(max_length=50, choices=[('Selesai', 'Selesai'), ('Belum Selesai', 'Belum Selesai')])
     alamat_rumah = models.CharField(max_length=255)
     tingkatan = models.CharField(max_length=50, choices=[('-', '-'), ('1', '1'), ('2', '2'), ('3', '3'), ('4', '4'), ('5', '5')])
     kelas = models.CharField(max_length=50, choices=[('-', '-'), ('ANGGERIK', 'ANGGERIK'), ('CEMPAKA', 'CEMPAKA'), ('DAHLIA', 'DAHLIA'), ('MAWAR', 'MAWAR'), ('SEROJA', 'SEROJA'), ('TERATAI', 'TERATAI'), ('UM', 'UM'), ('UKM', 'UKM'), ('USM', 'USM'), ('LILY', 'LILY')])

@@ -48,7 +48,7 @@ body {
 }
 
 a {
-  color: #f14141;
+  color: #4154f1;
   text-decoration: none;
 }
 
@@ -211,7 +211,7 @@ h6 {
 
 .dropdown-menu .dropdown-footer a {
   color: #444444;
-  text-decoration: none;
+  text-decoration: underline;
 }
 
 .dropdown-menu .dropdown-footer a:hover {
@@ -432,13 +432,13 @@ h6 {
 
 .nav-tabs-bordered .nav-link:hover,
 .nav-tabs-bordered .nav-link:focus {
-  color: #d1651a;
+  color: #4154f1;
 }
 
 .nav-tabs-bordered .nav-link.active {
   background-color: #fff;
-  color: #d1651a;
-  border-bottom: 2px solid #d1651a;
+  color: #4154f1;
+  border-bottom: 2px solid #4154f1;
 }
 
 /*--------------------------------------------------------------
@@ -923,11 +923,6 @@ h6 {
   height: 64px;
   flex-shrink: 0;
   flex-grow: 0;
-}
-
-.pdf-card .card-icon {
-  color: #4154f1;
-  background: #f6f6fe;
 }
 
 .dashboard .student-card .card-icon {
@@ -1452,26 +1447,9 @@ h6 {
 }
 
 .login {
-  margin: 0 auto;
-  padding-top: 10vh; /* Use viewport height for responsive padding */
-  max-width: 90%; /* Limit the width on larger screens */
+  margin: 0;
+  padding-top: 75px;
 }
-
-/* Media Queries for Responsive Resizing */
-@media (min-width: 768px) {
-  .login {
-    padding-top: 15vh; /* Increase padding for medium screens */
-    max-width: 70%;
-  }
-}
-
-@media (min-width: 1024px) {
-  .login {
-    padding-top: 20vh; /* More padding for larger screens */
-    max-width: 50%;
-  }
-}
-
 
 /* Form Button */
 .form-btn button {
@@ -1492,94 +1470,10 @@ input[readonly] {
   opacity: 1; /* Ensures it is fully opaque */
 }
 
-.card-body hr {
+hr {
   border: none; /* Removes the default border */
   height: 1px; /* Increase the thickness of the line */
   background-color: #000; /* Defines the color of the line */
   box-shadow: 0px 0 30px rgba(1, 41, 112, 0.2); /* Slightly darker shadow for emphasis */
   width: 100%; /* Makes the hr take full width */
 }
-
-.header-nav .nav-item .nav-link {
-  color: #495057; /* Default text color */
-  padding: 10px 15px; /* Padding for the tabs */
-  font-weight: 500; /* Font weight */
-  border: 1px solid transparent;
-  border-radius: 0; /* No rounded corners for tab style */
-  border-top-left-radius: .25rem;
-  border-top-right-radius: .25rem;
-  margin-right: 5px; /* Small gap between items */
-  transition: color 0.3s ease, background-color 0.3s ease;
-}
-
-.header-nav .nav-item .nav-link:hover {
-  color: #d1651a; /* Hover text color */
-}
-
-.header-nav .nav-item .nav-link.active {
-  color: #c1282a; /* Active text color */
-}
-
-.header-nav .nav-item .nav-link:not(.active):focus {
-  outline: none; /* Remove focus outline */
-}
-
-/* Centering and styling the about section */
-.about {
-  margin: 0 auto;
-  padding-top: 0; /* Use viewport height for responsive padding */
-  max-width: 100%; /* Limit the width on larger screens */
-}
-
-/* Optional: style to make the container fit well in mobile views */
-@media (max-width: 576px) {
-  .about {
-      padding: 15px;
-      font-size: 0.9rem;
-  }
-}
-
-.container2 {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  max-width: 700px;
-  margin: 0 auto;
-  padding: 20px;
-  background: #fff;
-  border-bottom-left-radius: 30px; border-bottom-right-radius: 30px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-}
-
-/* Styling for the paragraph text */
-.container2 p {
-  font-family: 'Open Sans', sans-serif;
-  font-size: 1rem;
-  line-height: 1.6;
-  color: #012970;
-  max-width: 600px; /* Optional: controls the text width for readability */
-  margin: 0 auto;
-  margin-top: 15px;
-  padding-bottom: 25px;
-}
-
-/* Basic Organization Chart Styles */
-.org-chart {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.chart-node {
-  padding: 10px;
-  border: 1px solid #ccc;
-  margin: 10px;
-  cursor: pointer;
-  text-align: center;
-  width: 150px;
-}
-.chart-node-container {
-  display: flex;
-  gap: 20px;
-}
-
