@@ -14,9 +14,7 @@
   <meta content="" name="description">
   <meta content="" name="keywords">
 
-  <!-- Template Main CSS File -->
   <link href="{% static "assets/css/style.css" %}" rel="stylesheet">
- 
   <!-- Favicons -->
   <link href="{% static "assets/img/SMKPJ logo.png" %}" rel="icon">
   <link href="{% static "assets/img/SMKPJ logo.png" %}" rel="apple-touch-icon">
@@ -32,7 +30,10 @@
   <link href="{% static "assets/vendor/quill/quill.snow.css" %}" rel="stylesheet">
   <link href="{% static "assets/vendor/quill/quill.bubble.css" %}" rel="stylesheet">
   <link href="{% static "assets/vendor/remixicon/remixicon.css" %}" rel="stylesheet">
-  <link href="{% static "assets/vendor/simple-datatables/style.css" %}" rel="stylesheet">  
+  <link href="{% static "assets/vendor/simple-datatables/style.css" %}" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  
 
 </head>
 
@@ -49,12 +50,12 @@
       </a>
     </div><!-- Penutup Logo -->    
 
-    <div class="search-bar">
+    {% comment %} <div class="search-bar">
       <form class="search-form d-flex align-items-center" method="POST" action="#">
         <input type="text" name="query" placeholder="Pencarian" title="Enter search keyword">
         <button type="submit" title="Search"><i class="bi bi-search"></i></button>
       </form>
-    </div><!-- Penutup Bar Pencarian-->
+    </div><!-- Penutup Bar Pencarian--> {% endcomment %}
 
     <nav class="header-nav ms-auto">
       <ul class="d-flex align-items-center">
@@ -65,15 +66,15 @@
           </a>
         </li><!-- Penutup Icon Pencarian-->
 
-        {% comment %} <li class="nav-item dropdown">
+        <li class="nav-item dropdown">
 
           <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
             <i class="bi bi-gear"></i>
           </a><!-- Penutup Icon Tetapan -->
 
-        </li><!-- Penutup Tetapan Nav --> {% endcomment %}
+        </li><!-- Penutup Tetapan Nav -->
 
-        {% comment %} <li class="nav-item dropdown">
+        <li class="nav-item dropdown">
 
           <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
             <i class="bi bi-bell"></i>
@@ -146,7 +147,7 @@
         
           </ul><!-- Penutup Dropdown Items Notifikasi -->
         
-        </li><!-- Penutup Notifikasi Nav --> {% endcomment %}
+        </li><!-- Penutup Notifikasi Nav -->
         
 
         <li class="nav-item dropdown pe-3">
@@ -159,14 +160,14 @@
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
               <h6>{{ user.username }}</h6>
-              <span>Admin Koperasi</span>
+              <span>Admin Kooperasi</span>
             </li>
             <li>
               <hr class="dropdown-divider">
             </li>
         
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="{% url 'profile_page' %}">
+              <a class="dropdown-item d-flex align-items-center" href="#">
                 <i class="bi bi-person"></i>
                 <span>Profil Saya</span>
               </a>
@@ -186,7 +187,7 @@
             </li>
         
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="{% url 'help_page' %}">
+              <a class="dropdown-item d-flex align-items-center" href="#">
                 <i class="bi bi-question-circle"></i>
                 <span>Perlu Bantuan?</span>
               </a>

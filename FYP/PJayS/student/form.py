@@ -7,13 +7,12 @@ class TambahStudentForm(forms.ModelForm):
         fields = [
             'nama', 
             'ic_pelajar', 
-            'jantina', 
-            'kaum', 
-            'agama', 
+            'jantina',  
             'alamat_rumah', 
             'tingkatan', 
             'kelas', 
             'ahli', 
+            'status', 
             'modal_syer', 
             'tarikh_daftar'
         ]
@@ -39,12 +38,11 @@ class UpdateStudentForm(forms.ModelForm):
             'nama', 
             'ic_pelajar', 
             'jantina', 
-            'kaum', 
-            'agama', 
             'alamat_rumah', 
             'tingkatan', 
             'kelas', 
             'ahli', 
+            'status', 
             'modal_syer', 
             'tarikh_daftar'
         ]

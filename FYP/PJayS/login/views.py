@@ -3,11 +3,44 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
-from student.models import*
-from teacher.models import*
+from student.models import Member  # Import Member from your student app
+from teacher.models import Teacher
 import json
 from django.db.models import Sum
 from django.db.models.functions import TruncMonth
+from django.contrib.auth.views import PasswordResetView
+from django.urls import reverse_lazy
+from django.contrib.auth.views import PasswordResetDoneView
+from django.contrib.auth import views as auth_views
+
+class CustomPasswordResetView(auth_views.PasswordResetView):
+    def get_email_context(self, user):
+        context = super().get_email_context(user)
+        context['protocol'] = self.request.scheme  # 'http' or 'https'
+        context['domain'] = self.request.get_host()  # e.g., 'example.com'
+        return context
+
+class CustomPasswordResetDoneView(PasswordResetDoneView):
+    template_name = 'login/password_reset_done.html'  # Your custom done page path
+
+
+class CustomPasswordResetView(PasswordResetView):
+    template_name = 'login/password_reset.html'  # Your password reset template path
+    email_template_name = 'login/password_reset_email.html'  # Your email template path
+    subject_template_name = 'login/password_reset_subject.txt'  # Your subject template path
+    success_url = reverse_lazy('password_reset_done')  # Redirect after successful reset
+
+    def form_valid(self, form):
+        # You can add custom logic here if needed
+        print("Password reset email is being sent.")
+        return super().form_valid(form)  # Send the email and redirect to the 'done' page
+    
+class CustomPasswordResetConfirmView(auth_views.PasswordResetConfirmView):
+    template_name = 'login/password_reset_confirm.html'  # Your custom confirm page path
+
+class CustomPasswordResetCompleteView(auth_views.PasswordResetCompleteView):
+    template_name = 'login/password_reset_complete.html'  # Your custom complete page path
+
 
 def admin_login(request):
     if request.user.is_authenticated:
@@ -15,9 +48,9 @@ def admin_login(request):
 
     if request.method == 'POST':
         username = request.POST.get('username')
-        password = request.POST.get('password')  # Corrected spelling
+        password = request.POST.get('password')
 
-        user = authenticate(username=username, password=password)  # Corrected usage
+        user = authenticate(username=username, password=password)
 
         if user:
             if user.is_superuser:
@@ -27,38 +60,42 @@ def admin_login(request):
                 messages.info(request, 'You are not an admin user.')
                 return redirect('/login/')
         else:
-            messages.info(request, 'Invalid username or password')
+            messages.error(request, 'Invalid username or password')
             return redirect('/login/')
 
     return render(request, 'login/pages-login-signup.html')
 
 def home(request):
-    if request.user.is_authenticated is not True: 
+    if not request.user.is_authenticated:
         return redirect('/login/')
     
-    # total of teacher and student
-    member = Member.objects.count()
-    teacher  = Teacher.objects.count()
+    # Total counts of members and teachers
+    member_count = Member.objects.count()
+    teacher_count = Teacher.objects.count()
 
-    # total saham teacher and student
-    teacher_total = sum([teacher.modal_syer for teacher in Teacher.objects.all()])
-    member_total = sum([member.modal_syer for member in Member.objects.all()])
+    # Total modal syer for teachers and members
+    teacher_total = Teacher.objects.aggregate(total=Sum('modal_syer'))['total'] or 0
+    member_total = Member.objects.aggregate(total=Sum('modal_syer'))['total'] or 0
 
-    # Prepare the data for the line chart
-    line_chart_data = Member.objects.annotate(month_year=TruncMonth('tarikh_daftar')).values('month_year').annotate(total_modal_syer=Sum('modal_syer')).order_by('month_year')
+    # Prepare data for the line chart
+    line_chart_data = Member.objects.annotate(month_year=TruncMonth('tarikh_daftar')) \
+        .values('month_year') \
+        .annotate(total_modal_syer=Sum('modal_syer')) \
+        .order_by('month_year')
+
     line_chart_data_list = list(line_chart_data)
     # Convert Decimal objects to float
     line_chart_data_list = [{'month_year': item['month_year'].strftime('%b %Y'), 'total_modal_syer': float(item['total_modal_syer'])} for item in line_chart_data_list]
 
     context = {
-        "member": member,
-        "teacher": teacher,
-        "teacher_total": teacher_total,
-        "member_total": member_total,
+        "member": member_count,
+        "teacher": teacher_count,
+        "teacher_total": float(teacher_total),
+        "member_total": float(member_total),
         "line_chart_data": json.dumps(line_chart_data_list)
     }
+    
     return render(request, 'login/laman utama-papan pemuka analisis.html', context)
-
 
 def logout_view(request):
     logout(request)

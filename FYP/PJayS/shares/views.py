@@ -55,8 +55,8 @@ def add_share_teacher_func(request, teacher_id):
 
             messages.success(request, 'Share amount updated successfully.')
             return redirect('view_account_teacher', teacher_id=teacher_id)  # Pass the teacher_id to the redirect
-        # else:
-        #     messages.error(request, f"There was an error adding share: {form.errors}")
+        else:
+            messages.error(request, f"There was an error adding share: {form.errors}")
     else:
         form = Teacher_Share()  # Define the form when the request method is not POST
 
@@ -81,10 +81,10 @@ def add_share_student_func(request, member_id):
 
             messages.success(request, 'Share amount updated successfully.')
             return redirect('share_page')
-        # else:
-        #     messages.error(request, f"There was an error adding share: {form.errors}")
-    # else:
-    #     form = Student_share()
+        else:
+            messages.error(request, f"There was an error adding share: {form.errors}")
+    else:
+        form = Student_Share()
 
     return render(request, 'saham/tambah-saham-pelajar.html', {'form': form,'member': member})
 

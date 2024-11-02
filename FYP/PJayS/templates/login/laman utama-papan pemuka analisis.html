@@ -1,0 +1,224 @@
+{% extends "layout.html" %}
+
+{% block title %}
+  Papan Pemuka Analisis - PJays KoopSystem
+{% endblock %}
+
+{% block content %}
+    <div class="pagetitle">
+        <h1><span>Papan Pemuka Analisis</span></h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'home' %}">Laman Utama</a></li>
+                <li class="breadcrumb-item active">Papan Pemuka Analisis</li>
+            </ol>
+        </nav>
+    </div><!-- Penutup Page Title -->
+
+    <section class="section dashboard">
+        <div class="row">
+
+            <!-- Left side columns -->
+            <div class="col-lg-4">
+                <div class="card">
+
+                    <div class="filter">
+                        <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                            <li><a class="dropdown-item" href="{% url 'register_student' %}">Pelajar</a></li>
+                            <li><a class="dropdown-item" href="{% url 'register_teacher' %}">Kakitangan</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="card-body">
+                        <h5 class="card-title">Komuniti <span>| Terkini</span></h5>
+
+                        <!-- Pelajar dan Kakitangan Cards -->
+                        <div class="row">
+                            <!-- Pelajar Card -->
+                            <div class="col-xxl-6 col-md-6">
+                                <div class="card info-card student-card">
+                                    <div class="filter">
+                                        <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                            <li><a class="dropdown-item" href="{% url 'register_student' %}">Lagi</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">Pelajar</h5>
+                                        <div class="d-flex align-items-center">
+                                            <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                                <i class="bi bi-people"></i>
+                                            </div>
+                                            <div class="ps-3">
+                                                <h6>{{member}}</h6>
+                                                <span class="text-secondary small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">meningkat</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><!-- Penutup Pelajar Card -->
+
+                            <!-- Kakitangan Card -->
+                            <div class="col-xxl-6 col-md-6">
+                                <div class="card info-card teacher-card">
+                                    <div class="filter">
+                                        <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                            <li><a class="dropdown-item" href="{% url 'register_teacher' %}">Lagi</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">Kakitangan</h5>
+                                        <div class="d-flex align-items-center">
+                                            <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                                <i class="bi bi-person-badge"></i>
+                                            </div>
+                                            <div class="ps-3">
+                                                <h6>{{teacher}}</h6>
+                                                <span class="text-success small pt-1 fw-bold">2%</span> <span class="text-muted small pt-2 ps-1">meningkat</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><!-- Penutup Kakitangan Card -->
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Left side columns -->
+            <div class="col-lg-5">
+              <div class="card">
+
+                  <div class="filter">
+                      <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                      <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                          <li><a class="dropdown-item" href="{% url 'register_student' %}">Pelajar</a></li>
+                          <li><a class="dropdown-item" href="{% url 'register_teacher' %}">Kakitangan</a></li>
+                      </ul>
+                  </div>
+
+                  <div class="card-body">
+                      <h5 class="card-title">Saham <span>| Terkini</span></h5>
+
+                      <!-- Pelajar dan Kakitangan Cards -->
+                      <div class="row">
+                          <!-- Pelajar Card -->
+                          <div class="col-xxl-6 col-md-6">
+                              <div class="card info-card student-card">
+                                  <div class="filter">
+                                      <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                                      <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                          <li><a class="dropdown-item" href="{% url 'register_student' %}">Lagi</a></li>
+                                      </ul>
+                                  </div>
+                                  <div class="card-body">
+                                      <h5 class="card-title">Pelajar</h5>
+                                      <div class="d-flex align-items-center">
+                                          <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                              <i class="bi bi-coin"></i>
+                                          </div>
+                                          <div class="ps-3">
+                                              <h6>{{ member_total }}</h6>
+
+                                              <span class="text-secondary small pt-1 fw-bold">20%</span> <span class="text-muted small pt-2 ps-1">meningkat</span>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div><!-- Penutup Pelajar Card -->
+
+                          <!-- Kakitangan Card -->
+                          <div class="col-xxl-6 col-md-6">
+                              <div class="card info-card teacher-card">
+                                  <div class="filter">
+                                      <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                                      <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                          <li><a class="dropdown-item" href="{% url 'register_teacher' %}">Lagi</a></li>
+                                      </ul>
+                                  </div>
+                                  <div class="card-body">
+                                      <h5 class="card-title">Kakitangan</h5>
+                                      <div class="d-flex align-items-center">
+                                          <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                              <i class="bi bi-cash"></i>
+                                          </div>
+                                          <div class="ps-3">
+                                              <h6>{{ teacher_total }}</h6>
+                                              <span class="text-success small pt-1 fw-bold">5%</span> <span class="text-muted small pt-2 ps-1">meningkat</span>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div><!-- Penutup Kakitangan Card -->
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Saham -->
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Jumlah Saham <span>| Terkini</span></h5>
+
+                        <!-- Line Chart -->
+                        <div id="lineChart"></div>
+
+                        <script>
+                            document.addEventListener("DOMContentLoaded", () => {
+                                const lineChartData = {{ line_chart_data|safe }};
+                                console.log(lineChartData); // Log the data to the console
+                        
+                                if (lineChartData.length > 0) {
+                                    new ApexCharts(document.querySelector("#lineChart"), {
+                                        series: [{
+                                            name: "Jumlah",
+                                            data: lineChartData.map(item => item.total_modal_syer)
+                                        }],
+                                        chart: {
+                                            height: 385,
+                                            type: 'line',
+                                            zoom: {
+                                                enabled: true
+                                            }
+                                        },
+                                        dataLabels: {
+                                            enabled: false, // Enable data labels
+                                            formatter: (val) => `RM ${val}` // Format the labels to include RM
+                                        },
+                                        stroke: {
+                                            curve: 'straight'
+                                        },
+                                        grid: {
+                                            row: {
+                                                colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
+                                                opacity: 0.5
+                                            },
+                                        },
+                                        xaxis: {
+                                            categories: lineChartData.map(item => item.month_year),
+                                        },
+                                        tooltip: {
+                                            y: {
+                                                formatter: (val) => `RM ${val}` // Format the tooltip to include RM
+                                            }
+                                        }
+                                    }).render();
+                                } else {
+                                    console.log("No data available"); // Log a message to the console if no data is available
+                                }
+                            });
+                        </script>
+                        <!-- End Line Chart -->
+
+                    </div>
+                </div>
+            </div><!-- Penutup Saham -->
+
+        </div>
+    </section>
+{% endblock content %}

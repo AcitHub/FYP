@@ -48,7 +48,7 @@ body {
 }
 
 a {
-  color: #f14141;
+  color: #4154f1;
   text-decoration: none;
 }
 
@@ -211,7 +211,7 @@ h6 {
 
 .dropdown-menu .dropdown-footer a {
   color: #444444;
-  text-decoration: none;
+  text-decoration: underline;
 }
 
 .dropdown-menu .dropdown-footer a:hover {
@@ -432,13 +432,13 @@ h6 {
 
 .nav-tabs-bordered .nav-link:hover,
 .nav-tabs-bordered .nav-link:focus {
-  color: #d1651a;
+  color: #4154f1;
 }
 
 .nav-tabs-bordered .nav-link.active {
   background-color: #fff;
-  color: #d1651a;
-  border-bottom: 2px solid #d1651a;
+  color: #4154f1;
+  border-bottom: 2px solid #4154f1;
 }
 
 /*--------------------------------------------------------------
@@ -923,11 +923,6 @@ h6 {
   height: 64px;
   flex-shrink: 0;
   flex-grow: 0;
-}
-
-.pdf-card .card-icon {
-  color: #4154f1;
-  background: #f6f6fe;
 }
 
 .dashboard .student-card .card-icon {
@@ -1475,7 +1470,7 @@ input[readonly] {
   opacity: 1; /* Ensures it is fully opaque */
 }
 
-.card-body hr {
+hr {
   border: none; /* Removes the default border */
   height: 1px; /* Increase the thickness of the line */
   background-color: #000; /* Defines the color of the line */
