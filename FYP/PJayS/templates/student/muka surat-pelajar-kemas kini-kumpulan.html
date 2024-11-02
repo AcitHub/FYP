@@ -86,6 +86,7 @@
                     <div class="col-sm-10">
                       <select class="form-select" id="newTingkatan" name="new_tingkatan">
                         <option value="" selected disabled>Pilih</option>
+                        <option value="-">-</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -125,16 +126,16 @@
                       <thead>
                         <tr>
                           <th>Pilih</th>
+                          <th>Bil.</th>
                           <th>ID member</th>
                           <th>No. IC</th>
                           <th>Nama</th>
                           <th>Jantina</th>
-                          <th>Kaum</th>
-                          <th>Agama</th>
                           <th>Alamat Rumah</th>
                           <th>Tingkatan</th>
                           <th>Kelas</th>
                           <th>Ahli</th>
+                          <th>Status Pengambilan Saham</th>
                           <th>Modal Syer(RM)</th>
                           <th data-type="date" data-format="MM/DD/YYYY">Tarikh Pendaftaran</th>
                         </tr>
@@ -145,16 +146,16 @@
                           <td>
                             <input type="checkbox" name="selected_students[]" value="{{ i.member_id }}">
                           </td>
+                          <td class="bil-number">{{ forloop.counter }}</td>
                           <td>{{ i.member_id }}</td>
                           <td>{{ i.ic_pelajar }}</td>
                           <td>{{ i.nama }}</td>
                           <td>{{ i.jantina }}</td>
-                          <td>{{ i.kaum }}</td>
-                          <td>{{ i.agama }}</td>
                           <td>{{ i.alamat_rumah }}</td>
                           <td>{{ i.tingkatan }}</td>
                           <td>{{ i.kelas }}</td>
                           <td>{{ i.ahli }}</td>
+                          <td>{{ i.status}}</td>
                           <td>{{ i.modal_syer }}</td>
                           <td>{{ i.tarikh_daftar }}</td>
                         </tr>
@@ -196,6 +197,7 @@
     function filterRows() {
       const tingkatanValue = filterTingkatan.value;
       const kelasValue = filterKelas.value;
+      let counter = 1; // Start counting from 1 for filtered rows
 
       rows.forEach(row => {
         const rowTingkatan = row.getAttribute('data-tingkatan');
@@ -207,6 +209,11 @@
         if (tingkatanMatch && kelasMatch) {
           row.style.display = '';
           row.querySelector('input[type="checkbox"]').disabled = false;
+
+          // Update the "Bil." column based on the visible order
+          const bilCell = row.querySelector('.bil-number');
+          bilCell.textContent = counter;
+          counter++;
         } else {
           row.style.display = 'none';
           row.querySelector('input[type="checkbox"]').disabled = true;
@@ -240,5 +247,6 @@
     });
   });
 </script>
+
 
 {% endblock %}

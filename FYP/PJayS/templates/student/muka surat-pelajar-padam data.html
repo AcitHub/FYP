@@ -23,7 +23,7 @@
       <div class="card">
         <div class="card-body">
       
-          <form method="POST" action="{% url 'delete_student_page' %}">
+          <form id="deleteForm" method="POST" action="{% url 'delete_student_page' %}">
             {% csrf_token %}
             <div class="card">
               <div class="card-body">
@@ -41,7 +41,6 @@
                       <option value="4">4</option>
                       <option value="5">5</option>
                     </select>
-                    {% comment %} {{ form.tingkatan }} {% endcomment %}
                   </div>
                 </div>
 
@@ -62,7 +61,6 @@
                       <option value="USM">USM</option>
                       <option value="LILY">LILY</option>
                     </select>
-                    {% comment %} {{ form.kelas }} {% endcomment %}
                   </div>
                 </div>
               </fieldset>
@@ -72,22 +70,21 @@
               <div class="card-body">
                 <fieldset>
                   <h5 class="card-title">Maklumat Data Pelajar</h5>
-                  <!-- Table container with scrollpane -->
                   <div class="table-scrollpane">
                     <table class="table datatable">
                       <thead>
                         <tr>
+                          <th>Bil.</th>
                           <th>Pilih</th>
                           <th>ID member</th>
                           <th>No. IC</th>
                           <th>Nama</th>
                           <th>Jantina</th>
-                          <th>Kaum</th>
-                          <th>Agama</th>
                           <th>Alamat Rumah</th>
                           <th>Tingkatan</th>
                           <th>Kelas</th>
                           <th>Ahli</th>
+                          <th>Status Pengambilan Saham</th>
                           <th>Modal Syer(RM)</th>
                           <th data-type="date" data-format="MM/DD/YYYY">Tarikh Pendaftaran</th>
                         </tr>
@@ -98,16 +95,16 @@
                           <td>
                             <input type="checkbox" name="selected_students[]" value="{{ i.member_id }}">
                           </td>
+                          <td>{{ forloop.counter }}</td>
                           <td>{{ i.member_id }}</td>
                           <td>{{ i.ic_pelajar }}</td>
                           <td>{{ i.nama }}</td>
                           <td>{{ i.jantina }}</td>
-                          <td>{{ i.kaum }}</td>
-                          <td>{{ i.agama }}</td>
                           <td>{{ i.alamat_rumah }}</td>
                           <td>{{ i.tingkatan }}</td>
                           <td>{{ i.kelas }}</td>
                           <td>{{ i.ahli }}</td>
+                          <td>{{ i.status }}</td>
                           <td>{{ i.modal_syer }}</td>
                           <td>{{ i.tarikh_daftar }}</td>
                         </tr>
@@ -122,13 +119,10 @@
                   </div>
                   <br>
                   <div class="form-btn">
-                    <!-- Delete Button below the table -->
-                    <button type="submit" class="btn btn-primary">Padam Pelajar Terpilih</button>
-                  </div>
+                    <button type="button" class="btn btn-primary" onclick="showConfirmModal()">Padam Pelajar Terpilih</button>
                 </fieldset>
               </div>
             </div>
-
           </form>
         </div>
       </div>
@@ -136,15 +130,47 @@
   </div>
 </section>
 
+<!-- Modal HTML for confirmation dialog -->
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="confirmDeleteModalLabel">Pengesahan Padam</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Adakah anda pasti untuk memadam pelajar terpilih?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+        <button type="button" class="btn btn-danger" onclick="submitDeleteForm()">Padam</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
+  function showConfirmModal() {
+    const selectedCheckboxes = document.querySelectorAll('input[name="selected_students[]"]:checked');
+    if (selectedCheckboxes.length > 0) {
+      const confirmDeleteModal = new bootstrap.Modal(document.getElementById('confirmDeleteModal'));
+      confirmDeleteModal.show();
+    } else {
+      alert("Sila pilih sekurang-kurangnya seorang pelajar untuk dipadam.");
+    }
+  }
+
+  function submitDeleteForm() {
+    document.getElementById('deleteForm').submit();
+  }
+
   document.addEventListener('DOMContentLoaded', function() {
     const selectAllCheckbox = document.getElementById('select-all');
     const filterTingkatan = document.getElementById('filterTingkatan');
     const filterKelas = document.getElementById('filterKelas');
     const rows = document.querySelectorAll('.student-row');
-    const form = document.querySelector('form'); // Get the form element
+    const form = document.getElementById('deleteForm');
   
-    // Filter rows based on Tingkatan and Kelas
     function filterRows() {
       const tingkatanValue = filterTingkatan.value;
       const kelasValue = filterKelas.value;
@@ -152,26 +178,33 @@
       rows.forEach(row => {
         const rowTingkatan = row.getAttribute('data-tingkatan');
         const rowKelas = row.getAttribute('data-kelas');
-  
-        // Check if the row should be visible based on the filters
         const tingkatanMatch = (tingkatanValue === "Pilih" || rowTingkatan === tingkatanValue);
         const kelasMatch = (kelasValue === "Pilih" || rowKelas === kelasValue);
   
         if (tingkatanMatch && kelasMatch) {
           row.style.display = '';
-          row.querySelector('input[type="checkbox"]').disabled = false; // Enable checkbox for visible rows
+          row.querySelector('input[type="checkbox"]').disabled = false;
         } else {
           row.style.display = 'none';
-          row.querySelector('input[type="checkbox"]').disabled = true; // Disable checkbox for hidden rows
+          row.querySelector('input[type="checkbox"]').disabled = true;
+        }
+      });
+      
+      updateRowNumbers();
+    }
+  
+    function updateRowNumbers() {
+      let visibleRowCount = 1;
+      rows.forEach(row => {
+        if (row.style.display !== 'none') {
+          row.querySelector('td:nth-child(2)').textContent = visibleRowCount++;
         }
       });
     }
   
-    // Add event listeners to dropdowns
     filterTingkatan.addEventListener('change', filterRows);
     filterKelas.addEventListener('change', filterRows);
   
-    // Select all visible checkboxes
     selectAllCheckbox.addEventListener('change', function() {
       rows.forEach(row => {
         if (row.style.display !== 'none') {
@@ -180,18 +213,15 @@
       });
     });
   
-    // Before form submission, ensure that hidden checkboxes are disabled so they won't be submitted
     form.addEventListener('submit', function() {
       rows.forEach(row => {
         if (row.style.display === 'none') {
-          row.querySelector('input[type="checkbox"]').disabled = true; // Ensure hidden checkboxes are disabled
+          row.querySelector('input[type="checkbox"]').disabled = true;
         }
       });
     });
   });
   
 </script>
-
-
 
 {% endblock %}

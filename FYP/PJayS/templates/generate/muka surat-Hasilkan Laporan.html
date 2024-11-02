@@ -87,12 +87,8 @@
             <table class="table datatable">
               <thead>
                 <tr>
-                  <th>ID member</th>
                   <th>No. IC</th>
                   <th>Nama</th>
-                  <th>Alamat Rumah</th>
-                  <th>Tingkatan</th>
-                  <th>Kelas</th>
                   <th>Ahli</th>
                   <th>Modal Syer(RM)</th>
                   <th>Tarikh Pendaftaran</th>
@@ -102,12 +98,8 @@
                 {% for report in reports %}
                   {% if report.is_member %}
                     <tr>
-                      <td>{{ report.member_id }}</td>
                       <td>{{ report.ic_pelajar }}</td>
                       <td>{{ report.nama }}</td>
-                      <td>{{ report.alamat_rumah }}</td>
-                      <td>{{ report.tingkatan }}</td>
-                      <td>{{ report.kelas }}</td>
                       <td>{{ report.ahli }}</td>
                       <td>{{ report.modal_syer }}</td>
                       <td>{{ report.tarikh_daftar }}</td>
@@ -132,7 +124,6 @@
             <table class="table datatable">
               <thead>
                 <tr>
-                  <th>ID Cikgu</th>
                   <th>No. IC</th>
                   <th>Nama</th>
                   <th>Pangkat</th>
@@ -145,7 +136,6 @@
                 {% for report in reports %}
                   {% if report.is_teacher %}
                     <tr>
-                      <td>{{ report.teacher_id }}</td>
                       <td>{{ report.ic_cikgu }}</td>
                       <td>{{ report.nama }}</td>
                       <td>{{ report.pangkat }}</td>
@@ -173,7 +163,6 @@
             <table class="table datatable">
               <thead>
                 <tr>
-                  <th>ID Pelajar</th>
                   <th>Nama</th>
                   <th>Modal Syer (RM)</th>
                   <th>Tarikh Pendaftaran</th>
@@ -182,7 +171,6 @@
               <tbody>
                 {% for report in reports %}
                   <tr>
-                    <td>{{ report.member_id }}</td>
                     <td>{{ report.nama }}</td>
                     <td>{{ report.modal_syer}}</td>
                     <td>{{ report.tarikh_daftar}}</td>

@@ -5,8 +5,8 @@ from teacher.models import Teacher
 from django.core.exceptions import ValidationError
 
 class Report(models.Model):
-    member = models.ForeignKey(Member, on_delete=models.CASCADE, null=True, blank=True)  # ForeignKey to Member model
-    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE, null=True, blank=True)  # ForeignKey to Teacher model
+    member_id = models.ForeignKey(Member, on_delete=models.CASCADE, null=True, blank=True)  # ForeignKey to Member model
+    teacher_id = models.ForeignKey(Teacher, on_delete=models.CASCADE, null=True, blank=True)  # ForeignKey to Teacher model
 
     # Personal details
     nama = models.CharField(max_length=100)

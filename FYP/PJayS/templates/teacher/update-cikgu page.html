@@ -47,38 +47,6 @@
         </fieldset>
 
         <div class="row mb-3">
-          <label for="kaumCikgu" class="col-sm-2 col-form-label">Kaum</label>
-          <div class="col-sm-10">
-            <select class="form-select" id="kaumCikgu" aria-label="Default select example" name="kaum">
-              <option selected disabled>Pilih</option>
-              <option value="IBAN ATAU SEA DAYAK" {% if teacher.kaum == 'IBAN ATAU SEA DAYAK' %}selected{% endif %}>IBAN</option>
-              <option value="INDONESIA" {% if teacher.kaum == 'INDONESIA' %}selected{% endif %}>INDONESIA</option>
-              <option value="KADAZAN" {% if teacher.kaum == 'KADAZAN' %}selected{% endif %}>KADAZAN</option>
-              <option value="KAYAN" {% if teacher.kaum == 'KAYAN' %}selected{% endif %}>KAYAN</option>
-              <option value="MELAYU" {% if teacher.kaum == 'MELAYU' %}selected{% endif %}>MELAYU</option>
-              <option value="ORANG ASLI" {% if teacher.kaum == 'ORANG ASLI' %}selected{% endif %}>ORANG ASLI(SEMENANJUNG)</option>
-              <option value="SEMAI" {% if teacher.kaum == 'SEMAI' %}selected{% endif %}>SEMAI</option>
-              <option value="THAI" {% if teacher.kaum == 'THAI' %}selected{% endif %}>THAI</option>
-              <option value="LAIN-LAIN" {% if teacher.kaum == 'LAIN-LAIN' %}selected{% endif %}>Lain-lain Kaum</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="row mb-3">
-          <label for="agamaCikgu" class="col-sm-2 col-form-label">Agama</label>
-          <div class="col-sm-10">
-            <select class="form-select" id="agamaCikgu" aria-label="Default select example" name="agama">
-              <option selected disabled>Pilih</option>
-              <option value="BUDDHA" {% if teacher.agama == 'BUDDHA' %}selected{% endif %}>BUDDHA</option>
-              <option value="ISLAM" {% if teacher.agama == 'ISLAM' %}selected{% endif %}>ISLAM</option>
-              <option value="KRISTIAN" {% if teacher.agama == 'KRISTIAN' %}selected{% endif %}>KRISTIAN</option>
-              <option value="TIADA AGAMA" {% if teacher.agama == 'TIADA AGAMA' %}selected{% endif %}>TIADA AGAMA/AITISMISME</option>
-              <option value="LAIN-LAIN" {% if teacher.agama == 'LAIN-LAIN' %}selected{% endif %}>Lain-lain Agama</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="row mb-3">
           <label for="inputAlamatCikgu" class="col-sm-2 col-form-label">Alamat Rumah</label>
           <div class="col-sm-10">
             <textarea class="form-control" id="inputAlamatCikgu" style="height: 100px" placeholder="Sila masukkan alamat rumah cikgu" name="alamat_rumah" >{{ teacher.alamat_rumah }}</textarea>
@@ -120,6 +88,26 @@
           </div>
         </fieldset>
 
+        <fieldset class="row mb-3">
+          <legend class="col-form-label col-sm-2 pt-0">Status Pengambilan Saham</legend>
+          <div class="col-sm-10 d-flex">
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="status" id="statusSaham" value="Selesai" {% if teacher.status == 'Selesai' %}checked{% endif %}>
+              <label class="form-check-label" for="ahliAktif">
+                Selesai
+              </label>
+              {% comment %} {{ form.ahli }} {% endcomment %}
+            </div>
+            <div class="form-check ms-3">
+              <input class="form-check-input" type="radio" name="status" id="statusSaham" value="Belum Selesai" {% if teacher.status == 'Belum Selesai' %}checked{% endif %}>
+              <label class="form-check-label" for="statusSaham">
+                Belum Selesai
+              </label>
+              {% comment %} {{ form.ahli }} {% endcomment %}
+            </div>
+          </div>
+        </fieldset>
+
         <div class="row mb-3">
           <label for="modalSyer" class="col-sm-2 col-form-label">Modal Syer(RM)</label>
           <div class="col-sm-10">
@@ -152,3 +140,20 @@
     </div>
   </div>
 {% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

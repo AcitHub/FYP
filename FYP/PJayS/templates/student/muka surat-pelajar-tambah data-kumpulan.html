@@ -67,16 +67,16 @@
                   <table class="table datatable">
                     <thead>
                       <tr>
+                        <th>Bil.</th>
                         <th>ID member</th>
                         <th>No. IC</th>
                         <th>Nama</th>
                         <th>Jantina</th>
-                        <th>Kaum</th>
-                        <th>Agama</th>
                         <th>Alamat Rumah</th>
                         <th>Tingkatan</th>
                         <th>Kelas</th>
                         <th>Ahli</th>
+                        <th>Status Pengambilan Saham</th>
                         <th>Modal Syer(RM)</th>
                         <th data-type="date" data-format="MM/DD/YYYY">Tarik Pendaftaran</th>
                       </tr>
@@ -84,16 +84,16 @@
                     <tbody>
                       {% for i in member %}
                       <tr>
+                        <td>{{ forloop.counter }}</td>
                         <td>{{ i.member_id }}</td>
                         <td>{{ i.ic_pelajar }}</td>
                         <td>{{ i.nama }}</td>
                         <td>{{ i.jantina }}</td>
-                        <td>{{ i.kaum }}</td>
-                        <td>{{ i.agama }}</td>
                         <td>{{ i.alamat_rumah }}</td>
                         <td>{{ i.tingkatan }}</td>
                         <td>{{ i.kelas }}</td>
                         <td>{{ i.ahli }}</td>
+                        <td>{{ i.status }}</td>
                         <td>{{ i.modal_syer }}</td>
                         <td>{{ i.tarikh_daftar }}</td>
                       </tr>

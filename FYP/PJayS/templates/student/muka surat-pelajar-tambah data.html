@@ -75,44 +75,6 @@
                     </fieldset>
         
                     <div class="row mb-3">
-                      <label for="kaumPelajar" class="col-sm-2 col-form-label">Kaum</label>
-                      <div class="col-sm-10">
-                        <select class="form-select" id="kaumPelajar" aria-label="Default select example" name="kaum">
-                          <option selected disabled>Pilih</option>
-                          <option value="-">-</option>
-                          <option value="IBAN ATAU SEA DAYAK">IBAN ATAU SEA DAYAK</option>
-                          <option value="INDONESIA">INDONESIA</option>
-                          <option value="KADAZAN">KADAZAN</option>
-                          <option value="KAYAN">KAYAN</option>
-                          <option value="MELAYU">MELAYU</option>
-                          <option value="ORANG ASLI">ORANG ASLI(SEMENANJUNG)</option>
-                          <option value="SEMAI">SEMAI</option>
-                          <option value="THAI">THAI</option>
-                          <option value="TEMIAR">TEMIAR</option>
-                          <option value="LAIN-LAIN">Lain-lain Kaum</option>
-                        </select>
-                        {% comment %} {{ form.kaum }} {% endcomment %}
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="agamaPelajar" class="col-sm-2 col-form-label">Agama</label>
-                      <div class="col-sm-10">
-                        <select class="form-select" id="agamaPelajar" aria-label="Default select example" name="agama">
-                          <option selected disabled>Pilih</option>
-                          <option value="-">-</option>
-                          <option value="BUDDHA">BUDDHA</option>
-                          <option value="ISLAM">ISLAM</option>
-                          <option value="KRISTIAN">KRISTIAN</option>
-                          <option value="TAO">TAO</option>
-                          <option value="TIADA AGAMA">TIADA AGAMA/AITISMISME</option>
-                          <option value="LAIN-LAIN">Lain-lain Agama</option>
-                        </select>
-                        {% comment %} {{ form.agama }} {% endcomment %}
-                      </div>
-                    </div>
-        
-                    <div class="row mb-3">
                       <label for="inputAlamatPelajar" class="col-sm-2 col-form-label">Alamat Rumah</label>
                       <div class="col-sm-10">
                         <textarea class="form-control" id="inputAlamatPelajar" style="height: 100px" placeholder="Sila masukkan alamat rumah pelajar" name="alamat_rumah"></textarea>
@@ -177,6 +139,26 @@
                       </div>
                     </fieldset>
 
+                    <fieldset class="row mb-3">
+                      <legend class="col-form-label col-sm-2 pt-0">Status Pengambilan Saham</legend>
+                      <div class="col-sm-10 d-flex">
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="status" id="statusSaham" value="Selesai" checked>
+                          <label class="form-check-label" for="ahliAktif">
+                            Selesai
+                          </label>
+                          {% comment %} {{ form.ahli }} {% endcomment %}
+                        </div>
+                        <div class="form-check ms-3">
+                          <input class="form-check-input" type="radio" name="status" id="statusSaham" value="Belum Selesai">
+                          <label class="form-check-label" for="statusSaham">
+                            Belum Selesai
+                          </label>
+                          {% comment %} {{ form.ahli }} {% endcomment %}
+                        </div>
+                      </div>
+                    </fieldset>
+
                     <div class="row mb-3">
                       <label for="modalSyer" class="col-sm-2 col-form-label">Modal Syer(RM)</label>
                       <div class="col-sm-10">
@@ -216,16 +198,16 @@
                     <table class="table datatable">
                       <thead>
                         <tr>
+                          <th>Bil.</th>
                           <th>ID member</th>
                           <th>No. IC</th>
                           <th>Nama</th>
                           <th>Jantina</th>
-                          <th>Kaum</th>
-                          <th>Agama</th>
                           <th>Alamat Rumah</th>
                           <th>Tingkatan</th>
                           <th>Kelas</th>
                           <th>Ahli</th>
+                          <th>Status Pengambilan Saham</th>
                           <th>Modal Syer(RM)</th>
                           <th data-type="date" data-format="MM/DD/YYYY">Tarikh Pendaftaran</th>
                         </tr>
@@ -233,16 +215,16 @@
                       <tbody>
                         {% for i in member %}
                         <tr>
+                          <td>{{ forloop.counter }}</td>
                           <td>{{ i.member_id}}</td>
                           <td>{{ i.ic_pelajar }}</td>
                           <td>{{ i.nama }}</td>
                           <td>{{ i.jantina }}</td>
-                          <td>{{ i.kaum }}</td>
-                          <td>{{ i.agama }}</td>
                           <td>{{ i.alamat_rumah }}</td>
                           <td>{{ i.tingkatan }}</td>
                           <td>{{ i.kelas }}</td>
                           <td>{{ i.ahli }}</td>
+                          <td>{{ i.status }}</td>
                           <td>{{ i.modal_syer }}</td>
                           <td>{{ i.tarikh_daftar }}</td>
                         </tr>

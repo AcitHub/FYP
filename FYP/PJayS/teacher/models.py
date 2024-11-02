@@ -1,25 +1,46 @@
 from django.db import models
-import random
-import string
-import uuid
-# Create your models here.
+from django.core.validators import RegexValidator
 
 def generate_teacher_id():
-    prefix = 'PJAYS'
-    counter = random.randint(1000, 9999)  # Adjust range as needed
-    member_id = f"{prefix}{str(counter).zfill(6)}"
-    return member_id
+    prefix = "STAFF"
+    try:
+        last_teacher = Teacher.objects.filter(teacher_id__startswith=prefix).order_by('-teacher_id').first()
+        if last_teacher and last_teacher.teacher_id[len(prefix):]:
+            last_id_num = int(last_teacher.teacher_id[len(prefix):])
+        else:
+            last_id_num = 0
+    except (ValueError, TypeError) as e:
+        print(f"Error in generate_teacher_id: {e}")
+        last_id_num = 0
+
+    new_id_num = last_id_num + 1
+    new_id = f"{prefix}{new_id_num:04d}"
+    print(f"Generated new Teacher ID: {new_id}")
+    return new_id
 
 class Teacher(models.Model):
-    teacher_id = models.AutoField(primary_key=True, auto_created=True)  # Sesuaikan panjang sesuai kebutuhan
+    teacher_id = models.CharField(max_length=9, primary_key=True, editable=False, default=generate_teacher_id)
     nama = models.CharField(max_length=100)
-    ic_cikgu = models.CharField(max_length=12, unique=True)
+    
+    # Validator for ic_cikgu to ensure only numbers and 12 digits
+    ic_cikgu = models.CharField(
+        max_length=12, 
+        unique=True,
+        validators=[RegexValidator(r'^\d{12}$', message="IC must be exactly 12 digits")]
+    )
+    
+    status = models.CharField(max_length=50, choices=[('Selesai', 'Selesai'), ('Belum Selesai', 'Belum Selesai')])
     jantina = models.CharField(max_length=10, choices=[('Lelaki', 'Lelaki'), ('Perempuan', 'Perempuan')])
-    kaum = models.CharField(max_length=50, choices=[('IBAN ATAU SEA DAYAK', 'IBAN  ATAU SEA DAYAK'), ('TEMIAR', 'TEMIAR'),('INDONESIA', 'INDONESIA'),('KADAZAN','KADAZAN'),('KAYAN','KAYAN'),('MELAYU','MELAYU'),('ORANG ASLI','ORANG ASLI'),('SEMAI','SEMAI'),('THAI','THAI'),('LAIN-LAIN','LAIN-LAIN')])  # Dropdown
-    agama = models.CharField(max_length=50, choices=[('BUDDHA', 'BUDDHA'), ('ISLAM', 'ISLAM'),('KRISTIAN','KRISTIAN'),('TAO','TAO'),('TIADA AGAMA','TIADA AGAMA'),('LAIN-LAIN','LAIN-LAIN')] )  # Dropdown
-    alamat_rumah = models.CharField(max_length=255)  # Dropdown
-    pangkat = models.CharField(max_length=50, choices=[('Pengerusi', 'Pengerusi'), ('Naib Pengerusi', 'Naib Pengerusi'), ('Pegawai Ehwal Ekonomi','Pegawai Ehwal Ekonomi'), ('Penolong Pegawai Ehwal Ekonomi', 'Penolong Pegawai Ehwal Ekonomi'), ('Juruaudit','Juruadit'), ('Penolong Juruaudit', 'Penolong Juruaudit'), ('Guru Biasa','Guru Biasa'), ('Lain-lain','Lain-lain') ])  # Dropdown
-    ahli = models.CharField(max_length=11, choices=[('Aktif', 'Aktif'),('Tidak Aktif', 'Tidak Aktif')], default='Aktif')
+    alamat_rumah = models.CharField(max_length=255)
+    pangkat = models.CharField(max_length=50, choices=[('Pengerusi', 'Pengerusi'), 
+                                                        ('Naib Pengerusi', 'Naib Pengerusi'), 
+                                                        ('Pegawai Ehwal Ekonomi', 'Pegawai Ehwal Ekonomi'), 
+                                                        ('Penolong Pegawai Ehwal Ekonomi', 'Penolong Pegawai Ehwal Ekonomi'), 
+                                                        ('Juruaudit', 'Juruaudit'), 
+                                                        ('Penolong Juruaudit', 'Penolong Juruaudit'), 
+                                                        ('Guru Biasa', 'Guru Biasa'), 
+                                                        ('Lain-lain', 'Lain-lain')])
+    ahli = models.CharField(max_length=11, choices=[('Aktif', 'Aktif'), ('Tidak Aktif', 'Tidak Aktif')], default='Aktif')
     modal_syer = models.DecimalField(max_digits=10, decimal_places=2)
     tarikh_daftar = models.DateField()
 

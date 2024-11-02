@@ -27,15 +27,15 @@
         <table class="table datatable">
           <thead>
             <tr>
+                <th>Bil.</th>
                 <th>ID Teacher</th>
                 <th>No. IC</th>
                 <th>Nama</th>
                 <th>Jantina</th>
-                <th>Kaum</th>
-                <th>Agama</th>
                 <th>Alamat Rumah</th>
                 <th>Pangkat</th>
                 <th>Ahli</th>
+                <th>Status Pengambilan Saham</th>
                 <th>Modal Syer(RM)</th>
                 <th data-type="date" data-format="MM/DD/YYYY">Tarik Pendaftaran</th>
               <th>Tindakan</th>
@@ -44,19 +44,19 @@
           <tbody>
             {% for teacher in teacher %}
             <tr>
+                <td>{{ forloop.counter }}</td>
                 <td>{{ teacher.teacher_id}}</td>
                 <td>{{ teacher.ic_cikgu}}</td>
                 <td>{{ teacher.nama }}</td>
                 <td>{{ teacher.jantina }}</td>
-                <td>{{ teacher.kaum }}</td>
-                <td>{{ teacher.agama }}</td>
                 <td>{{ teacher.alamat_rumah }}</td>
                 <td>{{ teacher.pangkat }}</td>
                 <td>{{ teacher.ahli }}</td>
+                <td>{{ teacher.status}}</td>
                 <td>{{ teacher.modal_syer }}</td>
                 <td>{{ teacher.tarikh_daftar }}</td>
               <td>
-                <form method="POST" action="{% url 'edit_teacher' teacher.teacher_id %}">
+                <form method="" action="{% url 'edit_teacher' teacher.teacher_id %}">
                   {% csrf_token %}
                   <div class="form-btn">
                     <button type="submit"  class="btn btn-primary">Kemas Kini</button>

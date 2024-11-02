@@ -23,57 +23,82 @@
         <div class="card-body">
           <h5 class="card-title">Maklumat Pendaftaran Kakitangan</h5>
           <div class="table-scrollpane">
-        <!-- Table with stripped rows -->
-        <table class="table datatable">
-
-          <thead>
-            <tr>
-              <th>ID Teacher</th>
-              <th>No. IC</th>
-              <th>Nama</th>
-              <th>Jantina</th>
-              <th>Kaum</th>
-              <th>Agama</th>
-              <th>Alamat Rumah</th>
-              <th>Pangkat</th>
-              <th>Ahli</th>
-              <th>Modal Syer(RM)</th>
-              <th data-type="date" data-format="MM/DD/YYYY">Tarik Pendaftaran</th>
-              <th>Tindakan</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            {% for i in teacher %}
-            <tr>
-              <td>{{ i.teacher_id}}</td>
-              <td>{{ i.ic_cikgu}}</td>
-              <td>{{ i.nama }}</td>
-              <td>{{ i.jantina }}</td>
-              <td>{{ i.kaum }}</td>
-              <td>{{ i.agama }}</td>
-              <td>{{ i.alamat_rumah }}</td>
-              <td>{{ i.pangkat }}</td>
-              <td>{{ i.ahli }}</td>
-              <td>{{ i.modal_syer }}</td>
-              <td>{{ i.tarikh_daftar }}</td>
-              <td>
-                <form method="POST" action="{% url 'delete_teacher' i.teacher_id %}">
-                  {% csrf_token %}
-                  <div class="form-btn">
-                    <button type="submit" class="btn btn-primary">Padam</button>
-                  </div>
-                </form> 
-              </td> <!-- Button yang menyimpan id pelajar untuk displaykan di form -->
-            </tr>
-            {% endfor %}
-            <!-- Repeat the rows for other students -->
-
-          </tbody>
-          
-        </table>
-        <!-- End Table with stripped rows -->
-      </div>
+            <!-- Table with stripped rows -->
+            <table class="table datatable">
+              <thead>
+                <tr>
+                  <th>Bil</th>
+                  <th>ID Teacher</th>
+                  <th>No. IC</th>
+                  <th>Nama</th>
+                  <th>Jantina</th>
+                  <th>Alamat Rumah</th>
+                  <th>Pangkat</th>
+                  <th>Ahli</th>
+                  <th>Status Pengambilan Saham</th>
+                  <th>Modal Syer(RM)</th>
+                  <th data-type="date" data-format="MM/DD/YYYY">Tarikh Pendaftaran</th>
+                  <th>Tindakan</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for i in teacher %}
+                <tr>
+                  <td>{{ forloop.counter }}</td>
+                  <td>{{ i.teacher_id }}</td>
+                  <td>{{ i.ic_cikgu }}</td>
+                  <td>{{ i.nama }}</td>
+                  <td>{{ i.jantina }}</td>
+                  <td>{{ i.alamat_rumah }}</td>
+                  <td>{{ i.pangkat }}</td>
+                  <td>{{ i.ahli }}</td>
+                  <td>{{ i.status }}</td>
+                  <td>{{ i.modal_syer }}</td>
+                  <td>{{ i.tarikh_daftar }}</td>
+                  <td>
+                    <button class="btn btn-primary" onclick="openConfirmModal('{{ i.teacher_id }}')">Padam</button>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- Confirmation Modal -->
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="confirmDeleteModalLabel">Pengesahan Padam</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Adakah anda pasti ingin memadam data kakitangan ini?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+        <form method="POST" id="deleteForm" style="display: inline;">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-danger">Padam</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Function to open the confirmation modal
+  function openConfirmModal(teacherId) {
+    const deleteForm = document.getElementById('deleteForm');
+    deleteForm.action = `/home/delete_teacher/${teacherId}/`; // Set the action URL with teacher ID
+    const confirmDeleteModal = new bootstrap.Modal(document.getElementById('confirmDeleteModal'));
+    confirmDeleteModal.show();
+  }
+</script>
+
 {% endblock %}

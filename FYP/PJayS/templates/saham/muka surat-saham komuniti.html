@@ -207,7 +207,8 @@
                 <table class="table datatable">
                   <thead>
                     <tr>
-                      <th>ID TEACHER</th>
+                      <th>Bil</th>
+                      <th>Id Cikgu</th>
                       <th>Nama</th>
                       <th>Modal Syer (RM)</th>
                       <th>Tarikh Pendaftaran</th>
@@ -217,6 +218,7 @@
                   <tbody>
                     {% for teacher in teacher %}
                     <tr>
+                        <td>{{ forloop.counter }}</td>
                         <td>{{ teacher.teacher_id }}</td>
                         <td>{{ teacher.nama }}</td>
                         <td>{{ teacher.modal_syer }}</td>
@@ -257,7 +259,8 @@
                 <table class="table datatable">
                   <thead>
                     <tr>
-                      <th>ID STUDENT</th>
+                      <th>Bil</th>
+                      <th>Id Pelajar</th>
                       <th>Nama</th>
                       <th>Modal Syer (RM)</th>
                       <th>Tarikh Pendaftaran</th>
@@ -267,6 +270,7 @@
                   <tbody>
                     {% for member in member %}
                     <tr>
+                      <td>{{ forloop.counter }}</td>
                       <td>{{ member.member_id }}</td>
                       <td>{{ member.nama }}</td>
                       <td>{{ member.modal_syer }}</td>

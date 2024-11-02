@@ -37,38 +37,38 @@
                   <table class="table datatable">
                     <thead>
                       <tr>
+                        <th>Bil.</th>
                         <th>ID member</th>
-                          <th>No. IC</th>
-                          <th>Nama</th>
-                          <th>Jantina</th>
-                          <th>Kaum</th>
-                          <th>Agama</th>
-                          <th>Alamat Rumah</th>
-                          <th>Tingkatan</th>
-                          <th>Kelas</th>
-                          <th>Ahli</th>
-                          <th>Modal Syer(RM)</th>
-                          <th data-type="date" data-format="MM/DD/YYYY">Tarik Pendaftaran</th>
+                        <th>No. IC</th>
+                        <th>Nama</th>
+                        <th>Jantina</th>
+                        <th>Alamat Rumah</th>
+                        <th>Tingkatan</th>
+                        <th>Kelas</th>
+                        <th>Ahli</th>
+                        <th>Status Pangambilan Saham</th>
+                        <th>Modal Syer(RM)</th>
+                        <th data-type="date" data-format="MM/DD/YYYY">Tarik Pendaftaran</th>
                         <th>Tindakan</th>
                       </tr>
                     </thead>
                     <tbody>
                       {% for member in member %}
                       <tr>
+                        <td>{{ forloop.counter }}</td>
                         <td>{{ member.member_id}}</td>
                         <td>{{ member.ic_pelajar }}</td>
                         <td>{{ member.nama }}</td>
                         <td>{{ member.jantina }}</td>
-                        <td>{{ member.kaum }}</td>
-                        <td>{{ member.agama }}</td>
                         <td>{{ member.alamat_rumah }}</td>
                         <td>{{ member.tingkatan }}</td>
                         <td>{{ member.kelas }}</td>
                         <td>{{ member.ahli }}</td>
+                        <td>{{ member.status }}</td>
                         <td>{{ member.modal_syer }}</td>
                         <td>{{ member.tarikh_daftar }}</td>
                         <td>
-                          <form method="POST" action="{% url 'edit_student' member.member_id %}">
+                          <form method="" action="{% url 'edit_student' member.member_id %}">
                             {% csrf_token %}
                             <div class="form-btn">
                               <button type="submit"  class="btn btn-primary">Kemas Kini</button>
