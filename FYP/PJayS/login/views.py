@@ -63,3 +63,9 @@ def home(request):
 def logout_view(request):
     logout(request)
     return redirect('/login/')
+
+def organization_chart_view(request):
+    return render(request, 'login/pages-organization chart.html')
+
+def about_view(request):
+    return render(request, 'login/pages-about.html')
