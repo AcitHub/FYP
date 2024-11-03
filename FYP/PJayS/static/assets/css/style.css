@@ -1447,8 +1447,24 @@ h6 {
 }
 
 .login {
-  margin: 0;
-  padding-top: 75px;
+  margin: 0 auto;
+  padding-top: 10vh; /* Use viewport height for responsive padding */
+  max-width: 90%; /* Limit the width on larger screens */
+}
+
+/* Media Queries for Responsive Resizing */
+@media (min-width: 768px) {
+  .login {
+    padding-top: 15vh; /* Increase padding for medium screens */
+    max-width: 70%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .login {
+    padding-top: 20vh; /* More padding for larger screens */
+    max-width: 50%;
+  }
 }
 
 /* Form Button */
@@ -1476,4 +1492,309 @@ hr {
   background-color: #000; /* Defines the color of the line */
   box-shadow: 0px 0 30px rgba(1, 41, 112, 0.2); /* Slightly darker shadow for emphasis */
   width: 100%; /* Makes the hr take full width */
+}
+
+.card-body hr {
+  border: none; /* Removes the default border */
+  height: 1px; /* Increase the thickness of the line */
+  background-color: #000; /* Defines the color of the line */
+  box-shadow: 0px 0 30px rgba(1, 41, 112, 0.2); /* Slightly darker shadow for emphasis */
+  width: 100%; /* Makes the hr take full width */
+}
+
+.header-nav .nav-item .nav-link {
+  color: #495057; /* Default text color */
+  padding: 10px 15px; /* Padding for the tabs */
+  font-weight: 500; /* Font weight */
+  border: 1px solid transparent;
+  border-radius: 0; /* No rounded corners for tab style */
+  border-top-left-radius: .25rem;
+  border-top-right-radius: .25rem;
+  margin-right: 5px; /* Small gap between items */
+  transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.header-nav .nav-item .nav-link:hover {
+  color: #d1651a; /* Hover text color */
+}
+
+.header-nav .nav-item .nav-link.active {
+  color: #c1282a; /* Active text color */
+}
+
+.header-nav .nav-item .nav-link:not(.active):focus {
+  outline: none; /* Remove focus outline */
+}
+
+/* Centering and styling the about section */
+.about {
+  margin: 0 auto;
+  padding-top: 3vh; /* Use viewport height for responsive padding */
+  max-width: 100%; /* Limit the width on larger screens */
+}
+
+/* Optional: style to make the container fit well in mobile views */
+@media (max-width: 576px) {
+  .about {
+      padding: 15px;
+      font-size: 0.9rem;
+  }
+}
+
+.about-image {
+  max-width: 700px; /* Adjust the size as needed */
+  height: auto;
+  margin-left: 10px;
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.text-container {
+  flex: 1;
+  padding-right: 10px;
+  max-width: 600px; /* Optional max-width for readability */
+}
+
+.container2 {
+  display: flex;
+  align-items: flex-start;
+  text-align: center;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 40px;
+  background: #fff;
+  border-radius: 30px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  gap: 20px; /* Space between flex items */
+}
+
+.container2 p {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #012970;
+  margin: 0 auto;
+  margin-top: 15px;
+  padding-bottom: 25px;
+  text-align: left;
+}
+
+/* Centering and styling the about section */
+.chart {
+  margin: 0 auto;
+  padding-top: 15vh; /* Use viewport height for responsive padding */
+  max-width: 100%; /* Limit the width on larger screens */
+}
+
+.objectives-container {
+  justify-content: space-between; /* Distribute objectives evenly */
+  gap: 20px; /* Space between each objective */
+  padding: 20px;
+  border-top: 1px solid #ddd; /* Optional: Separator line */
+  margin-top: 20px;
+  background: rgb(209, 101, 26, 0.7);
+}
+
+.objectives-container h5 {
+  width: 100%;
+  font-weight: bold;
+  font-size: 20px;
+  color: #fff;
+  margin-top: 0;
+  text-align: center;
+  padding: 10px 0; /* Add padding for spacing */
+  border-radius: 8px; /* Optional: for rounded corners */
+}
+
+.objective1 {
+  flex: 1;
+  max-width: 250px; /* Control the width of each objective */
+  text-align: center;
+  margin-right: 250px;
+}
+
+.objective2 {
+  flex: 1;
+  max-width: 250px; /* Control the width of each objective */
+  text-align: center;
+  margin-right: 250px;
+}
+
+.objective3 {
+  flex: 1;
+  max-width: 250px; /* Control the width of each objective */
+  text-align: center;
+}
+
+.objective-icon {
+  width: 225px; /* Adjust icon size */
+  height: 225px;
+  margin-bottom: 10px;
+}
+
+.objective-text {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: bold;
+  font-size: 1rem;
+  color: #fff;
+  line-height: 1.4;
+  margin: 0 auto;
+}
+
+.container3 {
+  align-items: center;
+  text-align: left;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 30px;
+  background: #fff;
+  border-radius: 30px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  gap: 20px; /* Space between flex items */
+}
+
+.footer-about {
+  background-color: #f6f9ff;
+  ;
+}
+
+/* Reset */
+.login-logo-reset img {
+  max-height: 40px;
+  margin-right: 6px;
+}
+
+.login-logo-reset span {
+  font-size: 40px;
+  font-weight: 700;
+  color: #000;
+  font-family: "Nunito", sans-serif;
+}
+
+.container-reset {
+  background-color: #ffffff;
+  border-radius: 30px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+  position: relative;
+  overflow: hidden;
+  width: 150vh;
+  max-width: 100%;
+  min-height: 480px;
+}
+
+.container-reset button {
+  background: -webkit-linear-gradient(left, #d1651a 0%, #c1282a 50%, #d1651a 100%);
+  background-size: 200% auto;
+  background-position: left;
+  transition: background-position 0.2s ease-out;
+  color: #fff;
+  font-size: 12px;
+  padding: 10px 45px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.container-reset button:hover {
+  background-position: right;
+}
+
+.container-reset form {
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0 40px;
+  height: 100%;
+}
+
+.form-container-reset {
+  position: absolute;
+  top: 0;
+  height: 90%;
+}
+
+.log-in-reset {
+  left: 0;
+  width: 50%;
+  z-index: 2;
+}
+
+.toggle-container-reset {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 150px 0 0 100px;
+  z-index: 1000;
+}
+
+.toggle-reset {
+  background-color: #fff;
+  height: 100%;
+  background: linear-gradient(to bottom, #fff, #faab73 );
+  color: #012970;
+  position: relative;
+  left: -100%;
+  height: 100%;
+  width: 200%;
+}
+
+.toggle-panel-reset {
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0 30px;
+  text-align: center;
+  top: 0;
+}
+
+.toggle-right-reset {
+  right: 0;
+}
+
+.login-reset {
+  margin: 0 auto;
+  padding-top: 10vh; /* Use viewport height for responsive padding */
+  max-width: 90%; /* Limit the width on larger screens */
+}
+
+/* Media Queries for Responsive Resizing */
+@media (min-width: 768px) {
+  .login-reset {
+    padding-top: 15vh; /* Increase padding for medium screens */
+    max-width: 70%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .login-reset {
+    padding-top: 20vh; /* More padding for larger screens */
+    max-width: 50%;
+  }
+}
+
+/* Form Button */
+.form-btn-reset button {
+  background: -webkit-linear-gradient(left, #d1651a 0%, #c1282a 50%, #d1651a 100%);
+  background-size: 200% auto;
+  background-position: left;
+  transition: background-position 0.2s ease-out;
+  color: #fff !important;
+}
+
+.form-btn-reset button:hover {
+  background-position: right;
+  color: white !important;
 }
