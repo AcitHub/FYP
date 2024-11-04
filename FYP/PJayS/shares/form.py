@@ -5,9 +5,9 @@ from .models import SahamTeacher
 class Teacher_Share(forms.ModelForm):
     class Meta:
         model = SahamTeacher
-        fields = ['amount']
+        fields = ['amount','note']
 
 class Student_Share(forms.ModelForm):
     class Meta:
         model = SahamTeacher
-        fields = ['amount']
+        fields = ['amount','note']

@@ -77,6 +77,46 @@
                   </div>
                 </fieldset>
 
+                <fieldset class="row mb-3">
+                  <legend class="col-form-label col-sm-2 pt-0">Status Pengambilan Saham</legend>
+                  <div class="col-sm-10 d-flex">
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="status" id="filterStatus" value="Selesai">
+                      <label class="form-check-label" for="filterStatus">
+                        Selesai
+                      </label>
+                      {% comment %} {{ form.ahli }} {% endcomment %}
+                    </div>
+                    <div class="form-check ms-3">
+                      <input class="form-check-input" type="radio" name="status" id="filterStatus" value="Belum Selesai">
+                      <label class="form-check-label" for="filterStatus">
+                        Belum Selesai
+                      </label>
+                      {% comment %} {{ form.ahli }} {% endcomment %}
+                    </div>
+                  </div>
+                </fieldset>
+                
+                <fieldset class="row mb-3">
+                  <legend class="col-form-label col-sm-2 pt-0">Ahli</legend>
+                  <div class="col-sm-10 d-flex">
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="ahli" id="filterAhli" value="Aktif">
+                      <label class="form-check-label" for="filterAhli">
+                        Aktif
+                      </label>
+                      {% comment %} {{ form.ahli }} {% endcomment %}
+                    </div>
+                    <div class="form-check ms-3">
+                      <input class="form-check-input" type="radio" name="ahli" id="filterAhli" value="Tidak Aktif">
+                      <label class="form-check-label" for="filterAhli">
+                        Tidak Aktif
+                      </label>
+                      {% comment %} {{ form.ahli }} {% endcomment %}
+                    </div>
+                  </div>
+                </fieldset>
+
                 <hr>
 
                 <fieldset>
@@ -116,6 +156,46 @@
                   </div>
                 </fieldset>
 
+                <fieldset class="row mb-3">
+                  <legend class="col-form-label col-sm-2 pt-0">Status Pengambilan Saham</legend>
+                  <div class="col-sm-10 d-flex">
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="new_status" id="statusSaham" value="Selesai">
+                      <label class="form-check-label" for="statusSaham">
+                        Selesai
+                      </label>
+                      {% comment %} {{ form.ahli }} {% endcomment %}
+                    </div>
+                    <div class="form-check ms-3">
+                      <input class="form-check-input" type="radio" name="new_status" id="statusSaham" value="Belum Selesai">
+                      <label class="form-check-label" for="statusSaham">
+                        Belum Selesai
+                      </label>
+                      {% comment %} {{ form.ahli }} {% endcomment %}
+                    </div>
+                  </div>
+                </fieldset>
+                
+                <fieldset class="row mb-3">
+                  <legend class="col-form-label col-sm-2 pt-0">Ahli</legend>
+                  <div class="col-sm-10 d-flex">
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="new_ahli" id="ahliAktif" value="Aktif">
+                      <label class="form-check-label" for="ahliAktif">
+                        Aktif
+                      </label>
+                      {% comment %} {{ form.ahli }} {% endcomment %}
+                    </div>
+                    <div class="form-check ms-3">
+                      <input class="form-check-input" type="radio" name="new_ahli" id="ahliTidakAktif" value="Tidak Aktif">
+                      <label class="form-check-label" for="ahliTidakAktif">
+                        Tidak Aktif
+                      </label>
+                      {% comment %} {{ form.ahli }} {% endcomment %}
+                    </div>
+                  </div>
+                </fieldset>
+
                 <hr>
                 
                 <fieldset>
@@ -142,7 +222,7 @@
                       </thead>
                       <tbody>
                         {% for i in member %}
-                        <tr class="student-row" data-tingkatan="{{ i.tingkatan }}" data-kelas="{{ i.kelas }}">
+                        <tr class="student-row" data-tingkatan="{{ i.tingkatan }}" data-kelas="{{ i.kelas }}" data-status="{{ i.status }}" data-ahli="{{ i.ahli }}">
                           <td>
                             <input type="checkbox" name="selected_students[]" value="{{ i.member_id }}">
                           </td>
@@ -190,63 +270,84 @@
     const selectAllCheckbox = document.getElementById('select-all');
     const filterTingkatan = document.getElementById('filterTingkatan');
     const filterKelas = document.getElementById('filterKelas');
+    const filterStatus = document.querySelectorAll('input[name="status"]');
+    const filterAhli = document.querySelectorAll('input[name="ahli"]');
     const rows = document.querySelectorAll('.student-row');
     const form = document.querySelector('form');
-    const updateButton = form.querySelector('button[type="submit"]');
+
+    function getSelectedValue(radioNodeList) {
+        const selected = Array.from(radioNodeList).find(radio => radio.checked);
+        return selected ? selected.value : "Pilih";
+    }
 
     function filterRows() {
-      const tingkatanValue = filterTingkatan.value;
-      const kelasValue = filterKelas.value;
-      let counter = 1; // Start counting from 1 for filtered rows
+        const tingkatanValue = filterTingkatan.value;
+        const kelasValue = filterKelas.value;
+        const statusValue = getSelectedValue(filterStatus);
+        const ahliValue = getSelectedValue(filterAhli);
+        let counter = 1;
 
-      rows.forEach(row => {
-        const rowTingkatan = row.getAttribute('data-tingkatan');
-        const rowKelas = row.getAttribute('data-kelas');
+        rows.forEach(row => {
+            const rowTingkatan = row.getAttribute('data-tingkatan');
+            const rowKelas = row.getAttribute('data-kelas');
+            const rowStatus = row.getAttribute('data-status');
+            const rowAhli = row.getAttribute('data-ahli');
 
-        const tingkatanMatch = (tingkatanValue === "Pilih" || rowTingkatan === tingkatanValue);
-        const kelasMatch = (kelasValue === "Pilih" || rowKelas === kelasValue);
+            const tingkatanMatch = (tingkatanValue === "Pilih" || rowTingkatan === tingkatanValue);
+            const kelasMatch = (kelasValue === "Pilih" || rowKelas === kelasValue);
+            const statusMatch = (statusValue === "Pilih" || rowStatus === statusValue);
+            const ahliMatch = (ahliValue === "Pilih" || rowAhli === ahliValue);
 
-        if (tingkatanMatch && kelasMatch) {
-          row.style.display = '';
-          row.querySelector('input[type="checkbox"]').disabled = false;
+            if (tingkatanMatch && kelasMatch && statusMatch && ahliMatch) {
+                row.style.display = ''; 
+                row.querySelector('input[type="checkbox"]').disabled = false;
+                row.querySelector('.bil-number').textContent = counter++;
+            } else {
+                row.style.display = 'none';
+                row.querySelector('input[type="checkbox"]').checked = false; 
+                row.querySelector('input[type="checkbox"]').disabled = true;
+            }
+        });
 
-          // Update the "Bil." column based on the visible order
-          const bilCell = row.querySelector('.bil-number');
-          bilCell.textContent = counter;
-          counter++;
-        } else {
-          row.style.display = 'none';
-          row.querySelector('input[type="checkbox"]').disabled = true;
-        }
-      });
+        updateSelectAllCheckbox();
     }
+
+    function updateSelectAllCheckbox() {
+        const visibleRows = Array.from(rows).filter(row => row.style.display !== 'none');
+        const allVisibleChecked = visibleRows.every(row => row.querySelector('input[type="checkbox"]').checked);
+        const anyVisibleChecked = visibleRows.some(row => row.querySelector('input[type="checkbox"]').checked);
+
+        selectAllCheckbox.checked = allVisibleChecked;
+        selectAllCheckbox.indeterminate = !allVisibleChecked && anyVisibleChecked;
+    }
+
+    selectAllCheckbox.addEventListener('change', function() {
+        rows.forEach(row => {
+            if (row.style.display !== 'none') {
+                row.querySelector('input[type="checkbox"]').checked = selectAllCheckbox.checked;
+            }
+        });
+    });
 
     filterTingkatan.addEventListener('change', filterRows);
     filterKelas.addEventListener('change', filterRows);
-
-    selectAllCheckbox.addEventListener('change', function() {
-      rows.forEach(row => {
-        if (row.style.display !== 'none') {
-          row.querySelector('input[type="checkbox"]').checked = selectAllCheckbox.checked;
-        }
-      });
-    });
+    filterStatus.forEach(radio => radio.addEventListener('change', filterRows));
+    filterAhli.forEach(radio => radio.addEventListener('change', filterRows));
+    filterRows();
 
     form.addEventListener('submit', function() {
-      rows.forEach(row => {
-        if (row.style.display === 'none') {
-          row.querySelector('input[type="checkbox"]').disabled = true;
-        }
-      });
-
-      if (!Array.from(rows).some(row => row.querySelector('input[type="checkbox"]').checked)) {
-        updateButton.disabled = true;
-        alert('Please select at least one student to update.');
-        return false;
-      }
+        rows.forEach(row => {
+            const checkbox = row.querySelector('input[type="checkbox"]');
+            if (row.style.display === 'none') {
+                checkbox.disabled = true; 
+            }
+        });
     });
-  });
+});
+
+
 </script>
+
 
 
 {% endblock %}

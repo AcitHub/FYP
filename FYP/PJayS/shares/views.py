@@ -5,8 +5,8 @@ from django.contrib import messages
 from .form import Teacher_Share, Student_Share
 from .models import Teacher, SahamTeacher, Member, SahamStudent
 from student.models import Member
-from django.db.models import Sum
-from django.db.models.functions import TruncMonth
+from django.db.models import Sum 
+from django.db.models.functions import TruncMonth 
 
 def share_page(request):
     # pie chart
@@ -36,32 +36,46 @@ def share_page(request):
 
     return render(request, 'saham/muka surat-saham komuniti.html', context)
 
+# function go to page tambah saham teacher
+def page_tambah_saham_teacher(request, teacher_id):
+    teacher = get_object_or_404(Teacher, pk=teacher_id)
+    form = SahamTeacher()  # Define an empty form
+    return render(request, 'saham/tambah-saham-kakitangan.html', {'form': form, 'teacher': teacher})
+
 # function add teacher saham into each account 
 def add_share_teacher_func(request, teacher_id):
     teacher = get_object_or_404(Teacher, pk=teacher_id)
-    # saham = SahamTeacher.objects.filter(teacher_id=teacher_id)
 
     if request.method == 'POST':
         form = Teacher_Share(request.POST)
         if form.is_valid():
             new_modal_syer = form.cleaned_data['amount']
+            note_text = form.cleaned_data['note']
 
             # Update the Teacher model
             teacher.modal_syer += new_modal_syer  # Corrected line - Only add the new amount
             teacher.save()
 
             # Create a new SahamTeacher record
-            SahamTeacher.objects.create(teacher=teacher, amount=new_modal_syer)
+            SahamTeacher.objects.create(teacher=teacher, amount=new_modal_syer, note=note_text)
 
             messages.success(request, 'Share amount updated successfully.')
             return redirect('view_account_teacher', teacher_id=teacher_id)  # Pass the teacher_id to the redirect
         else:
             messages.error(request, f"There was an error adding share: {form.errors}")
-    else:
-        form = Teacher_Share()  # Define the form when the request method is not POST
 
-    return render(request, 'saham/tambah-saham-kakitangan.html', {'form': form, 'teacher': teacher})
+        # Check if 'kembali' button was pressed
+        if 'kembali' in request.POST:
+            return HttpResponseRedirect(reverse('view_account_teacher', args=[teacher_id]))
 
+    # If the request method is not POST, redirect back to the form page
+    return redirect('page_tambah_saham_teacher', teacher_id=teacher_id)
+
+# function go to page tambah saham student
+def page_tambah_saham_student(request, member_id):
+    member = get_object_or_404(Member, pk=member_id)
+    form = SahamStudent()  # Define an empty form
+    return render(request, 'saham/tambah-saham-pelajar.html', {'form': form, 'member': member})
 
 # function add student saham into each account 
 def add_share_student_func(request, member_id):
@@ -71,22 +85,25 @@ def add_share_student_func(request, member_id):
         form = Student_Share(request.POST)
         if form.is_valid():
             new_modal_syer = form.cleaned_data['amount']
+            note_text = form.cleaned_data['note']
 
             # Update the Teacher model
             member.modal_syer += new_modal_syer  # Corrected line - Only add the new amount
             member.save()
 
             # Create a new SahamTeacher record
-            SahamStudent.objects.create(member=member, amount=new_modal_syer)
+            SahamStudent.objects.create(member=member, amount=new_modal_syer, note=note_text)
 
             messages.success(request, 'Share amount updated successfully.')
-            return redirect('share_page')
+            return redirect('view_account_student', member_id=member_id)
         else:
             messages.error(request, f"There was an error adding share: {form.errors}")
-    else:
-        form = Student_Share()
 
-    return render(request, 'saham/tambah-saham-pelajar.html', {'form': form,'member': member})
+        # Check if 'kembali' button was pressed
+        if 'kembali' in request.POST:
+            return HttpResponseRedirect(reverse('view_account_student', args=[member_id]))
+
+    return redirect('page_tambah_saham_student', member_id=member_id)
 
 # view account saham teacher
 def view_account_teacher(request, teacher_id):

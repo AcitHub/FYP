@@ -68,7 +68,8 @@
                         <div class="login">
                             <div class="container" id="container">
                                 <div class="form-container log-in">
-                                    <form class="row g-0" method="POST" action="{% url 'login' %}">
+                                    <form class="row g-0" action="{% url 'login' %}" method="post">
+                                        
                                         {% csrf_token %}
                                         <div class="pt-4 pb-1">
                                             <div class="pb-1">
@@ -153,13 +154,13 @@
 
                         <!-- ======= Footer ======= -->
                         <footer class="footer-about d-flex justify-content-around pt-3">
-                            <p class="card-title">Sebarang Pertanyaan : (+60) 13-392 1279</p>
-                            <p class="card-title">|</p>
-                            <p class="card-title">Sekolah Menengah Kebangsaan Panggung Jaya</p>
-                            <p class="card-title">|</p>
-                            <p class="card-title">Emel : <a href="#">suehajariah220511@gmail.com</a></p>
-                            <p class="card-title">|</p>
-                            <p class="card-title">Lokasi : Panggung Lalat 81300 Gua Musang, Kelantan</p>
+                            <p>Sebarang Pertanyaan : (+60) 13-392 1279</p>
+                            <p>|</p>
+                            <p>Sekolah Menengah Kebangsaan Panggung Jaya</p>
+                            <p>|</p>
+                            <p>Emel : <a href="#">suehajariah220511@gmail.com</a></p>
+                            <p>|</p>
+                            <p>Lokasi : Panggung Lalat 81300 Gua Musang, Kelantan</p>
                         </footer><!-- Penutup Footer -->
 
                         <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
@@ -221,6 +222,7 @@
     <script src="{% static 'assets/vendor/simple-datatables/simple-datatables.js' %}"></script>
     <script src="{% static 'assets/vendor/chart.js/chart.umd.js' %}"></script>
     <script src="{% static 'assets/vendor/apexcharts/apexcharts.min.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- Template Main JS File -->
     <script src="{% static 'assets/js/main.js' %}"></script>

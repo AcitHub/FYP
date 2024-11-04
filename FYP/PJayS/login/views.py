@@ -73,6 +73,13 @@ def home(request):
     member_count = Member.objects.count()
     teacher_count = Teacher.objects.count()
 
+    # Calculate the number of students and teachers who have completed and not completed their shares
+    saham_student_selesai = Member.objects.filter(status='Selesai').count()
+    saham_student_belum_selesai = Member.objects.filter(status='Belum Selesai').count()
+
+    saham_teacher_selesai = Teacher.objects.filter(status='Selesai').count()
+    saham_teacher_belum_selesai = Teacher.objects.filter(status='Belum Selesai').count()
+
     # Total modal syer for teachers and members
     teacher_total = Teacher.objects.aggregate(total=Sum('modal_syer'))['total'] or 0
     member_total = Member.objects.aggregate(total=Sum('modal_syer'))['total'] or 0
@@ -87,7 +94,16 @@ def home(request):
     # Convert Decimal objects to float
     line_chart_data_list = [{'month_year': item['month_year'].strftime('%b %Y'), 'total_modal_syer': float(item['total_modal_syer'])} for item in line_chart_data_list]
 
+    # Prepare data for the combined pie chart
+    combined_data = [
+        {"value": saham_student_selesai, "name": "Pelajar Selesai"},
+        {"value": saham_student_belum_selesai, "name": "Pelajar Belum Selesai"},
+        {"value": saham_teacher_selesai, "name": "Guru Selesai"},
+        {"value": saham_teacher_belum_selesai, "name": "Guru Belum Selesai"},
+    ]
+
     context = {
+        'combined_data': json.dumps(combined_data),
         "member": member_count,
         "teacher": teacher_count,
         "teacher_total": float(teacher_total),

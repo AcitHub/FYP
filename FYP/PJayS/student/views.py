@@ -1,11 +1,12 @@
 import pandas as pd
+import json
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import Member
 from .form import TambahStudentForm
 from .form import UpdateStudentForm
 from django.db import transaction
-
+from django.db.models import Sum
 
 def get_all_members():
     """Helper function to get all members."""
@@ -57,6 +58,23 @@ def register_student_kumpulan_page(request):
 
                 # Replace any NaN or missing values with "-"
                 df = df.fillna('-')
+
+                # Convert the "Tarikh Daftar" column from Excel serial numbers or incorrect formats
+                def convert_date(value):
+                    try:
+                        # Check if the value is an Excel serial date (numeric)
+                        if isinstance(value, (int, float)):
+                            return pd.to_datetime("1899-12-30") + pd.to_timedelta(int(value), unit='D')
+                        # Otherwise, try to parse as a standard date string
+                        return pd.to_datetime(value).date()
+                    except Exception:
+                        return None  # Return None for invalid dates
+
+                # Apply the date conversion and handle invalid dates
+                df['Tarikh Daftar'] = df['Tarikh Daftar'].apply(convert_date)
+                if df['Tarikh Daftar'].isnull().any():
+                    messages.error(request, "Some dates in the 'Tarikh Daftar' column could not be converted. Please ensure all dates are valid.")
+                    return redirect('register_student_kumpulan_page')
 
                 # Begin transaction to ensure atomic save
                 with transaction.atomic():
@@ -141,46 +159,47 @@ def edit_student(request, member_id):
 
     return render(request, 'student/update-page.html', {'form': form, 'member': member})
 
-
-
 def update_student_kumpulan_page(request):
     if request.method == 'POST':
-        # Get new values to update
         new_tingkatan = request.POST.get('new_tingkatan')
         new_kelas = request.POST.get('new_kelas')
+        new_status = request.POST.get('new_status')
+        new_ahli = request.POST.get('new_ahli')
 
-        # Get selected student IDs
         selected_students = request.POST.getlist('selected_students[]')
 
         if selected_students:
-            # Filter students by selected IDs
             students_to_update = Member.objects.filter(member_id__in=selected_students)
 
-            updated = False  # Flag to check if any updates were made
+            updated = False  
 
-            if new_tingkatan:
-                # Check if any student has a different tingkatan
-                if students_to_update.exclude(tingkatan=new_tingkatan).exists():
-                    students_to_update.update(tingkatan=new_tingkatan)
-                    updated = True
+            if new_tingkatan and students_to_update.exclude(tingkatan=new_tingkatan).exists():
+                students_to_update.update(tingkatan=new_tingkatan)
+                updated = True
 
-            if new_kelas:
-                # Check if any student has a different kelas
-                if students_to_update.exclude(kelas=new_kelas).exists():
-                    students_to_update.update(kelas=new_kelas)
-                    updated = True
+            if new_kelas and students_to_update.exclude(kelas=new_kelas).exists():
+                students_to_update.update(kelas=new_kelas)
+                updated = True
+
+            if new_status and students_to_update.exclude(status=new_status).exists():
+                students_to_update.update(status=new_status)
+                updated = True
+
+            if new_ahli and students_to_update.exclude(ahli=new_ahli).exists():
+                students_to_update.update(ahli=new_ahli)
+                updated = True
 
             if updated:
                 messages.success(request, 'Selected students have been updated.')
             else:
-                messages.warning(request, 'No updates have been done as the values were the same.')
-
+                messages.warning(request, 'No updates were made as the values were the same.')
         else:
             messages.warning(request, 'No students selected for updating.')
 
         return redirect('update_student_kumpulan_page')
 
     member = Member.objects.all()
+
     return render(request, 'student/muka surat-pelajar-kemas kini-kumpulan.html', {'member': member})
 
 def help_page(request):
@@ -190,3 +209,39 @@ def help_page(request):
 def profile_page(request):
     member = Member.objects.all()
     return render(request, 'student/laman-profil.html', {'member': member})
+
+def data_student(request):
+    # list all member
+    member =  Member.objects.all()
+
+    # total_student
+    total_member = Member.objects.count()
+
+    # total_saham
+    total_saham_member = sum([member.modal_syer for member in Member.objects.all()])
+
+    # Calculate total number of active and inactive students
+    pelajar_aktif = Member.objects.filter(ahli="Aktif").count()
+    pelajar_tidak_aktif = Member.objects.filter(ahli="Tidak Aktif").count()
+
+    # Calculate total number of active and inactive share ownership
+    saham_selesai = Member.objects.filter(status="Selesai").count()
+    saham_belum_selesai = Member.objects.filter(status="Belum Selesai").count()
+
+    # Prepare the data for the bar chart
+    bar_chart_data = Member.objects.values('tingkatan').annotate(total_saham=Sum('modal_syer')).order_by('tingkatan')
+    bar_chart_data_list = list(bar_chart_data)
+    # Convert Decimal objects to float
+    bar_chart_data_list = [{'tingkatan': item['tingkatan'], 'total_saham': float(item['total_saham'])} for item in bar_chart_data_list]
+
+    context = {
+        'saham_selesai': saham_selesai,
+        'saham_belum_selesai': saham_belum_selesai,
+        'pelajar_aktif': pelajar_aktif,
+        'pelajar_tidak_aktif' : pelajar_tidak_aktif,
+        'member': member,
+        'total_saham_member' : total_saham_member,
+        'total_member': total_member,
+        "bar_chart_data": json.dumps(bar_chart_data_list),
+    }
+    return render(request, 'student/muka surat data-pelajar & saham.html', context)

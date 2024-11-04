@@ -1559,7 +1559,7 @@ hr {
   display: flex;
   align-items: flex-start;
   text-align: center;
-  max-width: 1400px;
+  max-width: 1380px;
   margin: 0 auto;
   padding: 40px;
   background: #fff;
@@ -1658,6 +1658,307 @@ hr {
   ;
 }
 
+/* Done */
+.login-logo-done img {
+  max-height: 40px;
+  margin-right: 6px;
+}
+
+.login-logo-done span {
+  font-size: 40px;
+  font-weight: 700;
+  color: #000;
+  font-family: "Nunito", sans-serif;
+}
+
+.container-done {
+  background-color: #ffffff;
+  border-radius: 30px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+  position: relative;
+  overflow: hidden;
+  width: 150vh;
+  max-width: 100%;
+  min-height: 170px;
+  padding: 0 40px;
+}
+
+.container-done button {
+  background: -webkit-linear-gradient(left, #d1651a 0%, #c1282a 50%, #d1651a 100%);
+  background-size: 200% auto;
+  background-position: left;
+  transition: background-position 0.2s ease-out;
+  color: #fff;
+  font-size: 12px;
+  padding: 10px 45px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.container-done button:hover {
+  background-position: right;
+}
+
+.container-done form {
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0 40px;
+  height: 100%;
+}
+
+.form-container-done {
+  position: absolute;
+  top: 0;
+  height: 90%;
+}
+
+.log-in-done {
+  left: 0;
+  width: 50%;
+  z-index: 2;
+  padding: 50px 50px;
+}
+
+.toggle-container-done {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 50px 0 0 50px;
+  z-index: 1000;
+}
+
+.toggle-done {
+  background-color: #fff;
+  height: 100%;
+  background: linear-gradient(to bottom, #fff, #faab73 );
+  color: #012970;
+  position: relative;
+  left: -100%;
+  height: 100%;
+  width: 200%;
+}
+
+.toggle-panel-done {
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0 30px;
+  text-align: center;
+  top: 0;
+}
+
+.toggle-right-done {
+  right: 0;
+}
+
+.login-done {
+  margin: 0 auto;
+  padding-top: 10vh; /* Use viewport height for responsive padding */
+  max-width: 90%; /* Limit the width on larger screens */
+}
+
+/* Media Queries for Responsive Resizing */
+@media (min-width: 768px) {
+  .login-done {
+    padding-top: 15vh; /* Increase padding for medium screens */
+    max-width: 70%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .login-done {
+    padding-top: 20vh; /* More padding for larger screens */
+    max-width: 50%;
+  }
+}
+
+/* Form Button */
+.form-btn-done button {
+  background: -webkit-linear-gradient(left, #d1651a 0%, #c1282a 50%, #d1651a 100%);
+  background-size: 200% auto;
+  background-position: left;
+  transition: background-position 0.2s ease-out;
+  color: #fff !important;
+}
+
+.form-btn-done button:hover {
+  background-position: right;
+  color: white !important;
+}
+
+.footer-about p {
+  font-weight: bold;
+  padding: 20px 0 15px 0;
+  font-size: 15px;
+  font-weight: 500;
+  color: #012970;
+  font-family: "Poppins", sans-serif;
+}
+
+.background {
+  background-color: #f8f9fa; /* Light background color */
+  min-height: 100vh; /* Ensure it covers full height */
+}
+
+.content {
+  padding: 20px; /* Add some padding if needed */
+}
+
+/* Confirm reset */
+.login-logo-confirm img {
+  max-height: 40px;
+  margin-right: 6px;
+}
+
+.login-logo-confirm span {
+  font-size: 40px;
+  font-weight: 700;
+  color: #000;
+  font-family: "Nunito", sans-serif;
+}
+
+.container-confirm {
+  background-color: #ffffff;
+  border-radius: 30px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+  position: relative;
+  overflow: hidden;
+  width: 250vh;
+  max-width: 100%;
+  min-height: 550px;
+}
+
+.container-confirm button {
+  background: -webkit-linear-gradient(left, #d1651a 0%, #c1282a 50%, #d1651a 100%);
+  background-size: 200% auto;
+  background-position: left;
+  transition: background-position 0.2s ease-out;
+  color: #fff;
+  font-size: 12px;
+  padding: 10px 45px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.container-confirm button:hover {
+  background-position: right;
+}
+
+.container-confirm form {
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0 40px;
+  height: 100%;
+}
+
+.form-container-reconfirmset {
+  position: absolute;
+  top: 0;
+  height: 90%;
+}
+
+.log-in-confirm {
+  left: 0;
+  width: 50%;
+  z-index: 2;
+  padding: 50px 50px;
+}
+
+.toggle-container-confirm {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 100px 0 0 100px;
+  z-index: 1000;
+}
+
+.toggle-confirm {
+  background-color: #fff;
+  height: 100%;
+  background: linear-gradient(to bottom, #fff, #faab73 );
+  color: #012970;
+  position: relative;
+  left: -100%;
+  height: 100%;
+  width: 200%;
+}
+
+.toggle-panel-confirm {
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0 30px;
+  text-align: center;
+  top: 0;
+}
+
+.toggle-right-confirm {
+  right: 0;
+}
+
+.login-confirm {
+  margin: 0 auto;
+  max-width: 90%; /* Limit the width on larger screens */
+  padding: 15vh;
+}
+
+/* Media Queries for Responsive Resizing */
+@media (min-width: 768px) {
+  .login-confirm {
+    max-width: 70%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .login-confirm {
+    max-width: 50%;
+  }
+}
+
+/* Form Button */
+.form-btn-confirm button {
+  background: -webkit-linear-gradient(left, #d1651a 0%, #c1282a 50%, #d1651a 100%);
+  background-size: 200% auto;
+  background-position: left;
+  transition: background-position 0.2s ease-out;
+  color: #fff !important;
+}
+
+.form-btn-confirm button:hover {
+  background-position: right;
+  color: white !important;
+}
+
 /* Reset */
 .login-logo-reset img {
   max-height: 40px;
@@ -1677,9 +1978,9 @@ hr {
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
   position: relative;
   overflow: hidden;
-  width: 150vh;
+  width: 200vh;
   max-width: 100%;
-  min-height: 480px;
+  min-height: 280px;
 }
 
 .container-reset button {
@@ -1723,6 +2024,7 @@ hr {
   left: 0;
   width: 50%;
   z-index: 2;
+  padding: 50px 50px;
 }
 
 .toggle-container-reset {
@@ -1732,7 +2034,7 @@ hr {
   width: 50%;
   height: 100%;
   overflow: hidden;
-  border-radius: 150px 0 0 100px;
+  border-radius: 50px 0 0 50px;
   z-index: 1000;
 }
 
@@ -1785,16 +2087,6 @@ hr {
   }
 }
 
-/* Form Button */
-.form-btn-reset button {
-  background: -webkit-linear-gradient(left, #d1651a 0%, #c1282a 50%, #d1651a 100%);
-  background-size: 200% auto;
-  background-position: left;
-  transition: background-position 0.2s ease-out;
-  color: #fff !important;
-}
-
-.form-btn-reset button:hover {
-  background-position: right;
-  color: white !important;
+.container-confirm button a {
+  color: #fff
 }

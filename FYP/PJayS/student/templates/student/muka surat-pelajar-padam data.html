@@ -63,6 +63,47 @@
                     </select>
                   </div>
                 </div>
+
+                <fieldset class="row mb-3">
+                  <legend class="col-form-label col-sm-2 pt-0">Status Pengambilan Saham</legend>
+                  <div class="col-sm-10 d-flex">
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="status" id="statusSaham" value="Selesai">
+                      <label class="form-check-label" for="statusSaham">
+                        Selesai
+                      </label>
+                      {% comment %} {{ form.ahli }} {% endcomment %}
+                    </div>
+                    <div class="form-check ms-3">
+                      <input class="form-check-input" type="radio" name="status" id="statusSaham" value="Belum Selesai">
+                      <label class="form-check-label" for="statusSaham">
+                        Belum Selesai
+                      </label>
+                      {% comment %} {{ form.ahli }} {% endcomment %}
+                    </div>
+                  </div>
+                </fieldset>
+                
+                <fieldset class="row mb-3">
+                  <legend class="col-form-label col-sm-2 pt-0">Ahli</legend>
+                  <div class="col-sm-10 d-flex">
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="ahli" id="ahliAktif" value="Aktif">
+                      <label class="form-check-label" for="ahliAktif">
+                        Aktif
+                      </label>
+                      {% comment %} {{ form.ahli }} {% endcomment %}
+                    </div>
+                    <div class="form-check ms-3">
+                      <input class="form-check-input" type="radio" name="ahli" id="ahliTidakAktif" value="Tidak Aktif">
+                      <label class="form-check-label" for="ahliTidakAktif">
+                        Tidak Aktif
+                      </label>
+                      {% comment %} {{ form.ahli }} {% endcomment %}
+                    </div>
+                  </div>
+                </fieldset>
+
               </fieldset>
             </div>
             </div>
@@ -91,7 +132,11 @@
                       </thead>
                       <tbody>
                         {% for i in member %}
-                        <tr class="student-row" data-tingkatan="{{ i.tingkatan }}" data-kelas="{{ i.kelas }}">
+                        <tr class="student-row" 
+                            data-tingkatan="{{ i.tingkatan }}" 
+                            data-kelas="{{ i.kelas }}" 
+                            data-status="{{ i.status }}" 
+                            data-ahli="{{ i.ahli }}">
                           <td>
                             <input type="checkbox" name="selected_students[]" value="{{ i.member_id }}">
                           </td>
@@ -110,6 +155,7 @@
                         </tr>
                         {% endfor %}
                       </tbody>
+                      
                     </table>
                   </div>
                   <br>
@@ -168,20 +214,29 @@
     const selectAllCheckbox = document.getElementById('select-all');
     const filterTingkatan = document.getElementById('filterTingkatan');
     const filterKelas = document.getElementById('filterKelas');
+    const filterStatus = document.querySelectorAll('input[name="status"]');
+    const filterAhli = document.querySelectorAll('input[name="ahli"]');
     const rows = document.querySelectorAll('.student-row');
     const form = document.getElementById('deleteForm');
   
     function filterRows() {
       const tingkatanValue = filterTingkatan.value;
       const kelasValue = filterKelas.value;
+      const statusValue = document.querySelector('input[name="status"]:checked')?.value || '';
+      const ahliValue = document.querySelector('input[name="ahli"]:checked')?.value || '';
   
       rows.forEach(row => {
         const rowTingkatan = row.getAttribute('data-tingkatan');
         const rowKelas = row.getAttribute('data-kelas');
+        const rowStatus = row.getAttribute('data-status');
+        const rowAhli = row.getAttribute('data-ahli');
+
         const tingkatanMatch = (tingkatanValue === "Pilih" || rowTingkatan === tingkatanValue);
         const kelasMatch = (kelasValue === "Pilih" || rowKelas === kelasValue);
-  
-        if (tingkatanMatch && kelasMatch) {
+        const statusMatch = (!statusValue || rowStatus === statusValue);
+        const ahliMatch = (!ahliValue || rowAhli === ahliValue);
+
+        if (tingkatanMatch && kelasMatch && statusMatch && ahliMatch) {
           row.style.display = '';
           row.querySelector('input[type="checkbox"]').disabled = false;
         } else {
@@ -204,6 +259,8 @@
   
     filterTingkatan.addEventListener('change', filterRows);
     filterKelas.addEventListener('change', filterRows);
+    filterStatus.forEach(radio => radio.addEventListener('change', filterRows));
+    filterAhli.forEach(radio => radio.addEventListener('change', filterRows));
   
     selectAllCheckbox.addEventListener('change', function() {
       rows.forEach(row => {
@@ -221,7 +278,7 @@
       });
     });
   });
-  
 </script>
+
 
 {% endblock %}

@@ -166,7 +166,7 @@
               <hr class="dropdown-divider">
             </li>
         
-            <li>
+            {% comment %} <li>
               <a class="dropdown-item d-flex align-items-center" href="{% url 'profile_page' %}">
                 <i class="bi bi-person"></i>
                 <span>Profil Saya</span>
@@ -181,7 +181,7 @@
                 <i class="bi bi-gear"></i>
                 <span>Tetapan Akaun</span>
               </a>
-            </li>
+            </li> {% endcomment %}
             <li>
               <hr class="dropdown-divider">
             </li>
@@ -240,7 +240,15 @@
               <span>Pelajar</span><i class="bi bi-chevron-down ms-auto student-chevron"></i>
             </a>
             <ul id="student-data-nav" class="nav-content collapse" data-bs-parent="#komuniti-nav">
-                
+              
+              {% comment %} data pelajar {% endcomment %}
+              <li class="nav-item">
+                <a class="nav-link collapsed pelajar-link" href="{%  url 'data_student' %}">
+                  <i class="bi bi-file-earmark-bar-graph"></i>
+                  <span>Data Pelajar</span>
+                </a>
+              </li>
+
               <li class="nav-item">
                 <a class="nav-link collapsed pelajar-link" href="{% url 'register_student' %}">
                   <i class="bi bi-plus-circle"></i>
@@ -275,7 +283,15 @@
               <span>Kakitangan</span><i class="bi bi-chevron-down ms-auto staff-chevron"></i>
             </a>
             <ul id="staff-data-nav" class="nav-content collapse" data-bs-parent="#komuniti-nav">
-                
+              
+              {% comment %} Data Table cikgu and saham {% endcomment %}
+              <li class="nav-item">
+                <a class="nav-link collapsed pelajar-link" href="{% url 'data_teacher'%}">
+                  <i class="bi bi-file-earmark-bar-graph"></i>
+                  <span>Data Kakitangan</span>
+                </a>
+              </li>
+
               <!-- Tambah Data -->
               <li class="nav-item">
                 <a class="nav-link collapsed pelajar-link" href="{% url 'register_teacher' %}">
