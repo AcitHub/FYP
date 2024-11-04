@@ -52,7 +52,6 @@
                                             </div>
                                             <div class="ps-3">
                                                 <h6>{{member}}</h6>
-                                                <span class="text-secondary small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">meningkat</span>
                                             </div>
                                         </div>
                                     </div>
@@ -76,7 +75,6 @@
                                             </div>
                                             <div class="ps-3">
                                                 <h6>{{teacher}}</h6>
-                                                <span class="text-success small pt-1 fw-bold">2%</span> <span class="text-muted small pt-2 ps-1">meningkat</span>
                                             </div>
                                         </div>
                                     </div>
@@ -121,9 +119,7 @@
                                               <i class="bi bi-coin"></i>
                                           </div>
                                           <div class="ps-3">
-                                              <h6>{{ member_total }}</h6>
-
-                                              <span class="text-secondary small pt-1 fw-bold">20%</span> <span class="text-muted small pt-2 ps-1">meningkat</span>
+                                              <h6>RM{{ member_total }}</h6>
                                           </div>
                                       </div>
                                   </div>
@@ -146,8 +142,7 @@
                                               <i class="bi bi-cash"></i>
                                           </div>
                                           <div class="ps-3">
-                                              <h6>{{ teacher_total }}</h6>
-                                              <span class="text-success small pt-1 fw-bold">5%</span> <span class="text-muted small pt-2 ps-1">meningkat</span>
+                                              <h6>RM{{ teacher_total }}</h6>
                                           </div>
                                       </div>
                                   </div>
@@ -166,7 +161,7 @@
                   <div class="card-body pb-0">
                     <h5 class="card-title">Status Pengambilan Saham</h5>
                     <div id="combinedStatusPieChart" style="width: 350px; height: 220px;"></div>
-  
+
                     <script>
                         document.addEventListener("DOMContentLoaded", () => {
                             // Initialize the pie chart for combined student and teacher share status
@@ -201,7 +196,7 @@
                                 }]
                             });
                         });
-                    </script>                                                                 
+                    </script>
                     </div>
                 </div>
             </div>
@@ -218,7 +213,7 @@
                             document.addEventListener("DOMContentLoaded", () => {
                                 const lineChartData = {{ line_chart_data|safe }};
                                 console.log(lineChartData); // Log the data to the console
-                        
+
                                 if (lineChartData.length > 0) {
                                     new ApexCharts(document.querySelector("#lineChart"), {
                                         series: [{

@@ -51,8 +51,7 @@
                                               <i class="bi bi-people"></i>
                                           </div>
                                           <div class="ps-3">
-                                              <h6>{{ total_member }} Pelajar</h6>
-                                              <span class="text-secondary small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">meningkat</span>
+                                              <h6>{{ total_member }}</h6>
                                           </div>
                                       </div>
                                   </div>
@@ -75,8 +74,6 @@
                                         </div>
                                         <div class="ps-3">
                                             <h6>RM{{ total_saham_member }}</h6>
-
-                                            <span class="text-secondary small pt-1 fw-bold">20%</span> <span class="text-muted small pt-2 ps-1">meningkat</span>
                                         </div>
                                     </div>
                                 </div>
@@ -178,17 +175,17 @@
           <div class="card">
               <div class="card-body">
                   <h5 class="card-title">Jumlah Saham Pelajar Mengikut Tingkatan </h5>
-      
+
                   <!-- Column Chart -->
                   <div id="columnChart"></div>
-      
+
                   <script>
                     document.addEventListener("DOMContentLoaded", () => {
                         const chartData = {{ bar_chart_data|safe }};
-                
+
                         const categories = chartData.map(item => item.tingkatan);
                         const seriesData = chartData.map(item => item.total_saham);
-                
+
                         new ApexCharts(document.querySelector("#columnChart"), {
                             series: [{
                                 name: 'Jumlah Saham',
@@ -235,12 +232,12 @@
                     });
                 </script>
                   <!-- End Column Chart -->
-      
+
               </div>
           </div>
       </div>
     <hr>
-      
+
     <!-- data cikgu -->
     <div class="col-lg-12">
       <div class="pagetitle">
@@ -311,7 +308,7 @@
                       </div>
                     </div>
                   </fieldset>
-                  
+
                   <fieldset class="row mb-3">
                     <legend class="col-form-label col-sm-2 pt-0">Ahli</legend>
                     <div class="col-sm-10 d-flex">
@@ -389,7 +386,7 @@
         const filterStatus = document.querySelectorAll("input[name='status']");
         const filterAhli = document.querySelectorAll("input[name='ahli']");
         const studentRows = document.querySelectorAll(".student-row");
-  
+
         // Function to get the selected radio button value
         function getSelectedValue(radioGroup) {
             for (const radio of radioGroup) {
@@ -399,20 +396,20 @@
             }
             return null; // Return null if no option is selected
         }
-  
+
         // Function to filter the rows based on the selected values
         function filterStudents() {
             const selectedTingkatan = filterTingkatan.value;
             const selectedKelas = filterKelas.value;
             const selectedStatus = getSelectedValue(filterStatus);
             const selectedAhli = getSelectedValue(filterAhli);
-  
+
             studentRows.forEach(row => {
                 const rowTingkatan = row.getAttribute("data-tingkatan");
                 const rowKelas = row.getAttribute("data-kelas");
                 const rowStatus = row.getAttribute("data-status");
                 const rowAhli = row.getAttribute("data-ahli");
-  
+
                 // Show or hide the row based on all filter criteria
                 if (
                     (selectedTingkatan === "Pilih" || selectedTingkatan === rowTingkatan || selectedTingkatan === "-") &&
@@ -426,7 +423,7 @@
                 }
             });
         }
-  
+
         // Add event listeners to the filter dropdowns and radio buttons
         filterTingkatan.addEventListener("change", filterStudents);
         filterKelas.addEventListener("change", filterStudents);

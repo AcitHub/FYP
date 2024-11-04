@@ -37,7 +37,7 @@
             <!-- Logo Section -->
             <a href="dashboard" class="logo d-flex align-items-center">
                 <img src="{% static 'assets/img/SMKPJ logo.png' %}" alt="">
-                <span class="d-none d-lg-block ms-2">PJayS KoopSys</span>
+                <span class="d-none d-lg-block ms-2">Sistem Koperasi PJayS</span>
             </a>
 
             <!-- Navigation Links -->
@@ -69,7 +69,7 @@
                             <div class="container" id="container">
                                 <div class="form-container log-in">
                                     <form class="row g-0" action="{% url 'login' %}" method="post">
-                                        
+
                                         {% csrf_token %}
                                         <div class="pt-4 pb-1">
                                             <div class="pb-1">
@@ -103,8 +103,8 @@
                                 <div class="toggle-container">
                                     <div class="toggle">
                                         <div class="toggle-panel toggle-right">
-                                            <h5 class="card-title text-center pb-0 fs-4 mb-2">Hai, Admin!</h5>
-                                            <p>Setiap hari adalah peluang baru untuk melangkah lebih jauh. Terus maju dan jadikan setiap cabaran sebagai peluang untuk berjaya!</p>
+                                            <h5 class="card-title text-center pb-0 fs-4 mb-2">Laman Terhad!</h5>
+                                            <p>Laman ini hanya boleh diakses oleh Admin PJayS sahaja!</p>
                                         </div>
                                     </div>
                                 </div>
@@ -126,7 +126,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <!-- Objectives Section -->
                         <div class="objectives-container d-flex flex-column pt-4">
                             <h5 class="card-title text-center pb-0 fs-4">OBJEKTIF</h5> <!-- Centralized title -->
@@ -134,19 +134,19 @@
                             <div class="d-flex justify-content-center pt-3">
                                 <!-- Objective 1 -->
                                 <div class="objective1 text-center">
-                                    <img src="{% static 'assets/img/obj-1.png' %}" alt="Icon 1" class="objective-icon"> <!-- Replace with your icon path -->
+                                    <img src="{% static 'assets/img/Obj-1.png' %}" alt="Icon 1" class="objective-icon"> <!-- Replace with your icon path -->
                                     <p class="objective-text">PENDAFTARAN PELAJAR</p>
                                 </div>
-                                
+
                                 <!-- Objective 2 -->
                                 <div class="objective2 text-center">
-                                    <img src="{% static 'assets/img/obj-2.png' %}" alt="Icon 2" class="objective-icon"> <!-- Replace with your icon path -->
+                                    <img src="{% static 'assets/img/Obj-2.png' %}" alt="Icon 2" class="objective-icon"> <!-- Replace with your icon path -->
                                     <p class="objective-text">MENGURUS DATA</p>
                                 </div>
-                                
+
                                 <!-- Objective 3 -->
                                 <div class="objective3 text-center">
-                                    <img src="{% static 'assets/img/obj-3.png' %}" alt="Icon 3" class="objective-icon"> <!-- Replace with your icon path -->
+                                    <img src="{% static 'assets/img/Obj-3.png' %}" alt="Icon 3" class="objective-icon"> <!-- Replace with your icon path -->
                                     <p class="objective-text">MENJANA LAPORAN</p>
                                 </div>
                             </div>
@@ -231,12 +231,12 @@
         const passwordInput = document.getElementById("yourPassword");
         const togglePassword = document.getElementById("togglePassword");
         const toggleIcon = document.getElementById("toggleIcon");
-    
+
         togglePassword.addEventListener("click", function () {
             // Toggle the password field type between password and text
             const type = passwordInput.getAttribute("type") === "password" ? "text" : "password";
             passwordInput.setAttribute("type", type);
-    
+
             // Toggle the icon class between bi-eye and bi-eye-slash
             toggleIcon.classList.toggle("bi-eye");
             toggleIcon.classList.toggle("bi-eye-slash");

@@ -34,7 +34,7 @@ class CustomPasswordResetView(PasswordResetView):
         # You can add custom logic here if needed
         print("Password reset email is being sent.")
         return super().form_valid(form)  # Send the email and redirect to the 'done' page
-    
+
 class CustomPasswordResetConfirmView(auth_views.PasswordResetConfirmView):
     template_name = 'login/password_reset_confirm.html'  # Your custom confirm page path
 
@@ -58,17 +58,17 @@ def admin_login(request):
                 return redirect('/home/')
             else:
                 messages.info(request, 'You are not an admin user.')
-                return redirect('/login/')
+                return redirect('login')
         else:
             messages.error(request, 'Invalid username or password')
-            return redirect('/login/')
+            return redirect('login')
 
     return render(request, 'login/pages-login-signup.html')
 
 def home(request):
     if not request.user.is_authenticated:
         return redirect('/login/')
-    
+
     # Total counts of members and teachers
     member_count = Member.objects.count()
     teacher_count = Teacher.objects.count()
@@ -110,9 +110,9 @@ def home(request):
         "member_total": float(member_total),
         "line_chart_data": json.dumps(line_chart_data_list)
     }
-    
+
     return render(request, 'login/laman utama-papan pemuka analisis.html', context)
 
 def logout_view(request):
     logout(request)
-    return redirect('/login/')
+    return redirect('login')

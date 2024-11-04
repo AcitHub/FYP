@@ -33,7 +33,7 @@
   <link href="{% static "assets/vendor/simple-datatables/style.css" %}" rel="stylesheet">
 
   <!-- Template Main CSS File -->
-  
+
 
 </head>
 
@@ -46,9 +46,9 @@
       <i class="bi bi-list toggle-sidebar-btn ms-auto"></i>
       <a href="dashboard" class="logo d-flex align-items-center ms-3">
         <img src="{% static "assets/img/SMKPJ logo.png" %}" alt="">
-        <span class="d-none d-lg-block">PJayS KoopSys</span>
+        <span class="d-none d-lg-block">Sistem Koperasi PJayS</span>
       </a>
-    </div><!-- Penutup Logo -->    
+    </div><!-- Penutup Logo -->
 
     {% comment %} <div class="search-bar">
       <form class="search-form d-flex align-items-center" method="POST" action="#">
@@ -80,7 +80,7 @@
             <i class="bi bi-bell"></i>
             <span class="badge bg-primary badge-number">4</span>
           </a><!-- Penutup Icon Notifikasi -->
-        
+
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
             <li class="dropdown-header">
               Anda mempunyai 4 notifikasi baru
@@ -89,7 +89,7 @@
             <li>
               <hr class="dropdown-divider">
             </li>
-        
+
             <li class="notification-item">
               <i class="bi bi-exclamation-circle text-warning"></i>
               <div>
@@ -98,11 +98,11 @@
                 <p>30 min. yang lalu</p>
               </div>
             </li>
-        
+
             <li>
               <hr class="dropdown-divider">
             </li>
-        
+
             <li class="notification-item">
               <i class="bi bi-x-circle text-danger"></i>
               <div>
@@ -111,11 +111,11 @@
                 <p>1 jam yang lalu</p>
               </div>
             </li>
-        
+
             <li>
               <hr class="dropdown-divider">
             </li>
-        
+
             <li class="notification-item">
               <i class="bi bi-check-circle text-success"></i>
               <div>
@@ -124,11 +124,11 @@
                 <p>2 jam yang lalu</p>
               </div>
             </li>
-        
+
             <li>
               <hr class="dropdown-divider">
             </li>
-        
+
             <li class="notification-item">
               <i class="bi bi-info-circle text-primary"></i>
               <div>
@@ -137,18 +137,18 @@
                 <p>4 jam yang lalu</p>
               </div>
             </li>
-        
+
             <li>
               <hr class="dropdown-divider">
             </li>
             <li class="dropdown-footer">
               <a href="#">Tunjukkan semua notifikasi</a>
             </li>
-        
+
           </ul><!-- Penutup Dropdown Items Notifikasi -->
-        
+
         </li><!-- Penutup Notifikasi Nav --> {% endcomment %}
-        
+
 
         <li class="nav-item dropdown pe-3">
 
@@ -156,7 +156,7 @@
             <img src="{% static "assets/img/profile-img.jpg" %}" alt="Profil" class="rounded-circle">
             <span class="d-none d-md-block dropdown-toggle ps-2">Welcome {{ user.username }}</span>
           </a><!-- Penutup Icon Gambar Profil -->
-        
+
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
               <h6>{{ user.username }}</h6>
@@ -165,7 +165,7 @@
             <li>
               <hr class="dropdown-divider">
             </li>
-        
+
             {% comment %} <li>
               <a class="dropdown-item d-flex align-items-center" href="{% url 'profile_page' %}">
                 <i class="bi bi-person"></i>
@@ -175,7 +175,7 @@
             <li>
               <hr class="dropdown-divider">
             </li>
-        
+
             <li>
               <a class="dropdown-item d-flex align-items-center" href="#">
                 <i class="bi bi-gear"></i>
@@ -185,7 +185,7 @@
             <li>
               <hr class="dropdown-divider">
             </li>
-        
+
             <li>
               <a class="dropdown-item d-flex align-items-center" href="{% url 'help_page' %}">
                 <i class="bi bi-question-circle"></i>
@@ -195,14 +195,14 @@
             <li>
               <hr class="dropdown-divider">
             </li>
-        
+
             <li>
               <a class="dropdown-item d-flex align-items-center" href="/logout/">
                 <i class="bi bi-box-arrow-right"></i>
                 <span>Log Keluar</span>
               </a>
             </li>
-        
+
           </ul><!-- Penutup Dropdown Items Profil -->
         </li><!-- Penutup Profil Nav -->
 
@@ -226,13 +226,13 @@
       </li><!-- Penutup Nav Papan Pemuka Analisis -->
 
       <li class="nav-heading">Muka Surat</li>
-      
+
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#komuniti-nav" data-bs-toggle="collapse" href="#">
           <i class="ri-community-line"></i><span>Komuniti</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="komuniti-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
-            
+
           <!-- Pelajar Section -->
           <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#student-data-nav" data-bs-toggle="collapse" href="#">
@@ -240,7 +240,7 @@
               <span>Pelajar</span><i class="bi bi-chevron-down ms-auto student-chevron"></i>
             </a>
             <ul id="student-data-nav" class="nav-content collapse" data-bs-parent="#komuniti-nav">
-              
+
               {% comment %} data pelajar {% endcomment %}
               <li class="nav-item">
                 <a class="nav-link collapsed pelajar-link" href="{%  url 'data_student' %}">
@@ -256,7 +256,7 @@
                 </a>
 
               </li><!-- End Tambah Data Nav Item -->
-              
+
               <!-- Kemas Kini Data -->
               <li class="nav-item">
                 <a class="nav-link collapsed pelajar-link" href="{% url 'update_student_page' %}">
@@ -272,10 +272,10 @@
                   <span>Padam Data</span>
                 </a>
               </li>
-              
+
             </ul><!-- Penutup Nav Pelajar -->
           </li><!-- Penutup Nav Pelajar -->
-          
+
           <!-- Kakitangan Section -->
           <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#staff-data-nav" data-bs-toggle="collapse" href="#">
@@ -283,7 +283,7 @@
               <span>Kakitangan</span><i class="bi bi-chevron-down ms-auto staff-chevron"></i>
             </a>
             <ul id="staff-data-nav" class="nav-content collapse" data-bs-parent="#komuniti-nav">
-              
+
               {% comment %} Data Table cikgu and saham {% endcomment %}
               <li class="nav-item">
                 <a class="nav-link collapsed pelajar-link" href="{% url 'data_teacher'%}">
@@ -307,7 +307,7 @@
                   <span>Kemas Kini Data</span>
                 </a>
               </li>
-              
+
               <!-- Padam Data -->
               <li class="nav-item">
                 <a class="nav-link collapsed pelajar-link" href="{% url 'delete_teacher_page' %}">
@@ -315,13 +315,13 @@
                   <span>Padam Data</span>
                 </a>
               </li>
-                
+
             </ul><!-- Penutup Nav Kakitangan -->
           </li><!-- Penutup Nav Kakitangan -->
-            
+
         </ul><!-- Penutup Nav Komuniti -->
       </li><!-- Penutup Nav Komuniti -->
- 
+
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="{% url 'share_page' %}">
@@ -349,10 +349,10 @@
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
     <div class="copyright">
-      &copy; Hak Cipta <strong><span>PJayS KoopSys</span></strong>. Semua Hak Cipta Terpelihara
+      &copy; Hak Cipta <strong><span>Sistem Koperasi PJayS</span></strong>. Semua Hak Cipta Terpelihara
     </div>
     <div class="credits">
-      Direka oleh <a href="#">Acit</a>
+      Direka oleh <a href="#">Final Year Project Politeknik Mersing</a>
     </div>
   </footer><!-- Penutup Footer -->
 
